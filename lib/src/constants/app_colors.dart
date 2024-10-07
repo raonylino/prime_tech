@@ -17,4 +17,12 @@ class AppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+    static const  gradientGrey = LinearGradient(
+    colors: [
+      Color.fromRGBO(189, 195, 199, 1),
+      Color.fromRGBO(44, 62, 80,1),
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }

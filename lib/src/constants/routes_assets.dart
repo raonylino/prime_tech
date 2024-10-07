@@ -9,4 +9,7 @@ class RoutesAssets {
 
   // --------------------------------- Home Page -------------------------------
   static const String homePage = '/home';
+
+  // --------------------------------- Register Page -------------------------------
+  static const String registerPage = '/register';
 }

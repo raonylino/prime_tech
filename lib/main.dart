@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:prime_tech/firebase_options.dart';
 import 'package:prime_tech/src/prime_tech_app.dart';
 
-void main() async{
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
-);
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const PrimeTechApp());
 }
