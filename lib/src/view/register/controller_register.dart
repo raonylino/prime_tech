@@ -1,26 +1,38 @@
 
 import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:prime_tech/src/model/user_model.dart';
 
 class ControllerRegister {
-
-  static Future<String> registerUsers(String email, String senha) async {
-
+  static Future<UserModel?> registerUser(String email, String password, String name) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: senha,);
-      
+
+      final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+
+      );
+
+      await FirebaseFirestore.instance.collection('users').doc(userCredential.user!.uid).set({
+        'email': email,
+        'name': name,
+
+      });
+
+      return UserModel(
+        uid: userCredential.user!.uid,
+        email: email,
+        name: name,
+        isAdmin: false,
+      );
     } on FirebaseAuthException catch (e) {
 
-      if (e.code == 'weak-password') {
-        log('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        log('The account already exists for that email.');
-      }
-    } catch (e,s) {
-      log('Erro ao registrar usuário: $e', stackTrace: s);
-    }
-    return email;
-  }
+      log(e.message.toString());
+    } catch (e) {
 
+      log(e.toString());
+    }
+    return null;
+  }
 }

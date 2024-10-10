@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:prime_tech/src/constants/app_colors.dart';
 import 'package:prime_tech/src/constants/app_text_styles.dart';
 import 'package:prime_tech/src/constants/routes_assets.dart';
+import 'package:prime_tech/src/view/register/controller_register.dart';
+import 'package:validatorless/validatorless.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -98,6 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       width: screenSize.width * .8,
                       child: TextFormField(
                         controller: _nameEC,
+                        validator: Validatorless.required('Nome obrigatório'),
                         decoration: InputDecoration(
                           hintText: 'Nome',
                           hintStyle: TextStyle(
@@ -137,6 +140,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       width: screenSize.width * .8,
                       child: TextFormField(
                         controller: _emailEC,
+                        validator: Validatorless.multiple([
+                          Validatorless.required('Email obrigatório'),
+                          Validatorless.email('Email inválido'),
+                        ]),
                         decoration: InputDecoration(
                           hintText: 'Email',
                           hintStyle: TextStyle(
@@ -177,6 +184,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: TextFormField(
                         obscureText: true,
                         controller: _passwordEC,
+                        validator: Validatorless.multiple([
+                          Validatorless.required('Senha obrigatória'),
+                          Validatorless.min(6, 'Mínimo de 6 caracteres'),
+                          Validatorless.max(20, 'Máximo de 20 caracteres'),
+                        ]),
                         decoration: InputDecoration(
                           hintText: 'Senha',
                           hintStyle: TextStyle(
@@ -216,6 +228,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       width: screenSize.width * .8,
                       child: TextFormField(
                         obscureText: true,
+                        validator: Validatorless.multiple([
+                          Validatorless.required('Confirme sua senha'),
+                          Validatorless.compare(
+                              _passwordEC, 'Senhas diferentes'),
+                          Validatorless.min(6, 'Mínimo de 6 caracteres'),
+                          Validatorless.max(20, 'Máximo de 20 caracteres'),
+                        ]),
                         decoration: InputDecoration(
                           hintText: 'Confirme sua senha',
                           hintStyle: TextStyle(
@@ -248,7 +267,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                     ),
-                    const Expanded(child: SizedBox(
+                    const Expanded(
+                        child: SizedBox(
                       height: 30,
                     )),
                     Row(
@@ -287,7 +307,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           decoration: BoxDecoration(
                             gradient: AppColors.gradient,
                             borderRadius: BorderRadius.circular(24),
-                            
                           ),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -297,7 +316,33 @@ class _RegisterPageState extends State<RegisterPage> {
                                 borderRadius: BorderRadius.circular(24),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () async {
+                              if (formKey.currentState!.validate()) {
+                                final success =
+                                    await ControllerRegister.registerUser(
+                                        _emailEC.text,
+                                        _passwordEC.text,
+                                        _nameEC.text);
+
+                                if (success != null) {
+                                  // ignore: use_build_context_synchronously
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'Cadastro realizado com sucesso!')),
+                                  );
+                                   // ignore: use_build_context_synchronously
+                                  Navigator.of(context).pushReplacementNamed(
+                                      RoutesAssets.loginPage);
+                                } else {
+                                   // ignore: use_build_context_synchronously
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text(
+                                              'Erro ao cadastrar usuário. Tente novamente.')));
+                                }
+                              }
+                            },
                             child: Text(
                               'Cadastrar',
                               style: TextStyle(

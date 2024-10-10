@@ -25,4 +25,6 @@ class AppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  static const  backgroundColor = Color.fromRGBO(231, 231, 231, 1);
 }
