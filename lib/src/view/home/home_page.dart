@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:prime_tech/src/constants/app_colors.dart';
+import 'package:prime_tech/src/constants/routes_assets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,26 +12,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
     int _selectedIndex = 1;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Inicio',
-      style: optionStyle,
-    ),
-    Text(
-      'Manutenção',
-      style: optionStyle,
-    ),
-    Text(
-      'Perfil',
-      style: optionStyle,
-    ),
-    Text(
-      'Profile',
-      style: optionStyle,
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -95,18 +76,27 @@ class _HomePageState extends State<HomePage> {
                 duration: const Duration(milliseconds: 400),
                 tabBackgroundColor: AppColors.primaryColor,
                 color: AppColors.primaryColor,
-                tabs: const [
+                tabs:  [
                   GButton(
                     icon: Icons.person,
                     text: 'Perfil',
+                    onPressed: (){
+                      Navigator.pushNamed(context, RoutesAssets.profilePage);
+                    },
                   ),
                   GButton(
                     icon: Icons.home,
                     text: 'Inicio',
+                    onPressed: (){
+                      Navigator.pushNamed(context, RoutesAssets.homePage);
+                    },
                   ),
                  GButton(
                     icon: Icons.library_books,
                     text: 'Manutenção',
+                    onPressed: (){
+                      Navigator.pushNamed(context, RoutesAssets.splashPage);
+                    },
                   ),
                 ],
                 selectedIndex: _selectedIndex,
