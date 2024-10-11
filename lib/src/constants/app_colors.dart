@@ -27,4 +27,6 @@ class AppColors {
   );
 
   static const  backgroundColor = Color.fromRGBO(231, 231, 231, 1);
+  static const  backgroundColorOpacity = Color.fromRGBO(231, 231, 231, .5);
+
 }

@@ -15,4 +15,8 @@ class RoutesAssets {
 
   // --------------------------------- Profile Page -------------------------------
   static const String profilePage = '/profile';
+  static const String profileEmailPage = '/profile/editEmail';
+  static const String profileNamePage = '/profile/editName';
+  static const String profilePasswordPage = '/profile/editPassword';
+
 }

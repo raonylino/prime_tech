@@ -20,6 +20,8 @@ class ControllerRegister {
 
       });
 
+      await FirebaseAuth.instance.currentUser!.updateDisplayName(name);
+
       return UserModel(
         uid: userCredential.user!.uid,
         email: email,

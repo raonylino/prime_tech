@@ -16,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final bool success = false;
 
   @override
   void dispose() {
@@ -23,15 +24,14 @@ class _LoginPageState extends State<LoginPage> {
     passwordController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         top: false,
-        child: CustomScrollView(
-          physics: const ScrollPhysics(),
-          slivers: [
+        child: CustomScrollView(physics: const ScrollPhysics(), slivers: [
           SliverFillRemaining(
             hasScrollBody: false,
             child: Form(
@@ -186,15 +186,19 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(24),
                         ),
                       ),
-                      onPressed: () async{
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           final email = emailController.text;
                           final password = passwordController.text;
-                          
-                          await ControllerLogin.loginUser(email, password);
-                          // ignore: use_build_context_synchronously
-                          Navigator.of(context)
-                              .pushReplacementNamed(RoutesAssets.homePage);
+
+                          await ControllerLogin.loginUser(
+                              context, email, password, (bool success) {
+                            if (success) {
+                              // ignore: use_build_context_synchronously
+                              Navigator.of(context)
+                                  .pushReplacementNamed(RoutesAssets.homePage);
+                            }
+                          });
                         }
                       },
                       child: Text(
@@ -225,8 +229,8 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed(RoutesAssets.registerPage);
+                            Navigator.of(context).pushReplacementNamed(
+                                RoutesAssets.registerPage);
                           },
                           child: Text(
                             'Cdastra-se',
