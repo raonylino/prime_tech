@@ -38,6 +38,7 @@ import 'package:prime_tech/src/constants/app_text_styles.dart';
         }
       }
     } on FirebaseAuthException catch (e) {
+      log(e.code);
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -46,6 +47,8 @@ import 'package:prime_tech/src/constants/app_text_styles.dart';
                 ? 'Usuário não encontrado!'
                 : e.code == 'wrong-password'
                     ? 'Senha inválida!'
+                    : e.code == 'invalid-credential'
+                        ? 'Credenciais inválidas! Verifique o e-mail e a senha.'
                     : 'Erro ao fazer login. Por favor, tente novamente.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -60,16 +63,12 @@ import 'package:prime_tech/src/constants/app_text_styles.dart';
           duration: const Duration(seconds: 2),
         ),
       );
-
-      log(e.code == 'user-not-found'
-          ? 'No user found for that email.'
-          : 'Wrong password provided for that user.');
     } catch (e) {
       // Capturar outras exceções
       log('An error occurred: $e');
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Erro ao fazer login. Por favor, tente novamente.'),
           backgroundColor: Colors.red,
           behavior: SnackBarBehavior.floating,

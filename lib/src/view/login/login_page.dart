@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:prime_tech/src/constants/app_colors.dart';
 import 'package:prime_tech/src/constants/app_text_styles.dart';
@@ -17,6 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final bool success = false;
+  bool obscureText = true;
 
   @override
   void dispose() {
@@ -115,12 +117,24 @@ class _LoginPageState extends State<LoginPage> {
                         Validatorless.required('Senha obrigatória'),
                         Validatorless.min(6, 'Senha inválida'),
                       ]),
-                      obscureText: true,
+                      obscureText: obscureText,
                       decoration: InputDecoration(
                         hintText: 'Senha',
                         filled: true,
                         fillColor: Colors.black.withOpacity(0.1),
                         prefixIcon: const Icon(Icons.key),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              obscureText = !obscureText;
+                            });
+                          },
+                          icon: Icon(
+                            obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                        ),
                         enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.grey,
@@ -156,7 +170,52 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            if (emailController.text.isNotEmpty) {
+                              await FirebaseAuth.instance
+                                  .sendPasswordResetEmail(
+                                      email: emailController.text);
+                              // ignore: use_build_context_synchronously
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Email de recuperação enviado para ${emailController.text}!',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontFamily: TextStyles.instance
+                                          .secondary,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  backgroundColor: Colors.amber[900],
+                                  behavior: SnackBarBehavior.floating,
+                                  duration: const Duration(seconds: 2),
+                                ),
+                              );
+                            }else {
+                              // ignore: use_build_context_synchronously
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Digite um email!',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontFamily: TextStyles.instance
+                                          .secondary,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  backgroundColor: Colors.red[900],
+                                  behavior: SnackBarBehavior.floating,
+                                  duration: const Duration(seconds: 2),
+                                ),
+                              );
+                            }
+                          },
                           child: Text(
                             'Clique aqui',
                             style: TextStyle(

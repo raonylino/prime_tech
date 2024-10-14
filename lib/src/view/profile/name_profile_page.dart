@@ -2,26 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:prime_tech/src/constants/app_colors.dart';
 import 'package:prime_tech/src/constants/app_text_styles.dart';
 import 'package:prime_tech/src/constants/routes_assets.dart';
+import 'package:prime_tech/src/view/profile/controller_profile.dart';
 import 'package:validatorless/validatorless.dart';
 
 class NameProfilePage extends StatefulWidget {
-
-  const NameProfilePage({ super.key });
+  const NameProfilePage({super.key});
 
   @override
   State<NameProfilePage> createState() => _NameProfilePageState();
 }
 
 class _NameProfilePageState extends State<NameProfilePage> {
-
   final formKey = GlobalKey<FormState>();
   final _nameEC = TextEditingController();
+  final bool success = false;
 
   @override
   void dispose() {
     super.dispose();
     _nameEC.dispose();
-
   }
 
   @override
@@ -133,7 +132,7 @@ class _NameProfilePageState extends State<NameProfilePage> {
                         ),
                       ),
                     ),
-                     const SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     SizedBox(
@@ -182,7 +181,7 @@ class _NameProfilePageState extends State<NameProfilePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                                                Container(
+                        Container(
                           width: screenSize.width * .4,
                           decoration: BoxDecoration(
                             gradient: AppColors.gradientGrey,
@@ -224,7 +223,52 @@ class _NameProfilePageState extends State<NameProfilePage> {
                                 borderRadius: BorderRadius.circular(24),
                               ),
                             ),
-                            onPressed: () async {},
+                            onPressed: () async {
+                              if (formKey.currentState!.validate()) {
+                                await ControllerProfile.updateUserName(
+                                    _nameEC.text, (bool success) {
+                                  if (success) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.green,
+                                        content: Text(
+                                          'Alterado com sucesso',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontFamily:
+                                                TextStyles.instance.secondary,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        duration: const Duration(seconds: 2),
+                                      ),
+                                    );
+                                    Navigator.of(context).popAndPushNamed(
+                                        RoutesAssets.profilePage);
+                                  }else{
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.red,
+                                        content: Text(
+                                          'Erro ao alterar',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontFamily:
+                                                TextStyles.instance.secondary,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        duration: const Duration(seconds: 2),
+                                      ),
+                                    );
+                                  }
+                                });
+                              }
+                            },
                             child: Text(
                               'Alterar',
                               style: TextStyle(

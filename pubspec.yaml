@@ -41,6 +41,8 @@ dependencies:
   validatorless: ^1.2.3
   carousel_slider: ^5.0.0
   google_nav_bar: ^5.0.6
+  image_picker: ^1.1.2
+  firebase_storage: ^12.3.3
 
 dev_dependencies:
   flutter_test:

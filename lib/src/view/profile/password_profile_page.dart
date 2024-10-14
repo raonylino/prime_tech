@@ -2,26 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:prime_tech/src/constants/app_colors.dart';
 import 'package:prime_tech/src/constants/app_text_styles.dart';
 import 'package:prime_tech/src/constants/routes_assets.dart';
+import 'package:prime_tech/src/view/profile/controller_profile.dart';
 import 'package:validatorless/validatorless.dart';
 
 class PasswordProfilePage extends StatefulWidget {
-
-  const PasswordProfilePage({ super.key });
+  const PasswordProfilePage({super.key});
 
   @override
   State<PasswordProfilePage> createState() => _PasswordProfilePageState();
 }
 
 class _PasswordProfilePageState extends State<PasswordProfilePage> {
-
   final formKey = GlobalKey<FormState>();
   final _passwordEC = TextEditingController();
+  final bool success = false;
+  late bool obscureText = true;
+
+  
 
   @override
   void dispose() {
     super.dispose();
     _passwordEC.dispose();
-
   }
 
   @override
@@ -97,12 +99,12 @@ class _PasswordProfilePageState extends State<PasswordProfilePage> {
                     SizedBox(
                       width: screenSize.width * .8,
                       child: TextFormField(
+                        obscureText: obscureText,
                         controller: _passwordEC,
                         validator: Validatorless.multiple([
                           Validatorless.required('senha obrigatório'),
                           Validatorless.min(6, 'minimo 6 digitos'),
                           Validatorless.max(20, 'maximo 20 digitos'),
-
                         ]),
                         decoration: InputDecoration(
                           hintText: 'Senha',
@@ -114,7 +116,8 @@ class _PasswordProfilePageState extends State<PasswordProfilePage> {
                           ),
                           filled: true,
                           fillColor: Colors.black.withOpacity(0.1),
-                          prefixIcon: const Icon(Icons.email),
+                          prefixIcon: const Icon(Icons.key),
+               
                           enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Colors.grey,
@@ -136,17 +139,19 @@ class _PasswordProfilePageState extends State<PasswordProfilePage> {
                         ),
                       ),
                     ),
-                     const SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     SizedBox(
                       width: screenSize.width * .8,
                       child: TextFormField(
+                        obscureText: obscureText,
                         validator: Validatorless.multiple([
-                         Validatorless.required('senha obrigatório'),
+                          Validatorless.required('senha obrigatório'),
                           Validatorless.min(6, 'minimo 6 digitos'),
                           Validatorless.max(20, 'maximo 20 digitos'),
-                          Validatorless.compare(_passwordEC, 'senhas não conferem'),
+                          Validatorless.compare(
+                              _passwordEC, 'senhas não conferem'),
                         ]),
                         decoration: InputDecoration(
                           hintText: 'confirmar senha',
@@ -158,7 +163,17 @@ class _PasswordProfilePageState extends State<PasswordProfilePage> {
                           ),
                           filled: true,
                           fillColor: Colors.black.withOpacity(0.1),
-                          prefixIcon: const Icon(Icons.email),
+                          prefixIcon: const Icon(Icons.key),
+                                     suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                obscureText = !obscureText;
+                              });
+                            },
+                            icon: Icon(
+                              obscureText ? Icons.visibility : Icons.visibility_off,
+                            ),
+                          ),
                           enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Colors.grey,
@@ -187,7 +202,7 @@ class _PasswordProfilePageState extends State<PasswordProfilePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                                                Container(
+                        Container(
                           width: screenSize.width * .4,
                           decoration: BoxDecoration(
                             gradient: AppColors.gradientGrey,
@@ -229,7 +244,50 @@ class _PasswordProfilePageState extends State<PasswordProfilePage> {
                                 borderRadius: BorderRadius.circular(24),
                               ),
                             ),
-                            onPressed: () async {},
+                            onPressed: () async {
+                              if (formKey.currentState!.validate()) {
+                                await ControllerProfile.changePassword(
+                                    _passwordEC.text, (bool success) {
+                                  if (success) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.green,
+                                        content: Text(
+                                          'Senha alterada com sucesso.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontFamily:
+                                                TextStyles.instance.secondary,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                    Navigator.of(context).popAndPushNamed(
+                                        RoutesAssets.profilePage);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.red,
+                                        content: Text(
+                                          'Erro ao alterar a senha.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontFamily:
+                                                TextStyles.instance.secondary,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                });
+                              }
+                            },
                             child: Text(
                               'Alterar',
                               style: TextStyle(

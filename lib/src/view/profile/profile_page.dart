@@ -3,7 +3,9 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:prime_tech/src/constants/app_colors.dart';
 import 'package:prime_tech/src/constants/app_text_styles.dart';
 import 'package:prime_tech/src/constants/routes_assets.dart';
-import 'package:prime_tech/src/view/profile/email_profile_page.dart';
+import 'package:prime_tech/src/view/login/login_page.dart';
+import 'package:prime_tech/src/view/profile/controller_profile.dart';
+import 'package:prime_tech/src/view/profile/photo_profile_page.dart';
 import 'package:prime_tech/src/view/profile/name_profile_page.dart';
 import 'package:prime_tech/src/view/profile/password_profile_page.dart';
 
@@ -16,6 +18,24 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   int _selectedIndex = 0;
+
+  String userName = '';
+  String userEmail = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUser(); // Chama a função para carregar os dados do usuário
+  }
+
+  Future<void> _loadUser() async {
+    await ControllerProfile.getUser(); // Chama a função estática
+    setState(() {
+      userName = ControllerProfile.user?.displayName ?? '';
+      userEmail = ControllerProfile.user?.email ?? '';
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +94,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Peterson Andrades',
+                                Text(
+                                    userName,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -82,7 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       fontWeight: FontWeight.w400,
                                     )),
                                 Text(
-                                  'petersonandrades@gmail.com',
+                                  userEmail,
                                   style: TextStyle(
                                     color: Colors.white54,
                                     fontSize: 14,
@@ -167,7 +188,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const EmailProfilePage(),
+                                  builder: (context) => const PhotoProfilePage(),
                                 ),
                               );
                             },
@@ -175,12 +196,12 @@ class _ProfilePageState extends State<ProfilePage> {
                               children: [
                                 Row(
                                   children: [
-                                    const Icon(Icons.email,
+                                    const Icon(Icons.photo_camera_rounded,
                                         color: AppColors.primaryColor),
                                     Padding(
                                       padding: const EdgeInsets.only(left: 10),
                                       child: Text(
-                                        'Alterar e-mail',
+                                        'Alterar foto de perfil',
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 16,
@@ -248,7 +269,16 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           const SizedBox(height: 15),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              ControllerProfile.signOut();
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LoginPage(),
+                                ),
+                                (route) => false,
+                              );
+                            },
                             child: Row(
                               children: [
                                 Row(

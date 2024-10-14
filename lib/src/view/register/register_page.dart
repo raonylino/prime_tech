@@ -320,6 +320,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               if (formKey.currentState!.validate()) {
                                 final success =
                                     await ControllerRegister.registerUser(
+                                        context,
                                         _emailEC.text,
                                         _passwordEC.text,
                                         _nameEC.text);
@@ -327,19 +328,23 @@ class _RegisterPageState extends State<RegisterPage> {
                                 if (success != null) {
                                   // ignore: use_build_context_synchronously
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text(
-                                            'Cadastro realizado com sucesso!')),
+                                    SnackBar(
+                                      backgroundColor: Colors.green,
+                                      content: Text(
+                                        'Cadastro realizado com sucesso!',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontFamily:
+                                              TextStyles.instance.secondary,
+                                        ),
+                                      ),
+                                    ),
                                   );
-                                   // ignore: use_build_context_synchronously
+                                  // ignore: use_build_context_synchronously
                                   Navigator.of(context).pushReplacementNamed(
                                       RoutesAssets.loginPage);
-                                } else {
-                                   // ignore: use_build_context_synchronously
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text(
-                                              'Erro ao cadastrar usuário. Tente novamente.')));
                                 }
                               }
                             },
