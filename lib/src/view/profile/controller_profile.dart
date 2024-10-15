@@ -86,9 +86,8 @@ class ControllerProfile {
       User? user = FirebaseAuth.instance.currentUser;
 
       if (user != null) {
-        // Atualiza a URL da foto de perfil
         await user.updatePhotoURL(photoUrl);
-        await user.reload(); // Recarrega o perfil do usuário para refletir a mudança
+        await user.reload(); 
       }
     } catch (e) {
       log('Erro ao atualizar a foto de perfil: $e');

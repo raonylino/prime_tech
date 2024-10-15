@@ -56,6 +56,7 @@ class _PhotoProfilePageState extends State<PhotoProfilePage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: CustomScrollView(
           physics: const ScrollPhysics(),
@@ -96,28 +97,73 @@ class _PhotoProfilePageState extends State<PhotoProfilePage> {
                   const SizedBox(
                     height: 50,
                   ),
-                  _image != null
-                      ? CircleAvatar(
-                          radius: 60,
-                          backgroundImage: FileImage(_image!),
-                        )
-                      : CircleAvatar(
-                          radius: 60,
-                          backgroundImage: NetworkImage(
-                              FirebaseAuth.instance.currentUser?.photoURL ??
-                                  'https://via.placeholder.com/150'),
-                        ),
-                                const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: _changeProfilePicture,
-                    child: const Text('Escolher e Atualizar Imagem'),
+                  Text(
+                    'Altere sua foto de perfil',
+                    style: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: TextStyles.instance.primary,
+                    ),
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'escolha uma imagem de perfil',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: TextStyles.instance.secondary,
+                    ),
+                  ),
+                      const SizedBox(
+                    height: 50,
+                  ),
+                  Container(
+                    width: 300,
+                    height: 300,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          blurStyle: BlurStyle.normal,
+                          color: Colors.black.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 7,
+                          offset: const Offset(10, 10),
+                        ),
+                      ],
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(24),
+                        bottomRight: Radius.circular(24),),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(40),
+                      child: SizedBox(
+                        width: 200,
+                        height: 200,
+                        child: _image != null
+                            ? CircleAvatar(
+                                radius: 100,
+                                backgroundImage: FileImage(_image!),
+                              )
+                            : CircleAvatar(
+                                radius: 100,
+                                backgroundImage: NetworkImage(
+                                    FirebaseAuth.instance.currentUser?.photoURL ??
+                                        'https://via.placeholder.com/150'),
+                              ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
                   const Expanded(
                     child: SizedBox(
                       height: 20,
                     ),
                   ),
-          
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -163,7 +209,7 @@ class _PhotoProfilePageState extends State<PhotoProfilePage> {
                               borderRadius: BorderRadius.circular(24),
                             ),
                           ),
-                          onPressed: () async {},
+                          onPressed: _changeProfilePicture,
                           child: Text(
                             'Alterar',
                             style: TextStyle(

@@ -30,10 +30,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SafeArea(
-        top: false,
-        child: CustomScrollView(physics: const ScrollPhysics(), slivers: [
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        body: CustomScrollView(physics: const ScrollPhysics(), slivers: [
           SliverFillRemaining(
             hasScrollBody: false,
             child: Form(
@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   Container(
                     width: screenSize.width,
-                    height: 350,
+                    height: 300,
                     decoration: BoxDecoration(
                       color: Colors.black,
                       boxShadow: [
@@ -184,8 +184,7 @@ class _LoginPageState extends State<LoginPage> {
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
-                                      fontFamily: TextStyles.instance
-                                          .secondary,
+                                      fontFamily: TextStyles.instance.secondary,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
@@ -194,7 +193,7 @@ class _LoginPageState extends State<LoginPage> {
                                   duration: const Duration(seconds: 2),
                                 ),
                               );
-                            }else {
+                            } else {
                               // ignore: use_build_context_synchronously
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -204,8 +203,7 @@ class _LoginPageState extends State<LoginPage> {
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
-                                      fontFamily: TextStyles.instance
-                                          .secondary,
+                                      fontFamily: TextStyles.instance.secondary,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
@@ -270,8 +268,10 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 70,
+                  const Expanded(
+                    child: SizedBox(
+                      height: 10,
+                    ),
                   ),
                   SizedBox(
                     width: screenSize.width * .8,
@@ -292,7 +292,7 @@ class _LoginPageState extends State<LoginPage> {
                                 RoutesAssets.registerPage);
                           },
                           child: Text(
-                            'Cdastra-se',
+                            'Cadastra-se',
                             style: TextStyle(
                               color: AppColors.primaryColor,
                               fontSize: 14,

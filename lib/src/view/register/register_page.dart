@@ -29,9 +29,10 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SafeArea(
-        child: Form(
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        body: Form(
           key: formKey,
           child: CustomScrollView(
             physics: const ScrollPhysics(),
@@ -296,7 +297,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               'Voltar',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 24,
+                                fontSize: 20,
                                 fontFamily: TextStyles.instance.secondary,
                               ),
                             ),
@@ -324,7 +325,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         _emailEC.text,
                                         _passwordEC.text,
                                         _nameEC.text);
-
+        
                                 if (success != null) {
                                   // ignore: use_build_context_synchronously
                                   ScaffoldMessenger.of(context).showSnackBar(
@@ -352,7 +353,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               'Cadastrar',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 24,
+                                fontSize: 20,
                                 fontFamily: TextStyles.instance.secondary,
                               ),
                             ),

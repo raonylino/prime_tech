@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:prime_tech/src/constants/app_colors.dart';
@@ -40,9 +41,10 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        body: CustomScrollView(
           physics: const ScrollPhysics(),
           slivers: [
             SliverFillRemaining(
@@ -86,7 +88,12 @@ class _ProfilePageState extends State<ProfilePage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(100)),
                             ),
-                            child: const Icon(Icons.person, size: 40),
+                            child: CircleAvatar(
+                          radius: 60,
+                          backgroundImage: NetworkImage(
+                              FirebaseAuth.instance.currentUser?.photoURL ??
+                                  'https://via.placeholder.com/150'),
+                        ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 20),
@@ -330,64 +337,64 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 20.0, right: 8, left: 8),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(36),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 20,
-                color: Colors.black.withOpacity(.1),
-              )
-            ],
-          ),
-          child: SafeArea(
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-              child: GNav(
-                rippleColor: AppColors.secondaryColor,
-                hoverColor: AppColors.primaryColor,
-                gap: 8,
-                activeColor: Colors.white,
-                iconSize: 24,
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(bottom: 20.0, right: 8, left: 8),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(36),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 20,
+                  color: Colors.black.withOpacity(.1),
+                )
+              ],
+            ),
+            child: SafeArea(
+              child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                duration: const Duration(milliseconds: 400),
-                tabBackgroundColor: AppColors.primaryColor,
-                color: AppColors.primaryColor,
-                tabs: [
-                  GButton(
-                    icon: Icons.person,
-                    text: 'Perfil',
-                    onPressed: () {
-                      Navigator.pushNamed(context, RoutesAssets.profilePage);
-                    },
-                  ),
-                  GButton(
-                    icon: Icons.home,
-                    text: 'Inicio',
-                    onPressed: () {
-                      Navigator.pushNamed(context, RoutesAssets.homePage);
-                    },
-                  ),
-                  GButton(
-                    icon: Icons.library_books,
-                    text: 'Manutenção',
-                    onPressed: () {
-                      Navigator.pushNamed(context, RoutesAssets.splashPage);
-                    },
-                  ),
-                ],
-                selectedIndex: _selectedIndex,
-                onTabChange: (index) {
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-                },
+                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+                child: GNav(
+                  rippleColor: AppColors.secondaryColor,
+                  hoverColor: AppColors.primaryColor,
+                  gap: 8,
+                  activeColor: Colors.white,
+                  iconSize: 24,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  duration: const Duration(milliseconds: 400),
+                  tabBackgroundColor: AppColors.primaryColor,
+                  color: AppColors.primaryColor,
+                  tabs: [
+                    GButton(
+                      icon: Icons.person,
+                      text: 'Perfil',
+                      onPressed: () {
+                        Navigator.pushNamed(context, RoutesAssets.profilePage);
+                      },
+                    ),
+                    GButton(
+                      icon: Icons.home,
+                      text: 'Inicio',
+                      onPressed: () {
+                        Navigator.pushNamed(context, RoutesAssets.homePage);
+                      },
+                    ),
+                    GButton(
+                      icon: Icons.library_books,
+                      text: 'Manutenção',
+                      onPressed: () {
+                        Navigator.pushNamed(context, RoutesAssets.splashPage);
+                      },
+                    ),
+                  ],
+                  selectedIndex: _selectedIndex,
+                  onTabChange: (index) {
+                    setState(() {
+                      _selectedIndex = index;
+                    });
+                  },
+                ),
               ),
             ),
           ),
