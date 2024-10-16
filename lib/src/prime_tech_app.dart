@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prime_tech/src/constants/routes_assets.dart';
+import 'package:prime_tech/src/view/home/admin_home_page.dart';
 import 'package:prime_tech/src/view/home/home_page.dart';
 import 'package:prime_tech/src/view/login/login_page.dart';
 import 'package:prime_tech/src/view/profile/photo_profile_page.dart';
@@ -7,6 +8,7 @@ import 'package:prime_tech/src/view/profile/name_profile_page.dart';
 import 'package:prime_tech/src/view/profile/password_profile_page.dart';
 import 'package:prime_tech/src/view/profile/profile_page.dart';
 import 'package:prime_tech/src/view/register/register_page.dart';
+import 'package:prime_tech/src/view/sales/register_sales_page.dart';
 import 'package:prime_tech/src/view/splash/splash_page.dart';
 
 class PrimeTechApp extends StatelessWidget {
@@ -25,6 +27,8 @@ class PrimeTechApp extends StatelessWidget {
            RoutesAssets.profilePhotoPage : (context) => const PhotoProfilePage(),
            RoutesAssets.profileNamePage : (context) => const NameProfilePage(),
            RoutesAssets.profilePasswordPage : (context) => const PasswordProfilePage(),
+           RoutesAssets.salesRegisterPage : (context) => const RegisterSalesPage(),
+           RoutesAssets.adminHomePage : (context) => const AdminHomePage(),
          },
        );
   }

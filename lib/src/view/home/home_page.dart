@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-    int _selectedIndex = 1;
+  int _selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +44,15 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             child: Image.asset(
-               'assets/images/primeTech.png',
+              'assets/images/primeTech.png',
               fit: BoxFit.contain,
             ),
           ),
         ],
       ),
-       bottomNavigationBar: Padding(
-         padding: const EdgeInsets.only(bottom: 20.0, right: 8, left: 8),
-         child: Container(
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 20.0, right: 8, left: 8),
+        child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(36),
             color: Colors.white,
@@ -65,36 +65,38 @@ class _HomePageState extends State<HomePage> {
           ),
           child: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
               child: GNav(
-                rippleColor:  AppColors.secondaryColor,
+                rippleColor: AppColors.secondaryColor,
                 hoverColor: AppColors.primaryColor,
                 gap: 8,
                 activeColor: Colors.white,
                 iconSize: 24,
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 duration: const Duration(milliseconds: 400),
                 tabBackgroundColor: AppColors.primaryColor,
                 color: AppColors.primaryColor,
-                tabs:  [
+                tabs: [
                   GButton(
                     icon: Icons.person,
                     text: 'Perfil',
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.pushNamed(context, RoutesAssets.profilePage);
                     },
                   ),
                   GButton(
                     icon: Icons.home,
                     text: 'Inicio',
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.pushNamed(context, RoutesAssets.homePage);
                     },
                   ),
-                 GButton(
+                  GButton(
                     icon: Icons.library_books,
                     text: 'Manutenção',
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.pushNamed(context, RoutesAssets.splashPage);
                     },
                   ),
@@ -108,8 +110,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-               ),
-       ),
+        ),
+      ),
     );
   }
 }

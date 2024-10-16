@@ -247,13 +247,17 @@ class _LoginPageState extends State<LoginPage> {
                         if (_formKey.currentState!.validate()) {
                           final email = emailController.text;
                           final password = passwordController.text;
+                          final isadm = await ControllerLogin.isAdm(email);
 
                           await ControllerLogin.loginUser(
+                              // ignore: use_build_context_synchronously
                               context, email, password, (bool success) {
                             if (success) {
                               // ignore: use_build_context_synchronously
                               Navigator.of(context)
-                                  .pushReplacementNamed(RoutesAssets.homePage);
+                                  .pushReplacementNamed(isadm
+                                      ? RoutesAssets.adminHomePage
+                                      : RoutesAssets.homePage);
                             }
                           });
                         }

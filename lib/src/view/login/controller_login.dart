@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:prime_tech/src/constants/app_text_styles.dart';
@@ -77,4 +78,27 @@ import 'package:prime_tech/src/constants/app_text_styles.dart';
       );
     }
   }
+
+  static Future<bool> isAdm(String email) async {
+
+  final user = FirebaseAuth.instance.currentUser;
+
+  if (user == null) {
+    return false; 
+  }
+
+  final snapshot = await FirebaseFirestore.instance
+      .collection('users')
+      .where('email', isEqualTo: email)
+      .get();
+
+  if (snapshot.docs.isNotEmpty) 
+ {
+    final userData = snapshot.docs.first.data();
+
+    return userData['isAdmin'] as bool; 
+  } else {
+    return false; 
+  }
+}
 }
