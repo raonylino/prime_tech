@@ -8,7 +8,7 @@ import 'package:prime_tech/src/view/profile/name_profile_page.dart';
 import 'package:prime_tech/src/view/profile/password_profile_page.dart';
 import 'package:prime_tech/src/view/profile/profile_page.dart';
 import 'package:prime_tech/src/view/register/register_page.dart';
-import 'package:prime_tech/src/view/sales/register_sales_page.dart';
+import 'package:prime_tech/src/view/product/register_product_page.dart';
 import 'package:prime_tech/src/view/splash/splash_page.dart';
 
 class PrimeTechApp extends StatelessWidget {
@@ -27,7 +27,7 @@ class PrimeTechApp extends StatelessWidget {
            RoutesAssets.profilePhotoPage : (context) => const PhotoProfilePage(),
            RoutesAssets.profileNamePage : (context) => const NameProfilePage(),
            RoutesAssets.profilePasswordPage : (context) => const PasswordProfilePage(),
-           RoutesAssets.salesRegisterPage : (context) => const RegisterSalesPage(),
+           RoutesAssets.producstRegister : (context) => const RegisterProductPage(),
            RoutesAssets.adminHomePage : (context) => const AdminHomePage(),
          },
        );

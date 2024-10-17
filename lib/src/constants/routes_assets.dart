@@ -23,7 +23,7 @@ class RoutesAssets {
   static const String profilePasswordPage = '/profile/editPassword';
 
   // --------------------------------- Sales Page -------------------------------
-  static const String salesPage = '/sales';
-  static const String salesRegisterPage = '/sales/register';
+  static const String products = '/products';
+  static const String producstRegister = '/product/register';
 
 }

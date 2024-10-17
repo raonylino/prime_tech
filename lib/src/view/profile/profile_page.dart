@@ -4,6 +4,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:prime_tech/src/constants/app_colors.dart';
 import 'package:prime_tech/src/constants/app_text_styles.dart';
 import 'package:prime_tech/src/constants/routes_assets.dart';
+import 'package:prime_tech/src/view/login/controller_login.dart';
 import 'package:prime_tech/src/view/login/login_page.dart';
 import 'package:prime_tech/src/view/profile/controller_profile.dart';
 import 'package:prime_tech/src/view/profile/photo_profile_page.dart';
@@ -26,6 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
+     _selectedIndex = 0;
     _loadUser(); // Chama a função para carregar os dados do usuário
   }
 
@@ -370,15 +372,20 @@ class _ProfilePageState extends State<ProfilePage> {
                       icon: Icons.person,
                       text: 'Perfil',
                       onPressed: () {
-                        Navigator.pushNamed(context, RoutesAssets.profilePage);
+                        Navigator.popAndPushNamed(context, RoutesAssets.profilePage);
                       },
                     ),
                     GButton(
                       icon: Icons.home,
                       text: 'Inicio',
-                      onPressed: () {
-                        Navigator.pushNamed(context, RoutesAssets.homePage);
-                      },
+                    onPressed: () async{
+                      final isadm = await ControllerLogin.isAdm(FirebaseAuth.instance.currentUser!.email!);
+                         // ignore: use_build_context_synchronously
+                         Navigator.of(context)
+                                  .pushReplacementNamed(isadm
+                                      ? RoutesAssets.adminHomePage
+                                      : RoutesAssets.homePage);
+                    },
                     ),
                     GButton(
                       icon: Icons.library_books,

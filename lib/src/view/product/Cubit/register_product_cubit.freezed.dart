@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'register_sales_cubit.dart';
+part of 'register_product_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,29 +15,29 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$RegisterSalesState {
+mixin _$RegisterProductState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<SalesModel> sales) data,
-    required TResult Function() error,
+    required TResult Function(List<ProductModel> sales) data,
+    required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<SalesModel> sales)? data,
-    TResult? Function()? error,
+    TResult? Function(List<ProductModel> sales)? data,
+    TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<SalesModel> sales)? data,
-    TResult Function()? error,
+    TResult Function(List<ProductModel> sales)? data,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -69,23 +69,24 @@ mixin _$RegisterSalesState {
 }
 
 /// @nodoc
-abstract class $RegisterSalesStateCopyWith<$Res> {
-  factory $RegisterSalesStateCopyWith(
-          RegisterSalesState value, $Res Function(RegisterSalesState) then) =
-      _$RegisterSalesStateCopyWithImpl<$Res, RegisterSalesState>;
+abstract class $RegisterProductStateCopyWith<$Res> {
+  factory $RegisterProductStateCopyWith(RegisterProductState value,
+          $Res Function(RegisterProductState) then) =
+      _$RegisterProductStateCopyWithImpl<$Res, RegisterProductState>;
 }
 
 /// @nodoc
-class _$RegisterSalesStateCopyWithImpl<$Res, $Val extends RegisterSalesState>
-    implements $RegisterSalesStateCopyWith<$Res> {
-  _$RegisterSalesStateCopyWithImpl(this._value, this._then);
+class _$RegisterProductStateCopyWithImpl<$Res,
+        $Val extends RegisterProductState>
+    implements $RegisterProductStateCopyWith<$Res> {
+  _$RegisterProductStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RegisterSalesState
+  /// Create a copy of RegisterProductState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -98,13 +99,13 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$RegisterSalesStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$RegisterProductStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RegisterSalesState
+  /// Create a copy of RegisterProductState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -115,13 +116,13 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RegisterSalesState.initial()';
+    return 'RegisterProductState.initial()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'RegisterSalesState.initial'));
+    properties.add(DiagnosticsProperty('type', 'RegisterProductState.initial'));
   }
 
   @override
@@ -138,8 +139,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<SalesModel> sales) data,
-    required TResult Function() error,
+    required TResult Function(List<ProductModel> sales) data,
+    required TResult Function(String error) error,
   }) {
     return initial();
   }
@@ -149,8 +150,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<SalesModel> sales)? data,
-    TResult? Function()? error,
+    TResult? Function(List<ProductModel> sales)? data,
+    TResult? Function(String error)? error,
   }) {
     return initial?.call();
   }
@@ -160,8 +161,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<SalesModel> sales)? data,
-    TResult Function()? error,
+    TResult Function(List<ProductModel> sales)? data,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -208,7 +209,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   }
 }
 
-abstract class _Initial implements RegisterSalesState {
+abstract class _Initial implements RegisterProductState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -221,13 +222,13 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$RegisterSalesStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$RegisterProductStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RegisterSalesState
+  /// Create a copy of RegisterProductState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -238,13 +239,13 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RegisterSalesState.loading()';
+    return 'RegisterProductState.loading()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'RegisterSalesState.loading'));
+    properties.add(DiagnosticsProperty('type', 'RegisterProductState.loading'));
   }
 
   @override
@@ -261,8 +262,8 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<SalesModel> sales) data,
-    required TResult Function() error,
+    required TResult Function(List<ProductModel> sales) data,
+    required TResult Function(String error) error,
   }) {
     return loading();
   }
@@ -272,8 +273,8 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<SalesModel> sales)? data,
-    TResult? Function()? error,
+    TResult? Function(List<ProductModel> sales)? data,
+    TResult? Function(String error)? error,
   }) {
     return loading?.call();
   }
@@ -283,8 +284,8 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<SalesModel> sales)? data,
-    TResult Function()? error,
+    TResult Function(List<ProductModel> sales)? data,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -331,7 +332,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   }
 }
 
-abstract class _Loading implements RegisterSalesState {
+abstract class _Loading implements RegisterProductState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -341,17 +342,17 @@ abstract class _$$DataImplCopyWith<$Res> {
           _$DataImpl value, $Res Function(_$DataImpl) then) =
       __$$DataImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<SalesModel> sales});
+  $Res call({List<ProductModel> sales});
 }
 
 /// @nodoc
 class __$$DataImplCopyWithImpl<$Res>
-    extends _$RegisterSalesStateCopyWithImpl<$Res, _$DataImpl>
+    extends _$RegisterProductStateCopyWithImpl<$Res, _$DataImpl>
     implements _$$DataImplCopyWith<$Res> {
   __$$DataImplCopyWithImpl(_$DataImpl _value, $Res Function(_$DataImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RegisterSalesState
+  /// Create a copy of RegisterProductState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -362,7 +363,7 @@ class __$$DataImplCopyWithImpl<$Res>
       sales: null == sales
           ? _value._sales
           : sales // ignore: cast_nullable_to_non_nullable
-              as List<SalesModel>,
+              as List<ProductModel>,
     ));
   }
 }
@@ -370,11 +371,11 @@ class __$$DataImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DataImpl with DiagnosticableTreeMixin implements _Data {
-  const _$DataImpl({required final List<SalesModel> sales}) : _sales = sales;
+  const _$DataImpl({required final List<ProductModel> sales}) : _sales = sales;
 
-  final List<SalesModel> _sales;
+  final List<ProductModel> _sales;
   @override
-  List<SalesModel> get sales {
+  List<ProductModel> get sales {
     if (_sales is EqualUnmodifiableListView) return _sales;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_sales);
@@ -382,14 +383,14 @@ class _$DataImpl with DiagnosticableTreeMixin implements _Data {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RegisterSalesState.data(sales: $sales)';
+    return 'RegisterProductState.data(sales: $sales)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'RegisterSalesState.data'))
+      ..add(DiagnosticsProperty('type', 'RegisterProductState.data'))
       ..add(DiagnosticsProperty('sales', sales));
   }
 
@@ -405,7 +406,7 @@ class _$DataImpl with DiagnosticableTreeMixin implements _Data {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_sales));
 
-  /// Create a copy of RegisterSalesState
+  /// Create a copy of RegisterProductState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -418,8 +419,8 @@ class _$DataImpl with DiagnosticableTreeMixin implements _Data {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<SalesModel> sales) data,
-    required TResult Function() error,
+    required TResult Function(List<ProductModel> sales) data,
+    required TResult Function(String error) error,
   }) {
     return data(sales);
   }
@@ -429,8 +430,8 @@ class _$DataImpl with DiagnosticableTreeMixin implements _Data {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<SalesModel> sales)? data,
-    TResult? Function()? error,
+    TResult? Function(List<ProductModel> sales)? data,
+    TResult? Function(String error)? error,
   }) {
     return data?.call(sales);
   }
@@ -440,8 +441,8 @@ class _$DataImpl with DiagnosticableTreeMixin implements _Data {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<SalesModel> sales)? data,
-    TResult Function()? error,
+    TResult Function(List<ProductModel> sales)? data,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (data != null) {
@@ -488,12 +489,12 @@ class _$DataImpl with DiagnosticableTreeMixin implements _Data {
   }
 }
 
-abstract class _Data implements RegisterSalesState {
-  const factory _Data({required final List<SalesModel> sales}) = _$DataImpl;
+abstract class _Data implements RegisterProductState {
+  const factory _Data({required final List<ProductModel> sales}) = _$DataImpl;
 
-  List<SalesModel> get sales;
+  List<ProductModel> get sales;
 
-  /// Create a copy of RegisterSalesState
+  /// Create a copy of RegisterProductState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DataImplCopyWith<_$DataImpl> get copyWith =>
@@ -505,54 +506,83 @@ abstract class _$$ErrorImplCopyWith<$Res> {
   factory _$$ErrorImplCopyWith(
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String error});
 }
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$RegisterSalesStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$RegisterProductStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RegisterSalesState
+  /// Create a copy of RegisterProductState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$ErrorImpl(
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
-  const _$ErrorImpl();
+  const _$ErrorImpl({required this.error});
+
+  @override
+  final String error;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RegisterSalesState.error()';
+    return 'RegisterProductState.error(error: $error)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'RegisterSalesState.error'));
+    properties
+      ..add(DiagnosticsProperty('type', 'RegisterProductState.error'))
+      ..add(DiagnosticsProperty('error', error));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ErrorImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$ErrorImpl &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, error);
+
+  /// Create a copy of RegisterProductState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<SalesModel> sales) data,
-    required TResult Function() error,
+    required TResult Function(List<ProductModel> sales) data,
+    required TResult Function(String error) error,
   }) {
-    return error();
+    return error(this.error);
   }
 
   @override
@@ -560,10 +590,10 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<SalesModel> sales)? data,
-    TResult? Function()? error,
+    TResult? Function(List<ProductModel> sales)? data,
+    TResult? Function(String error)? error,
   }) {
-    return error?.call();
+    return error?.call(this.error);
   }
 
   @override
@@ -571,12 +601,12 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<SalesModel> sales)? data,
-    TResult Function()? error,
+    TResult Function(List<ProductModel> sales)? data,
+    TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error();
+      return error(this.error);
     }
     return orElse();
   }
@@ -619,6 +649,14 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   }
 }
 
-abstract class _Error implements RegisterSalesState {
-  const factory _Error() = _$ErrorImpl;
+abstract class _Error implements RegisterProductState {
+  const factory _Error({required final String error}) = _$ErrorImpl;
+
+  String get error;
+
+  /// Create a copy of RegisterProductState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
