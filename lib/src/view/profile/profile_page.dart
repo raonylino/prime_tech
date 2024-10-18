@@ -320,7 +320,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             color: const Color.fromARGB(131, 158, 158, 158),
                             margin: const EdgeInsets.symmetric(vertical: 10),
                           ),
-                          SizedBox(height: screenSize.height * 0.2),
+                          SizedBox(height: screenSize.height * 0.15),
                           Text(
                             ' © 2024. created by: Raony lino',
                             style: TextStyle(
@@ -338,73 +338,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
           ],
-        ),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.only(bottom: 20.0, right: 8, left: 8),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(36),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 20,
-                  color: Colors.black.withOpacity(.1),
-                )
-              ],
-            ),
-            child: SafeArea(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-                child: GNav(
-                  rippleColor: AppColors.secondaryColor,
-                  hoverColor: AppColors.primaryColor,
-                  gap: 8,
-                  activeColor: Colors.white,
-                  iconSize: 24,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  duration: const Duration(milliseconds: 400),
-                  tabBackgroundColor: AppColors.primaryColor,
-                  color: AppColors.primaryColor,
-                  tabs: [
-                    GButton(
-                      icon: Icons.person,
-                      text: 'Perfil',
-                      onPressed: () {
-                        Navigator.popAndPushNamed(context, RoutesAssets.profilePage);
-                      },
-                    ),
-                    GButton(
-                      icon: Icons.home,
-                      text: 'Inicio',
-                    onPressed: () async{
-                      final isadm = await ControllerLogin.isAdm(FirebaseAuth.instance.currentUser!.email!);
-                         // ignore: use_build_context_synchronously
-                         Navigator.of(context)
-                                  .pushReplacementNamed(isadm
-                                      ? RoutesAssets.adminHomePage
-                                      : RoutesAssets.homePage);
-                    },
-                    ),
-                    GButton(
-                      icon: Icons.library_books,
-                      text: 'Manutenção',
-                      onPressed: () {
-                        Navigator.pushNamed(context, RoutesAssets.splashPage);
-                      },
-                    ),
-                  ],
-                  selectedIndex: _selectedIndex,
-                  onTabChange: (index) {
-                    setState(() {
-                      _selectedIndex = index;
-                    });
-                  },
-                ),
-              ),
-            ),
-          ),
         ),
       ),
     );

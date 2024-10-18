@@ -10,6 +10,7 @@ import 'package:prime_tech/src/view/profile/profile_page.dart';
 import 'package:prime_tech/src/view/register/register_page.dart';
 import 'package:prime_tech/src/view/product/register_product_page.dart';
 import 'package:prime_tech/src/view/splash/splash_page.dart';
+import 'package:prime_tech/src/view/tabview/tabview_page.dart';
 
 class PrimeTechApp extends StatelessWidget {
 
@@ -29,6 +30,7 @@ class PrimeTechApp extends StatelessWidget {
            RoutesAssets.profilePasswordPage : (context) => const PasswordProfilePage(),
            RoutesAssets.producstRegister : (context) => const RegisterProductPage(),
            RoutesAssets.adminHomePage : (context) => const AdminHomePage(),
+           RoutesAssets.tabView : (context) => const TabviewPage(),
          },
        );
   }

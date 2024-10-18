@@ -255,9 +255,7 @@ class _LoginPageState extends State<LoginPage> {
                             if (success) {
                               // ignore: use_build_context_synchronously
                               Navigator.of(context)
-                                  .pushReplacementNamed(isadm
-                                      ? RoutesAssets.adminHomePage
-                                      : RoutesAssets.homePage);
+                                  .pushReplacementNamed(RoutesAssets.tabView);
                             }
                           });
                         }

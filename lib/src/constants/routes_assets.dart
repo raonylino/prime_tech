@@ -22,8 +22,10 @@ class RoutesAssets {
   static const String profileNamePage = '/profile/editName';
   static const String profilePasswordPage = '/profile/editPassword';
 
-  // --------------------------------- Sales Page -------------------------------
+  // --------------------------------- Product Page -------------------------------
   static const String products = '/products';
   static const String producstRegister = '/product/register';
 
+  // --------------------------------- tabview Page -------------------------------
+  static const String tabView = '/tabView';
 }
