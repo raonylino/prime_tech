@@ -1,10 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:prime_tech/src/constants/app_colors.dart';
 import 'package:prime_tech/src/constants/app_text_styles.dart';
-import 'package:prime_tech/src/constants/routes_assets.dart';
-import 'package:prime_tech/src/view/login/controller_login.dart';
 import 'package:prime_tech/src/view/login/login_page.dart';
 import 'package:prime_tech/src/view/profile/controller_profile.dart';
 import 'package:prime_tech/src/view/profile/photo_profile_page.dart';
@@ -19,7 +16,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  int _selectedIndex = 0;
 
   String userName = '';
   String userEmail = '';
@@ -27,7 +23,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-     _selectedIndex = 0;
     _loadUser(); // Chama a função para carregar os dados do usuário
   }
 

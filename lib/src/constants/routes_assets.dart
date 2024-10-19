@@ -28,4 +28,6 @@ class RoutesAssets {
 
   // --------------------------------- tabview Page -------------------------------
   static const String tabView = '/tabView';
+  static const String admTabView = '/admTabView';
+
 }

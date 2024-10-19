@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:prime_tech/src/view/home/home_page.dart';
+import 'package:prime_tech/src/view/home/admin_home_page.dart';
 import 'package:prime_tech/src/view/profile/profile_page.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 
-class TabviewPage extends StatefulWidget {
+class AdmTabviewPage extends StatefulWidget {
 
-  const TabviewPage({ super.key });
+  const AdmTabviewPage({ super.key });
 
   @override
-  State<TabviewPage> createState() => _TabviewPageState();
+  State<AdmTabviewPage> createState() => _AdmTabviewPageState();
 }
 
-class _TabviewPageState extends State<TabviewPage> {
-late PageController _pageController;
+class _AdmTabviewPageState extends State<AdmTabviewPage> {
+  late PageController _pageController;
   int selectedIndex = 1;
   @override
   void initState() {
@@ -72,7 +72,7 @@ late PageController _pageController;
 
 List<Widget> _listOfWidget = <Widget>[
   const ProfilePage(),
-  const HomePage(),
+  const AdminHomePage(),
   Container(
     alignment: Alignment.center,
     child: const Icon(

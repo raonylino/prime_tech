@@ -1,11 +1,9 @@
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:prime_tech/src/constants/app_colors.dart';
 import 'package:prime_tech/src/constants/app_text_styles.dart';
 import 'package:prime_tech/src/constants/routes_assets.dart';
-import 'package:prime_tech/src/view/login/controller_login.dart';
+
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});
@@ -18,7 +16,6 @@ enum PopupMenuPages { product, maintenance }
 
 class _AdminHomePageState extends State<AdminHomePage> {
   bool iconAction = true;
-  int _selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {

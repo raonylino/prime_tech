@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:prime_tech/src/constants/app_colors.dart';
-import 'package:prime_tech/src/constants/routes_assets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,7 +8,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {

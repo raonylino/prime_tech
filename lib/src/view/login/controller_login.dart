@@ -4,11 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:prime_tech/src/constants/app_text_styles.dart';
 
- class ControllerLogin {
-  static Future<void> loginUser(
-      BuildContext context, String email, String password, Function(bool) onSuccess) async {
+class ControllerLogin {
+  static Future<void> loginUser(BuildContext context, String email,
+      String password, Function(bool) onSuccess) async {
     try {
-      final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      final userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -23,14 +24,15 @@ import 'package:prime_tech/src/constants/app_text_styles.dart';
           // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Email não verificado! Por favor, verifique seu email.',
-                    textAlign: TextAlign.center,
-                     style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontFamily: TextStyles.instance.secondary,
-                    fontWeight: FontWeight.w400,
-                  )),
+              content:
+                  Text('Email não verificado! Por favor, verifique seu email.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontFamily: TextStyles.instance.secondary,
+                        fontWeight: FontWeight.w400,
+                      )),
               backgroundColor: Colors.amber[900],
               behavior: SnackBarBehavior.floating,
               duration: const Duration(seconds: 2),
@@ -50,14 +52,14 @@ import 'package:prime_tech/src/constants/app_text_styles.dart';
                     ? 'Senha inválida!'
                     : e.code == 'invalid-credential'
                         ? 'Credenciais inválidas! Verifique o e-mail e a senha.'
-                    : 'Erro ao fazer login. Por favor, tente novamente.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontFamily: TextStyles.instance.secondary,
-                      fontWeight: FontWeight.w400,
-                    ),
+                        : 'Erro ao fazer login. Por favor, tente novamente.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 14,
+              fontFamily: TextStyles.instance.secondary,
+              fontWeight: FontWeight.w400,
+            ),
           ),
           backgroundColor: Colors.red,
           behavior: SnackBarBehavior.floating,
@@ -80,25 +82,23 @@ import 'package:prime_tech/src/constants/app_text_styles.dart';
   }
 
   static Future<bool> isAdm(String email) async {
+    final user = FirebaseAuth.instance.currentUser;
 
-  final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      return false;
+    }
 
-  if (user == null) {
-    return false; 
+    final snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: email)
+        .get();
+
+    if (snapshot.docs.isNotEmpty) {
+      final userData = snapshot.docs.first.data();
+      log(userData.toString());
+      return userData['isAdmin'] as bool;
+    } else {
+      return false;
+    }
   }
-
-  final snapshot = await FirebaseFirestore.instance
-      .collection('users')
-      .where('email', isEqualTo: email)
-      .get();
-
-  if (snapshot.docs.isNotEmpty) 
- {
-    final userData = snapshot.docs.first.data();
-
-    return userData['isAdmin'] as bool; 
-  } else {
-    return false; 
-  }
-}
 }

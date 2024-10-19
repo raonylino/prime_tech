@@ -255,7 +255,10 @@ class _LoginPageState extends State<LoginPage> {
                             if (success) {
                               // ignore: use_build_context_synchronously
                               Navigator.of(context)
-                                  .pushReplacementNamed(RoutesAssets.tabView);
+                                  .pushReplacementNamed( isadm
+                                      ? RoutesAssets.admTabView
+                                      : RoutesAssets.tabView
+                                    );
                             }
                           });
                         }

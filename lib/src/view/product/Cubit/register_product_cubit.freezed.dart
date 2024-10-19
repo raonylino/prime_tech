@@ -21,7 +21,8 @@ mixin _$RegisterProductState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<ProductModel> sales) data,
-    required TResult Function(String error) error,
+    required TResult Function(String string, String error) error,
+    required TResult Function() success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +30,8 @@ mixin _$RegisterProductState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<ProductModel> sales)? data,
-    TResult? Function(String error)? error,
+    TResult? Function(String string, String error)? error,
+    TResult? Function()? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +39,8 @@ mixin _$RegisterProductState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<ProductModel> sales)? data,
-    TResult Function(String error)? error,
+    TResult Function(String string, String error)? error,
+    TResult Function()? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$RegisterProductState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Data value) data,
     required TResult Function(_Error value) error,
+    required TResult Function(_Success value) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +59,7 @@ mixin _$RegisterProductState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Data value)? data,
     TResult? Function(_Error value)? error,
+    TResult? Function(_Success value)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$RegisterProductState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Data value)? data,
     TResult Function(_Error value)? error,
+    TResult Function(_Success value)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -140,7 +146,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<ProductModel> sales) data,
-    required TResult Function(String error) error,
+    required TResult Function(String string, String error) error,
+    required TResult Function() success,
   }) {
     return initial();
   }
@@ -151,7 +158,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<ProductModel> sales)? data,
-    TResult? Function(String error)? error,
+    TResult? Function(String string, String error)? error,
+    TResult? Function()? success,
   }) {
     return initial?.call();
   }
@@ -162,7 +170,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<ProductModel> sales)? data,
-    TResult Function(String error)? error,
+    TResult Function(String string, String error)? error,
+    TResult Function()? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -178,6 +187,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Data value) data,
     required TResult Function(_Error value) error,
+    required TResult Function(_Success value) success,
   }) {
     return initial(this);
   }
@@ -189,6 +199,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Data value)? data,
     TResult? Function(_Error value)? error,
+    TResult? Function(_Success value)? success,
   }) {
     return initial?.call(this);
   }
@@ -200,6 +211,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Data value)? data,
     TResult Function(_Error value)? error,
+    TResult Function(_Success value)? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -263,7 +275,8 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<ProductModel> sales) data,
-    required TResult Function(String error) error,
+    required TResult Function(String string, String error) error,
+    required TResult Function() success,
   }) {
     return loading();
   }
@@ -274,7 +287,8 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<ProductModel> sales)? data,
-    TResult? Function(String error)? error,
+    TResult? Function(String string, String error)? error,
+    TResult? Function()? success,
   }) {
     return loading?.call();
   }
@@ -285,7 +299,8 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<ProductModel> sales)? data,
-    TResult Function(String error)? error,
+    TResult Function(String string, String error)? error,
+    TResult Function()? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -301,6 +316,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Data value) data,
     required TResult Function(_Error value) error,
+    required TResult Function(_Success value) success,
   }) {
     return loading(this);
   }
@@ -312,6 +328,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Data value)? data,
     TResult? Function(_Error value)? error,
+    TResult? Function(_Success value)? success,
   }) {
     return loading?.call(this);
   }
@@ -323,6 +340,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Data value)? data,
     TResult Function(_Error value)? error,
+    TResult Function(_Success value)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -420,7 +438,8 @@ class _$DataImpl with DiagnosticableTreeMixin implements _Data {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<ProductModel> sales) data,
-    required TResult Function(String error) error,
+    required TResult Function(String string, String error) error,
+    required TResult Function() success,
   }) {
     return data(sales);
   }
@@ -431,7 +450,8 @@ class _$DataImpl with DiagnosticableTreeMixin implements _Data {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<ProductModel> sales)? data,
-    TResult? Function(String error)? error,
+    TResult? Function(String string, String error)? error,
+    TResult? Function()? success,
   }) {
     return data?.call(sales);
   }
@@ -442,7 +462,8 @@ class _$DataImpl with DiagnosticableTreeMixin implements _Data {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<ProductModel> sales)? data,
-    TResult Function(String error)? error,
+    TResult Function(String string, String error)? error,
+    TResult Function()? success,
     required TResult orElse(),
   }) {
     if (data != null) {
@@ -458,6 +479,7 @@ class _$DataImpl with DiagnosticableTreeMixin implements _Data {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Data value) data,
     required TResult Function(_Error value) error,
+    required TResult Function(_Success value) success,
   }) {
     return data(this);
   }
@@ -469,6 +491,7 @@ class _$DataImpl with DiagnosticableTreeMixin implements _Data {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Data value)? data,
     TResult? Function(_Error value)? error,
+    TResult? Function(_Success value)? success,
   }) {
     return data?.call(this);
   }
@@ -480,6 +503,7 @@ class _$DataImpl with DiagnosticableTreeMixin implements _Data {
     TResult Function(_Loading value)? loading,
     TResult Function(_Data value)? data,
     TResult Function(_Error value)? error,
+    TResult Function(_Success value)? success,
     required TResult orElse(),
   }) {
     if (data != null) {
@@ -507,7 +531,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String error});
+  $Res call({String string, String error});
 }
 
 /// @nodoc
@@ -523,9 +547,14 @@ class __$$ErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? string = null,
     Object? error = null,
   }) {
     return _then(_$ErrorImpl(
+      null == string
+          ? _value.string
+          : string // ignore: cast_nullable_to_non_nullable
+              as String,
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -537,14 +566,16 @@ class __$$ErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
-  const _$ErrorImpl({required this.error});
+  const _$ErrorImpl(this.string, {required this.error});
 
+  @override
+  final String string;
   @override
   final String error;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RegisterProductState.error(error: $error)';
+    return 'RegisterProductState.error(string: $string, error: $error)';
   }
 
   @override
@@ -552,6 +583,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'RegisterProductState.error'))
+      ..add(DiagnosticsProperty('string', string))
       ..add(DiagnosticsProperty('error', error));
   }
 
@@ -560,11 +592,12 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
+            (identical(other.string, string) || other.string == string) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, string, error);
 
   /// Create a copy of RegisterProductState
   /// with the given fields replaced by the non-null parameter values.
@@ -580,9 +613,10 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<ProductModel> sales) data,
-    required TResult Function(String error) error,
+    required TResult Function(String string, String error) error,
+    required TResult Function() success,
   }) {
-    return error(this.error);
+    return error(string, this.error);
   }
 
   @override
@@ -591,9 +625,10 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<ProductModel> sales)? data,
-    TResult? Function(String error)? error,
+    TResult? Function(String string, String error)? error,
+    TResult? Function()? success,
   }) {
-    return error?.call(this.error);
+    return error?.call(string, this.error);
   }
 
   @override
@@ -602,11 +637,12 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<ProductModel> sales)? data,
-    TResult Function(String error)? error,
+    TResult Function(String string, String error)? error,
+    TResult Function()? success,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(this.error);
+      return error(string, this.error);
     }
     return orElse();
   }
@@ -618,6 +654,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Data value) data,
     required TResult Function(_Error value) error,
+    required TResult Function(_Success value) success,
   }) {
     return error(this);
   }
@@ -629,6 +666,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Data value)? data,
     TResult? Function(_Error value)? error,
+    TResult? Function(_Success value)? success,
   }) {
     return error?.call(this);
   }
@@ -640,6 +678,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     TResult Function(_Loading value)? loading,
     TResult Function(_Data value)? data,
     TResult Function(_Error value)? error,
+    TResult Function(_Success value)? success,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -650,8 +689,10 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
 }
 
 abstract class _Error implements RegisterProductState {
-  const factory _Error({required final String error}) = _$ErrorImpl;
+  const factory _Error(final String string, {required final String error}) =
+      _$ErrorImpl;
 
+  String get string;
   String get error;
 
   /// Create a copy of RegisterProductState
@@ -659,4 +700,133 @@ abstract class _Error implements RegisterProductState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SuccessImplCopyWith<$Res> {
+  factory _$$SuccessImplCopyWith(
+          _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
+      __$$SuccessImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SuccessImplCopyWithImpl<$Res>
+    extends _$RegisterProductStateCopyWithImpl<$Res, _$SuccessImpl>
+    implements _$$SuccessImplCopyWith<$Res> {
+  __$$SuccessImplCopyWithImpl(
+      _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of RegisterProductState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
+  const _$SuccessImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'RegisterProductState.success()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'RegisterProductState.success'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SuccessImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<ProductModel> sales) data,
+    required TResult Function(String string, String error) error,
+    required TResult Function() success,
+  }) {
+    return success();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<ProductModel> sales)? data,
+    TResult? Function(String string, String error)? error,
+    TResult? Function()? success,
+  }) {
+    return success?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<ProductModel> sales)? data,
+    TResult Function(String string, String error)? error,
+    TResult Function()? success,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Data value) data,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Success value) success,
+  }) {
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Data value)? data,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Success value)? success,
+  }) {
+    return success?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Data value)? data,
+    TResult Function(_Error value)? error,
+    TResult Function(_Success value)? success,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Success implements RegisterProductState {
+  const factory _Success() = _$SuccessImpl;
 }
