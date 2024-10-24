@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:prime_tech/src/constants/app_colors.dart';
@@ -247,12 +249,13 @@ class _LoginPageState extends State<LoginPage> {
                         if (_formKey.currentState!.validate()) {
                           final email = emailController.text;
                           final password = passwordController.text;
-                          final isadm = await ControllerLogin.isAdm(email);
+                          bool isadm = await ControllerLogin.isAdm(email);
 
                           await ControllerLogin.loginUser(
                               // ignore: use_build_context_synchronously
                               context, email, password, (bool success) {
                             if (success) {
+                              log(isadm.toString());
                               // ignore: use_build_context_synchronously
                               Navigator.of(context)
                                   .pushReplacementNamed( isadm

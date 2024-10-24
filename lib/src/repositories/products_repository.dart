@@ -1,41 +1,50 @@
-
+import 'dart:io';
+import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:prime_tech/src/model/product_model.dart';
 
 class ProductsRepository {
-   final FirebaseFirestore _firestore;
+  final FirebaseFirestore _firestore;
 
   ProductsRepository({FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance; 
-
-
+      : _firestore = firestore ?? FirebaseFirestore.instance;
 
   final CollectionReference<Map<String, dynamic>> products =
       FirebaseFirestore.instance.collection('produtos');
 
-
   Future<void> addProduct(ProductModel product) async {
+    try {
+      final String uid = _firestore.collection('produtos').doc().id;
 
-    final String uid = _firestore.collection('produtos').doc().id;
+      final Reference storageReference =
+          FirebaseStorage.instance.ref().child('produtos/$uid');
+      final UploadTask uploadTask =
+          storageReference.putFile(File(product.photoUrl));
+      final TaskSnapshot downloadUrl = await uploadTask;
+      final String imageUrl = await downloadUrl.ref.getDownloadURL();
 
+      final Map<String, dynamic> data = {
+        'name': product.name,
+        'description': product.description,
+        'price': product.price,
+        'photoUrl': imageUrl,
+        'category': product.category,
+      };
 
-    final Map<String, dynamic> data = {
-      'name': product.name,
-      'description': product.description,
-      'price': product.price,
-      'photoUrl': product.photoUrl,
-      'category': product.category,
-    };
-
-
-    await products.doc(uid).set(data);
+      await FirebaseFirestore.instance
+          .collection('produtos')
+          .doc(uid)
+          .set(data);
+      log('Produto adicionado com sucesso!');
+    } catch (e) {
+      log('Erro ao adicionar produto: $e');
+    }
   }
 
   Future<void> updateProduct(ProductModel product) async {
-
-
-    final String uid = product.uid!; 
+    final String uid = product.uid!;
 
     final Map<String, dynamic> data = {
       'name': product.name,
@@ -44,7 +53,6 @@ class ProductsRepository {
       'photoUrl': product.photoUrl,
       'category': product.category,
     };
-
 
     await products.doc(uid).update(data);
   }
@@ -71,17 +79,10 @@ class ProductsRepository {
     }
   }
 
-
-  Stream<List<ProductModel>> getAllProducts() {
-    return products.snapshots().map((snapshot) {
-      return snapshot.docs.map((doc) => ProductModel(
-          uid: doc.id,
-          name: doc.data()['name'] as String,
-          description: doc.data()['description'] as String,
-          price: doc.data()['price'] as int,
-          photoUrl: doc.data()['photoUrl'] as String,
-          category: doc.data()['category'] as String)).toList();
-    });
+  Future<List<ProductModel>> getAllProducts() {
+    log('carregando produtos');	
+    final product = _firestore.collection('produtos').get();
+    return product.then((querySnapshot) =>
+        querySnapshot.docs.map((e) => ProductModel.fromMap(e.data())).toList());
   }
-
 }

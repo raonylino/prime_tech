@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prime_tech/src/constants/app_colors.dart';
 import 'package:prime_tech/src/constants/app_text_styles.dart';
-import 'package:prime_tech/src/constants/routes_assets.dart';
 import 'package:prime_tech/src/view/profile/controller_profile.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -197,7 +196,7 @@ class _NameProfilePageState extends State<NameProfilePage> {
                             ),
                             onPressed: () {
                               Navigator.of(context)
-                                  .popAndPushNamed(RoutesAssets.profilePage);
+                                  .pop();
                             },
                             child: Text(
                               'Voltar',
@@ -245,8 +244,7 @@ class _NameProfilePageState extends State<NameProfilePage> {
                                         duration: const Duration(seconds: 2),
                                       ),
                                     );
-                                    Navigator.of(context).popAndPushNamed(
-                                        RoutesAssets.profilePage);
+                                    Navigator.of(context).pop();
                                   }else{
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(

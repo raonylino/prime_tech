@@ -1,9 +1,11 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prime_tech/src/constants/app_colors.dart';
 import 'package:prime_tech/src/constants/app_text_styles.dart';
 import 'package:prime_tech/src/constants/routes_assets.dart';
-
+import 'package:prime_tech/src/model/product_model.dart';
+import 'package:prime_tech/src/view/home/cubit/list_product_cubit.dart';
+import 'package:prime_tech/src/widgets/loader.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});
@@ -99,8 +101,65 @@ class _AdminHomePageState extends State<AdminHomePage> {
               })
         ],
       ),
-      body: const Column(
-        children: [],
+      body: Column(
+        children: [
+          Loader<ListProductCubit,ListProductState>(selector: (state) {
+            return state.maybeWhen(loading: () => true, orElse: () => false);
+          }),
+          BlocSelector<ListProductCubit,ListProductState,List<ProductModel>>(
+            selector: (state) {
+              return state.maybeWhen(
+                  data: (products) => products, 
+                  orElse: () => <ProductModel>[]);
+            },
+            builder: (context, products) {
+              return ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  final product = products[index];
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 10, top: 10),
+                    decoration: const BoxDecoration(
+                      color: Color.fromRGBO(51, 80, 241, 1),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromRGBO(198, 202, 208, 1),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: ListTile(
+                      onLongPress: () {},
+                      onTap: () async {},
+                      title: Text(
+                        product.name,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w300,
+                          fontFamily: 'Poppins',
+                          fontSize: 16,
+                        ),
+                      ),
+                      subtitle: Text(
+                        product.description,
+                        style: const TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 14,
+                            color: Colors.white),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ],
       ),
     );
   }

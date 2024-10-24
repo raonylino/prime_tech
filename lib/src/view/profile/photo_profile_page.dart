@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:prime_tech/src/constants/app_colors.dart';
 import 'package:prime_tech/src/constants/app_text_styles.dart';
-import 'package:prime_tech/src/constants/routes_assets.dart';
 import 'package:prime_tech/src/view/profile/controller_profile.dart';
 
 class PhotoProfilePage extends StatefulWidget {
@@ -16,6 +15,7 @@ class PhotoProfilePage extends StatefulWidget {
 
 class _PhotoProfilePageState extends State<PhotoProfilePage> {
   File? _image;
+  bool isLoading = false;
 
   Future<void> _changeProfilePicture() async {
     // Pega a imagem escolhida
@@ -32,6 +32,26 @@ class _PhotoProfilePageState extends State<PhotoProfilePage> {
       if (photoUrl != null) {
         // Atualiza a foto de perfil no Firebase Auth
         await ControllerProfile.updateProfilePicture(photoUrl);
+
+        setState(() {
+          isLoading = true;
+        });
+
+        Future.delayed(const Duration(seconds: 5), () {
+          setState(() {
+            isLoading = false;
+          });
+          // ignore: use_build_context_synchronously
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Perfil atualizado com sucesso!'),
+              behavior: SnackBarBehavior.floating,
+              duration: Duration(seconds: 2),
+            ),
+          );
+          // ignore: use_build_context_synchronously
+          Navigator.pop(context);
+        });
 
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
@@ -118,7 +138,7 @@ class _PhotoProfilePageState extends State<PhotoProfilePage> {
                       fontFamily: TextStyles.instance.secondary,
                     ),
                   ),
-                      const SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   Container(
@@ -137,7 +157,8 @@ class _PhotoProfilePageState extends State<PhotoProfilePage> {
                       ],
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(24),
-                        bottomRight: Radius.circular(24),),
+                        bottomRight: Radius.circular(24),
+                      ),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(40),
@@ -151,9 +172,9 @@ class _PhotoProfilePageState extends State<PhotoProfilePage> {
                               )
                             : CircleAvatar(
                                 radius: 100,
-                                backgroundImage: NetworkImage(
-                                    FirebaseAuth.instance.currentUser?.photoURL ??
-                                        'https://via.placeholder.com/150'),
+                                backgroundImage: NetworkImage(FirebaseAuth
+                                        .instance.currentUser?.photoURL ??
+                                    'https://via.placeholder.com/150'),
                               ),
                       ),
                     ),
@@ -182,8 +203,7 @@ class _PhotoProfilePageState extends State<PhotoProfilePage> {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.of(context)
-                                .popAndPushNamed(RoutesAssets.profilePage);
+                            Navigator.of(context).pop();
                           },
                           child: Text(
                             'Voltar',
@@ -211,7 +231,7 @@ class _PhotoProfilePageState extends State<PhotoProfilePage> {
                           ),
                           onPressed: _changeProfilePicture,
                           child: Text(
-                            'Alterar',
+                            isLoading ? 'Salvando' : 'Alterar',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 24,

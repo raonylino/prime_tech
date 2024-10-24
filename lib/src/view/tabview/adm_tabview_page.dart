@@ -75,10 +75,20 @@ List<Widget> _listOfWidget = <Widget>[
   const AdminHomePage(),
   Container(
     alignment: Alignment.center,
-    child: const Icon(
-      Icons.bolt,
-      size: 56,
-      color: Colors.brown,
+    child: const Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: EdgeInsets.all(10),
+          child: Text('Sistema em Construção'),
+        ),
+        Icon(
+          Icons.manage_history_rounded,
+          size: 56,
+          color: Colors.blue,
+        ),
+      ],
     ),
   ),
 ];

@@ -37,15 +37,15 @@ class _RegisterProductPageState extends State<RegisterProductPage> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final ImagePicker _picker = ImagePicker();
-    XFile? _image;
+    final ImagePicker picker = ImagePicker();
+    XFile? image;
 
-    Future<void> _pickImage() async {
+    Future<void> pickImage() async {
       final XFile? pickedFile =
-          await _picker.pickImage(source: ImageSource.gallery);
+          await picker.pickImage(source: ImageSource.gallery);
       if (pickedFile != null) {
         setState(() {
-          _image = pickedFile;
+          image = pickedFile;
           _photoUrlEC.text = pickedFile.path; // Set the path in the text field
         });
       }
@@ -292,7 +292,7 @@ class _RegisterProductPageState extends State<RegisterProductPage> {
                     SizedBox(
                       width: screenSize.width * .8,
                       child: GestureDetector(
-                        onTap: _pickImage,
+                        onTap: pickImage,
                         child: AbsorbPointer(
                           absorbing: true, 
                           child: TextFormField(
@@ -334,10 +334,10 @@ class _RegisterProductPageState extends State<RegisterProductPage> {
                         ),
                       ),
                     ),
-                    if (_image != null)
+                    if (image != null)
                       Padding(
                         padding: const EdgeInsets.all(16.0),
-                        child: Image.file(File(_image!.path)),
+                        child: Image.file(File(image!.path)),
                       ),
                     const Expanded(
                         child: SizedBox(

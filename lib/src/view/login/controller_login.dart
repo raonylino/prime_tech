@@ -83,7 +83,7 @@ class ControllerLogin {
 
   static Future<bool> isAdm(String email) async {
     final user = FirebaseAuth.instance.currentUser;
-
+    log(' entrou na isADM ${user.toString()}');
     if (user == null) {
       return false;
     }
