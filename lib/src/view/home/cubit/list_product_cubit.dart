@@ -13,8 +13,8 @@ class ListProductCubit extends Cubit<ListProductState> {
 
   final ProductsRepository _repository;
 
-  ListProductCubit({required repository}) :
-   _repository = ProductsRepository(),
+  ListProductCubit({required ProductsRepository repository}) :
+   _repository = repository,
    super(const ListProductState.initial());
 
      Future<void> findAllProducts() async {
