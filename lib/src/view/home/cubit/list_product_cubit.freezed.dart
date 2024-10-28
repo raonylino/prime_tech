@@ -15,11 +15,11 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$ListProdcutState {
+mixin _$ListProductState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<ProductModel> sales) data,
+    required TResult Function(List<ProductModel> products) data,
     required TResult Function(String string, String error) error,
     required TResult Function() loading,
     required TResult Function() success,
@@ -28,7 +28,7 @@ mixin _$ListProdcutState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<ProductModel> sales)? data,
+    TResult? Function(List<ProductModel> products)? data,
     TResult? Function(String string, String error)? error,
     TResult? Function()? loading,
     TResult? Function()? success,
@@ -37,7 +37,7 @@ mixin _$ListProdcutState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ProductModel> sales)? data,
+    TResult Function(List<ProductModel> products)? data,
     TResult Function(String string, String error)? error,
     TResult Function()? loading,
     TResult Function()? success,
@@ -47,7 +47,7 @@ mixin _$ListProdcutState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Data value) data,
+    required TResult Function(_Products value) data,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
@@ -56,7 +56,7 @@ mixin _$ListProdcutState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Data value)? data,
+    TResult? Function(_Products value)? data,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
@@ -65,7 +65,7 @@ mixin _$ListProdcutState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Data value)? data,
+    TResult Function(_Products value)? data,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
@@ -75,23 +75,23 @@ mixin _$ListProdcutState {
 }
 
 /// @nodoc
-abstract class $ListProdcutStateCopyWith<$Res> {
-  factory $ListProdcutStateCopyWith(
+abstract class $ListProductStateCopyWith<$Res> {
+  factory $ListProductStateCopyWith(
           ListProductState value, $Res Function(ListProductState) then) =
-      _$ListProdcutStateCopyWithImpl<$Res, ListProductState>;
+      _$ListProductStateCopyWithImpl<$Res, ListProductState>;
 }
 
 /// @nodoc
-class _$ListProdcutStateCopyWithImpl<$Res, $Val extends ListProductState>
-    implements $ListProdcutStateCopyWith<$Res> {
-  _$ListProdcutStateCopyWithImpl(this._value, this._then);
+class _$ListProductStateCopyWithImpl<$Res, $Val extends ListProductState>
+    implements $ListProductStateCopyWith<$Res> {
+  _$ListProductStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ListProdcutState
+  /// Create a copy of ListProductState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -104,13 +104,13 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$ListProdcutStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$ListProductStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListProdcutState
+  /// Create a copy of ListProductState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -121,7 +121,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'ListProdcutState.initial()';
+    return 'ListProductState.initial()';
   }
 
   @override
@@ -137,7 +137,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<ProductModel> sales) data,
+    required TResult Function(List<ProductModel> products) data,
     required TResult Function(String string, String error) error,
     required TResult Function() loading,
     required TResult Function() success,
@@ -149,7 +149,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<ProductModel> sales)? data,
+    TResult? Function(List<ProductModel> products)? data,
     TResult? Function(String string, String error)? error,
     TResult? Function()? loading,
     TResult? Function()? success,
@@ -161,7 +161,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ProductModel> sales)? data,
+    TResult Function(List<ProductModel> products)? data,
     TResult Function(String string, String error)? error,
     TResult Function()? loading,
     TResult Function()? success,
@@ -177,7 +177,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Data value) data,
+    required TResult Function(_Products value) data,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
@@ -189,7 +189,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Data value)? data,
+    TResult? Function(_Products value)? data,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
@@ -201,7 +201,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Data value)? data,
+    TResult Function(_Products value)? data,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
@@ -219,32 +219,33 @@ abstract class _Initial implements ListProductState {
 }
 
 /// @nodoc
-abstract class _$$DataImplCopyWith<$Res> {
-  factory _$$DataImplCopyWith(
-          _$DataImpl value, $Res Function(_$DataImpl) then) =
-      __$$DataImplCopyWithImpl<$Res>;
+abstract class _$$ProductsImplCopyWith<$Res> {
+  factory _$$ProductsImplCopyWith(
+          _$ProductsImpl value, $Res Function(_$ProductsImpl) then) =
+      __$$ProductsImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<ProductModel> sales});
+  $Res call({List<ProductModel> products});
 }
 
 /// @nodoc
-class __$$DataImplCopyWithImpl<$Res>
-    extends _$ListProdcutStateCopyWithImpl<$Res, _$DataImpl>
-    implements _$$DataImplCopyWith<$Res> {
-  __$$DataImplCopyWithImpl(_$DataImpl _value, $Res Function(_$DataImpl) _then)
+class __$$ProductsImplCopyWithImpl<$Res>
+    extends _$ListProductStateCopyWithImpl<$Res, _$ProductsImpl>
+    implements _$$ProductsImplCopyWith<$Res> {
+  __$$ProductsImplCopyWithImpl(
+      _$ProductsImpl _value, $Res Function(_$ProductsImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListProdcutState
+  /// Create a copy of ListProductState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sales = null,
+    Object? products = null,
   }) {
-    return _then(_$DataImpl(
-      sales: null == sales
-          ? _value._sales
-          : sales // ignore: cast_nullable_to_non_nullable
+    return _then(_$ProductsImpl(
+      products: null == products
+          ? _value._products
+          : products // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>,
     ));
   }
@@ -252,78 +253,79 @@ class __$$DataImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DataImpl implements _Data {
-  const _$DataImpl({required final List<ProductModel> sales}) : _sales = sales;
+class _$ProductsImpl implements _Products {
+  const _$ProductsImpl({required final List<ProductModel> products})
+      : _products = products;
 
-  final List<ProductModel> _sales;
+  final List<ProductModel> _products;
   @override
-  List<ProductModel> get sales {
-    if (_sales is EqualUnmodifiableListView) return _sales;
+  List<ProductModel> get products {
+    if (_products is EqualUnmodifiableListView) return _products;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_sales);
+    return EqualUnmodifiableListView(_products);
   }
 
   @override
   String toString() {
-    return 'ListProdcutState.data(sales: $sales)';
+    return 'ListProductState.data(products: $products)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DataImpl &&
-            const DeepCollectionEquality().equals(other._sales, _sales));
+            other is _$ProductsImpl &&
+            const DeepCollectionEquality().equals(other._products, _products));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_sales));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_products));
 
-  /// Create a copy of ListProdcutState
+  /// Create a copy of ListProductState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DataImplCopyWith<_$DataImpl> get copyWith =>
-      __$$DataImplCopyWithImpl<_$DataImpl>(this, _$identity);
+  _$$ProductsImplCopyWith<_$ProductsImpl> get copyWith =>
+      __$$ProductsImplCopyWithImpl<_$ProductsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<ProductModel> sales) data,
+    required TResult Function(List<ProductModel> products) data,
     required TResult Function(String string, String error) error,
     required TResult Function() loading,
     required TResult Function() success,
   }) {
-    return data(sales);
+    return data(products);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<ProductModel> sales)? data,
+    TResult? Function(List<ProductModel> products)? data,
     TResult? Function(String string, String error)? error,
     TResult? Function()? loading,
     TResult? Function()? success,
   }) {
-    return data?.call(sales);
+    return data?.call(products);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ProductModel> sales)? data,
+    TResult Function(List<ProductModel> products)? data,
     TResult Function(String string, String error)? error,
     TResult Function()? loading,
     TResult Function()? success,
     required TResult orElse(),
   }) {
     if (data != null) {
-      return data(sales);
+      return data(products);
     }
     return orElse();
   }
@@ -332,7 +334,7 @@ class _$DataImpl implements _Data {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Data value) data,
+    required TResult Function(_Products value) data,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
@@ -344,7 +346,7 @@ class _$DataImpl implements _Data {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Data value)? data,
+    TResult? Function(_Products value)? data,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
@@ -356,7 +358,7 @@ class _$DataImpl implements _Data {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Data value)? data,
+    TResult Function(_Products value)? data,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
@@ -369,15 +371,16 @@ class _$DataImpl implements _Data {
   }
 }
 
-abstract class _Data implements ListProductState {
-  const factory _Data({required final List<ProductModel> sales}) = _$DataImpl;
+abstract class _Products implements ListProductState {
+  const factory _Products({required final List<ProductModel> products}) =
+      _$ProductsImpl;
 
-  List<ProductModel> get sales;
+  List<ProductModel> get products;
 
-  /// Create a copy of ListProdcutState
+  /// Create a copy of ListProductState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DataImplCopyWith<_$DataImpl> get copyWith =>
+  _$$ProductsImplCopyWith<_$ProductsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -392,13 +395,13 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$ListProdcutStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$ListProductStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListProdcutState
+  /// Create a copy of ListProductState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -431,7 +434,7 @@ class _$ErrorImpl implements _Error {
 
   @override
   String toString() {
-    return 'ListProdcutState.error(string: $string, error: $error)';
+    return 'ListProductState.error(string: $string, error: $error)';
   }
 
   @override
@@ -446,7 +449,7 @@ class _$ErrorImpl implements _Error {
   @override
   int get hashCode => Object.hash(runtimeType, string, error);
 
-  /// Create a copy of ListProdcutState
+  /// Create a copy of ListProductState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -458,7 +461,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<ProductModel> sales) data,
+    required TResult Function(List<ProductModel> products) data,
     required TResult Function(String string, String error) error,
     required TResult Function() loading,
     required TResult Function() success,
@@ -470,7 +473,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<ProductModel> sales)? data,
+    TResult? Function(List<ProductModel> products)? data,
     TResult? Function(String string, String error)? error,
     TResult? Function()? loading,
     TResult? Function()? success,
@@ -482,7 +485,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ProductModel> sales)? data,
+    TResult Function(List<ProductModel> products)? data,
     TResult Function(String string, String error)? error,
     TResult Function()? loading,
     TResult Function()? success,
@@ -498,7 +501,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Data value) data,
+    required TResult Function(_Products value) data,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
@@ -510,7 +513,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Data value)? data,
+    TResult? Function(_Products value)? data,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
@@ -522,7 +525,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Data value)? data,
+    TResult Function(_Products value)? data,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
@@ -543,7 +546,7 @@ abstract class _Error implements ListProductState {
   String get string;
   String get error;
 
-  /// Create a copy of ListProdcutState
+  /// Create a copy of ListProductState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
@@ -559,13 +562,13 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$ListProdcutStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$ListProductStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListProdcutState
+  /// Create a copy of ListProductState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -576,7 +579,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'ListProdcutState.loading()';
+    return 'ListProductState.loading()';
   }
 
   @override
@@ -592,7 +595,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<ProductModel> sales) data,
+    required TResult Function(List<ProductModel> products) data,
     required TResult Function(String string, String error) error,
     required TResult Function() loading,
     required TResult Function() success,
@@ -604,7 +607,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<ProductModel> sales)? data,
+    TResult? Function(List<ProductModel> products)? data,
     TResult? Function(String string, String error)? error,
     TResult? Function()? loading,
     TResult? Function()? success,
@@ -616,7 +619,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ProductModel> sales)? data,
+    TResult Function(List<ProductModel> products)? data,
     TResult Function(String string, String error)? error,
     TResult Function()? loading,
     TResult Function()? success,
@@ -632,7 +635,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Data value) data,
+    required TResult Function(_Products value) data,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
@@ -644,7 +647,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Data value)? data,
+    TResult? Function(_Products value)? data,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
@@ -656,7 +659,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Data value)? data,
+    TResult Function(_Products value)? data,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
@@ -682,13 +685,13 @@ abstract class _$$SuccessImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$ListProdcutStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$ListProductStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListProdcutState
+  /// Create a copy of ListProductState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -699,7 +702,7 @@ class _$SuccessImpl implements _Success {
 
   @override
   String toString() {
-    return 'ListProdcutState.success()';
+    return 'ListProductState.success()';
   }
 
   @override
@@ -715,7 +718,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<ProductModel> sales) data,
+    required TResult Function(List<ProductModel> products) data,
     required TResult Function(String string, String error) error,
     required TResult Function() loading,
     required TResult Function() success,
@@ -727,7 +730,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<ProductModel> sales)? data,
+    TResult? Function(List<ProductModel> products)? data,
     TResult? Function(String string, String error)? error,
     TResult? Function()? loading,
     TResult? Function()? success,
@@ -739,7 +742,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<ProductModel> sales)? data,
+    TResult Function(List<ProductModel> products)? data,
     TResult Function(String string, String error)? error,
     TResult Function()? loading,
     TResult Function()? success,
@@ -755,7 +758,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Data value) data,
+    required TResult Function(_Products value) data,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
@@ -767,7 +770,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Data value)? data,
+    TResult? Function(_Products value)? data,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
@@ -779,7 +782,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Data value)? data,
+    TResult Function(_Products value)? data,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,

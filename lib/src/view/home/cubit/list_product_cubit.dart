@@ -8,20 +8,21 @@ import 'package:prime_tech/src/repositories/products_repository.dart';
 part 'list_product_state.dart';
 part 'list_product_cubit.freezed.dart';
 
+
 class ListProductCubit extends Cubit<ListProductState> {
 
   final ProductsRepository _repository;
-  
-  ListProductCubit({required repository}) : 
-  _repository = repository,
-  super(const ListProductState.initial());
 
-  Future<void> findAllProducts() async {
+  ListProductCubit({required repository}) :
+   _repository = ProductsRepository(),
+   super(const ListProductState.initial());
+
+     Future<void> findAllProducts() async {
     try {
       emit(const ListProductState.loading());
       log('Buscando produtos...');
       final products = await _repository.getAllProducts();
-      emit(ListProductState.data(sales: products));
+      emit(ListProductState.data(products: products));
 
     } catch (e) {
       emit(ListProductState.error(error: e.toString(), string: 'Erro ao buscar produtos'));
@@ -29,5 +30,5 @@ class ListProductCubit extends Cubit<ListProductState> {
 
     }
   }
-
+  
 }

@@ -22,7 +22,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    return Scaffold(
+    return 
+    Scaffold(
       appBar: AppBar(
         title: Text(
           'Administrador',
