@@ -24,9 +24,10 @@ class RoutesAssets {
 
   // --------------------------------- Product Page -------------------------------
   static const String products = '/products';
-  static const String producstRegister = '/product/register';
-
-  // --------------------------------- tabview Page -------------------------------
+  static const String productsRegister = '/product/register';
+  static const String productsEdit = '/product/edit';
+  
+  // --------------------------------- tabView Page -------------------------------
   static const String tabView = '/tabView';
   static const String admTabView = '/admTabView';
 

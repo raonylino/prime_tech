@@ -13,7 +13,7 @@ class ControllerLogin {
         email: email,
         password: password,
       );
-
+  
       final user = userCredential.user;
 
       if (user != null) {
@@ -100,5 +100,17 @@ class ControllerLogin {
     } else {
       return false;
     }
+  }
+
+  static void showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +8,7 @@ import 'package:prime_tech/src/constants/app_text_styles.dart';
 import 'package:prime_tech/src/model/product_model.dart';
 import 'package:prime_tech/src/view/home/cubit/list_product_cubit.dart';
 import 'package:prime_tech/src/widgets/loader.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -73,7 +76,6 @@ class _HomePageState extends State<HomePage> {
                     height: screenSize.height * 0.6,
                     autoPlay: true,
                     enlargeCenterPage: true,
-
                   ),
                   items: products.map((product) {
                     return Builder(
@@ -104,13 +106,15 @@ class _HomePageState extends State<HomePage> {
                                 fit: BoxFit.cover,
                               ),
                               const SizedBox(height: 16),
-                              Text(
-                                'R\$ ${product.price.toStringAsFixed(2)}',
-                                style: TextStyle(
-                                  fontFamily: TextStyles.instance.primary,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.primaryColor,
+                              Flexible(
+                                child: Text(
+                                  'R\$ ${product.price.toStringAsFixed(2)}',
+                                  style: TextStyle(
+                                    fontFamily: TextStyles.instance.primary,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.primaryColor,
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 8),
@@ -151,7 +155,10 @@ class _HomePageState extends State<HomePage> {
                                       borderRadius: BorderRadius.circular(24),
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    _openWhatsApp(product.name,
+                                        product.price.toInt());
+                                  },
                                   child: Text(
                                     'Comprar',
                                     style: TextStyle(
@@ -175,5 +182,19 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  Future<void> _openWhatsApp(String name, int price) async {
+    final String message =
+        "Olá, estou interessado no $name. Poderia me fornecer mais informações? \n Valor do produto: R\$ ${price.toStringAsFixed(2)}";
+    final Uri url = Uri.parse(
+        "https://wa.me/5535998626801?text=${Uri.encodeComponent(message)}");
+    if (!await canLaunchUrl(url)) {
+      await launchUrl(url);
+      log('Abrindo WhatsApp: $url');
+    } else {
+      log('erro');
+      throw 'Could not launch $url';
+    }
   }
 }

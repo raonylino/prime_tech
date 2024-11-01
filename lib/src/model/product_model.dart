@@ -15,7 +15,8 @@ class ProductModel {
     required this.name,
     required this.description,
     required this.price,
-    required this.photoUrl,required this.category
+    required this.photoUrl,
+    required this.category
     });
 
     Map<String, dynamic> toMap() {

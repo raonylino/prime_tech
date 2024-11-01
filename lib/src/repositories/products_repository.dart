@@ -43,19 +43,23 @@ class ProductsRepository {
     }
   }
 
-  Future<void> updateProduct(ProductModel product) async {
-    final String uid = product.uid!;
-
-    final Map<String, dynamic> data = {
-      'name': product.name,
-      'description': product.description,
-      'price': product.price,
-      'photoUrl': product.photoUrl,
-      'category': product.category,
-    };
-
-    await products.doc(uid).update(data);
+Future<void> updateProduct(ProductModel product) async {
+  if (product.uid == null || product.uid!.isEmpty) {
+   log('Erro ao atualizar o produto: ID do produto vazio ${product.uid}');
   }
+
+  final String uid = product.uid!;
+
+  final Map<String, dynamic> data = {
+    'name': product.name,
+    'description': product.description,
+    'price': product.price,
+    'photoUrl': product.photoUrl,
+    'category': product.category,
+  };
+
+  await products.doc(uid).update(data);
+}
 
   Future<void> deleteProduct(String uid) async {
     await products.doc(uid).delete();
@@ -68,8 +72,8 @@ class ProductsRepository {
     if (snapshot.exists) {
       final data = snapshot.data();
       return ProductModel(
-          uid: snapshot.id,
-          name: data!['name'] as String,
+          uid: data!['uid'] as String,
+          name: data['name'] as String,
           description: data['description'] as String,
           price: data['price'] as int,
           photoUrl: data['photoUrl'] as String,

@@ -247,21 +247,18 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
+                          ControllerLogin.showLoadingDialog(context);
                           final email = emailController.text;
                           final password = passwordController.text;
-                          bool isadm = await ControllerLogin.isAdm(email);
-
+                          bool isAdm = await ControllerLogin.isAdm(email);
                           await ControllerLogin.loginUser(
                               // ignore: use_build_context_synchronously
                               context, email, password, (bool success) {
                             if (success) {
-                              log(isadm.toString());
-                              // ignore: use_build_context_synchronously
-                              Navigator.of(context)
-                                  .pushReplacementNamed( isadm
-                                      ? RoutesAssets.admTabView
-                                      : RoutesAssets.tabView
-                                    );
+                              log(isAdm.toString());
+                              Navigator.of(context).pushReplacementNamed(isAdm
+                                  ? RoutesAssets.admTabView
+                                  : RoutesAssets.tabView);
                             }
                           });
                         }

@@ -16,8 +16,8 @@ class Loader<B extends StateStreamable<S>, S> extends StatelessWidget {
             visible: loading,
             child: Center(
               child: SizedBox(
-                height: 300,
-                width: 300,
+                height: 200,
+                width: 200,
                 child: Lottie.asset(
                   'assets/animations/loading.json',
                   fit: BoxFit.cover,

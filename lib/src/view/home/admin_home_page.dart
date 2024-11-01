@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +9,7 @@ import 'package:prime_tech/src/constants/routes_assets.dart';
 import 'package:prime_tech/src/model/product_model.dart';
 import 'package:prime_tech/src/view/home/cubit/list_product_cubit.dart';
 import 'package:prime_tech/src/widgets/loader.dart';
+
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});
@@ -26,6 +29,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           'Administrador',
           style: TextStyle(
@@ -69,7 +73,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     ],
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, RoutesAssets.producstRegister);
+                    Navigator.pushNamed(context, RoutesAssets.productsRegister);
                   },
                 ),
                 PopupMenuItem(
@@ -122,40 +126,45 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   }
         
                   return CarouselSlider(
-                    options: CarouselOptions(
-                      height: screenSize.height * 0.6,
-                      autoPlay: true,
-                      enlargeCenterPage: true,
-                    ),
-                    items: products.map((product) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                            padding: const EdgeInsets.all(16.0),
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                              boxShadow:[
-                                BoxShadow(
-                                  color: Color.fromRGBO(198, 202, 208, 1),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: Offset(0, 10),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image.network(
-                                  product.photoUrl,
-                                  width: screenSize.width * 0.7,
-                                  height: screenSize.height * 0.3,
-                                  fit: BoxFit.cover,
-                                ),
-                                const SizedBox(height: 16),
-                                Text(
+                  options: CarouselOptions(
+                    height: screenSize.height * 0.6,
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                  ),
+                  items: products.map((product) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                          padding: const EdgeInsets.all(16.0),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12.0)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(198, 202, 208, 1),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: Offset(0, 10),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 1,
+                                child: Text(product.uid!),
+                              ),
+                              Image.network(
+                                product.photoUrl,
+                                width: screenSize.width * 0.7,
+                                height: screenSize.height * 0.3,
+                                fit: BoxFit.cover,
+                              ),
+                              const SizedBox(height: 16),
+                              Flexible(
+                                child: Text(
                                   'R\$ ${product.price.toStringAsFixed(2)}',
                                   style: TextStyle(
                                     fontFamily: TextStyles.instance.primary,
@@ -164,32 +173,66 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                     color: AppColors.primaryColor,
                                   ),
                                 ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  product.name,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily:TextStyles.instance.secondary,
-                                    fontSize: 18,
-                                    color: Colors.black,
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                product.name,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: TextStyles.instance.secondary,
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                product.description,
+                                style: TextStyle(
+                                  fontFamily: TextStyles.instance.secondary,
+                                  fontSize: 14,
+                                  color: Colors.black45,
+                                ),
+                              ),
+                              const Expanded(
+                                child: SizedBox(
+                                  height: 10,
+                                ),
+                              ),
+                              Container(
+                                width: screenSize.width * .8,
+                                decoration: BoxDecoration(
+                                  gradient: AppColors.gradient,
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(24),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    log('Editando o produto ${product.uid}');
+                                    Navigator.pushReplacementNamed(context, RoutesAssets.productsEdit, arguments: product);
+                                  },
+                                  child: Text(
+                                    'Editar',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                      fontFamily: TextStyles.instance.secondary,
+                                    ),
                                   ),
                                 ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  product.description,
-                                  style: TextStyle(
-                                    fontFamily:TextStyles.instance.secondary,
-                                    fontSize: 14,
-                                    color: Colors.black45,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      );
-                    }).toList(),
-                  );
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                );
                 },
               ),
             ),
