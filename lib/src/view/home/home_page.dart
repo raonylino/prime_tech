@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prime_pronta_resposta/src/constants/app_colors.dart';
+import 'package:prime_pronta_resposta/src/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/view/accepted/accepted_page.dart';
 import 'package:prime_pronta_resposta/src/view/completed/completed_page.dart';
 import 'package:prime_pronta_resposta/src/view/pending/pending_page.dart';
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late PageController _pageController;
-  int selectedIndex = 1;
+  int selectedIndex = 0;
 
   @override
   void initState() {
@@ -39,7 +40,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         toolbarHeight: 70,
         title: const Text(
-          'Prime Pronta Resposta teste',
+          'Prime Pronta Resposta',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -52,7 +53,9 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.menu, color: Colors.white),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(AppRouters.profilePage);
+            },
           ),
         ],
       ),

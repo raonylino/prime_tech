@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prime_pronta_resposta/src/constants/app_routers.dart';
-import 'package:prime_pronta_resposta/src/view/home/home_page.dart';
+import 'package:prime_pronta_resposta/src/view/auth/login_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -47,9 +47,9 @@ class _SplashPageState extends State<SplashPage> {
             onEnd:
                 () => Navigator.of(context).pushAndRemoveUntil(
                   PageRouteBuilder(
-                    settings: const RouteSettings(name: AppRouters.homePage),
+                    settings: const RouteSettings(name: AppRouters.loginPage),
                     pageBuilder: (context, animation, secondaryAnimation) {
-                      return const HomePage();
+                      return const LoginPage();
                     },
                     transitionsBuilder: (_, animation, __, child) {
                       return FadeTransition(opacity: animation, child: child);

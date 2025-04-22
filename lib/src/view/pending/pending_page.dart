@@ -33,6 +33,7 @@ class PendingPage extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
+                        backgroundColor: AppColors.lightColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -41,7 +42,16 @@ class PendingPage extends StatelessWidget {
                           'Você deseja aceitar este chamado?',
                         ),
                         actions: [
-                          TextButton(
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.lightColor,
+                              side: const BorderSide(
+                                color: AppColors.primaryColor,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
                             onPressed: () {
                               Navigator.of(context).popAndPushNamed('/home');
                             },
@@ -57,11 +67,17 @@ class PendingPage extends StatelessWidget {
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              side: const BorderSide(
+                                color: AppColors.primaryColor,
+                              ),
                             ),
                             onPressed: () {
                               Navigator.of(
                                 context,
-                              ).pushNamed(AppRouters.acceptedPage);
+                              ).pushNamed(AppRouters.operationPage);
                               // Lógica para aceitar
                               print('Chamado aceito');
                             },
