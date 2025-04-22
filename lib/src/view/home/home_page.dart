@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         toolbarHeight: 70,
         title: const Text(
-          'Prime Pronta Resposta',
+          'Prime Pronta Resposta teste',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -59,11 +59,7 @@ class _HomePageState extends State<HomePage> {
       body: PageView(
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
-        children: const [
-          PendingPage(),
-          AcceptedPage(),
-          CompletedPage(),
-        ],
+        children: const [PendingPage(), AcceptedPage(), CompletedPage()],
       ),
       bottomNavigationBar: SlidingClippedNavBar(
         backgroundColor: AppColors.primaryColor,
