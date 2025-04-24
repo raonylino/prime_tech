@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:prime_pronta_resposta/src/constants/app_colors.dart';
 
 class CustomTexfield extends StatefulWidget {
@@ -10,6 +11,7 @@ class CustomTexfield extends StatefulWidget {
   final bool obscureText;
   final FormFieldValidator<String>? validator;
   final FocusNode? focusNode;
+  final List<TextInputFormatter>? inputFormatters;
 
   final Key? textFieldKey;
 
@@ -24,6 +26,7 @@ class CustomTexfield extends StatefulWidget {
     this.validator,
     this.focusNode,
     this.textFieldKey,
+    this.inputFormatters,
   });
 
   @override
@@ -39,7 +42,7 @@ class _CustomTexfieldState extends State<CustomTexfield> {
         Text(
           widget.labelText,
           style: TextStyle(
-            fontSize: 15,
+            fontSize: 13,
             fontWeight: FontWeight.w500,
             color: AppColors.primaryColor,
           ),
@@ -51,9 +54,11 @@ class _CustomTexfieldState extends State<CustomTexfield> {
           validator: widget.validator,
           controller: widget.controller,
           obscureText: widget.obscureText,
+          inputFormatters: widget.inputFormatters,
           decoration: InputDecoration(
             fillColor: widget.backgroundColor ?? Colors.white,
             hintText: widget.hintText,
+            hintStyle: TextStyle(fontSize: 13, color: AppColors.secondaryColor),
             filled: true,
             isDense: true,
             border: OutlineInputBorder(

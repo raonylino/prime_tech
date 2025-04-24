@@ -28,6 +28,10 @@ class _CustomProfileMenuState extends State<CustomProfileMenu> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         TextButton.icon(
+          style: TextButton.styleFrom(
+            fixedSize: const Size(200, 50),
+            alignment: Alignment.centerLeft,
+          ),
           onPressed: widget.onTap,
           label: Text(
             widget.label,

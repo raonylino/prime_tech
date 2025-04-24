@@ -4,6 +4,8 @@ class AppRouters {
   static const String recoverPage = '/login/recover';
   static const String registerPage = '/register';
   static const String profilePage = '/profile';
+  static const String profilePageEdit = '/profile/edit';
+  static const String passwordPage = '/profile/password';
   static const String homePage = '/home';
   static const String pendingPage = '/pending';
   static const String acceptedPage = '/home/accepted';
@@ -13,4 +15,5 @@ class AppRouters {
       '/operation/dateOperation/galleryPhoto';
   static const String imagePreviewPage =
       '/operation/dateOperation/galleryPhoto/imagePreview';
+  static const String errorPage = '/error-page';
 }

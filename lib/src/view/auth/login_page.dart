@@ -110,7 +110,7 @@ class _LoginViewState extends State<_LoginView> {
                         'Login',
                         style: TextStyle(
                           color: AppColors.primaryColor,
-                          fontSize: 60,
+                          fontSize: 40,
                           fontWeight: FontWeight.bold,
                           fontFamily: TextStyles.instance.primary,
                         ),
@@ -147,7 +147,7 @@ class _LoginViewState extends State<_LoginView> {
                                 style: TextStyle(
                                   fontFamily: TextStyles.instance.secondary,
                                   color: Colors.white,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -167,8 +167,8 @@ class _LoginViewState extends State<_LoginView> {
                             'Esqueceu sua senha?',
                             style: TextStyle(
                               color: AppColors.secondaryColor,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
                               fontFamily: TextStyles.instance.primary,
                             ),
                           ),

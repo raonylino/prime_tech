@@ -36,45 +36,50 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 70,
-        title: const Text(
-          'Prime Pronta Resposta',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 70,
+          title: const Text(
+            'Prime Pronta Resposta',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
-        ),
-        centerTitle: true,
-        backgroundColor: AppColors.primaryColor, // Cor do AppBar
+          centerTitle: true,
+          backgroundColor: AppColors.primaryColor, // Cor do AppBar
 
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.menu, color: Colors.white),
-            onPressed: () {
-              Navigator.of(context).pushNamed(AppRouters.profilePage);
-            },
-          ),
-        ],
-      ),
-      body: PageView(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: const [PendingPage(), AcceptedPage(), CompletedPage()],
-      ),
-      bottomNavigationBar: SlidingClippedNavBar(
-        backgroundColor: AppColors.primaryColor,
-        onButtonPressed: onButtonPressed,
-        iconSize: 30,
-        activeColor: Colors.white,
-        selectedIndex: selectedIndex,
-        barItems: [
-          BarItem(icon: Icons.car_crash_rounded, title: 'Pendentes'),
-          BarItem(icon: Icons.car_repair_rounded, title: 'Aceitos'),
-          BarItem(icon: Icons.directions_car_rounded, title: 'Concluidos'),
-        ],
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.menu, color: Colors.white),
+              onPressed: () {
+                Navigator.of(context).pushNamed(AppRouters.profilePage);
+              },
+            ),
+          ],
+        ),
+        body: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: const [PendingPage(), AcceptedPage(), CompletedPage()],
+        ),
+        bottomNavigationBar: SlidingClippedNavBar(
+          backgroundColor: AppColors.primaryColor,
+          onButtonPressed: onButtonPressed,
+          iconSize: 30,
+          activeColor: Colors.white,
+          selectedIndex: selectedIndex,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          barItems: [
+            BarItem(icon: Icons.car_crash_rounded, title: 'Pendentes'),
+            BarItem(icon: Icons.car_repair_rounded, title: 'Aceitos'),
+            BarItem(icon: Icons.directions_car_rounded, title: 'Concluidos'),
+          ],
+        ),
       ),
     );
   }

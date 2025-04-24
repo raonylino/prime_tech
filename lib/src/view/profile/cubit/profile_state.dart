@@ -10,8 +10,10 @@ class ProfileLoading extends ProfileState {}
 class ProfileLoaded extends ProfileState {
   final String name;
   final String email;
+  final String? imageUrl;
+  final String? phone;
 
-  ProfileLoaded({required this.name, required this.email});
+  ProfileLoaded({required this.name, required this.email, this.imageUrl, this.phone});
 }
 
 class ProfileError extends ProfileState {

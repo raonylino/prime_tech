@@ -53,7 +53,7 @@ class RecoverPasswordPage extends StatelessWidget {
                         'Recuperar Senha',
                         style: TextStyle(
                           color: AppColors.primaryColor,
-                          fontSize: 40,
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
                           fontFamily: TextStyles.instance.primary,
                         ),
@@ -84,7 +84,7 @@ class RecoverPasswordPage extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: TextStyles.instance.secondary,
                                   color: Colors.white,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -102,8 +102,8 @@ class RecoverPasswordPage extends StatelessWidget {
                             'Lembrou a senha?',
                             style: TextStyle(
                               color: AppColors.secondaryColor,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
                               fontFamily: TextStyles.instance.primary,
                             ),
                           ),

@@ -16,7 +16,7 @@ class PendingPage extends StatelessWidget {
           Text(
             'Pendentes',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 16,
               fontWeight: FontWeight.normal,
               fontFamily: TextStyles.instance.primary,
               color: AppColors.secondaryColor,
@@ -38,8 +38,14 @@ class PendingPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         title: const Text('Confirmação'),
-                        content: const Text(
+                        content: Text(
                           'Você deseja aceitar este chamado?',
+                          style: TextStyle(
+                            fontFamily: TextStyles.instance.secondary,
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                            color: AppColors.secondaryColor,
+                          ),
                         ),
                         actions: [
                           ElevatedButton(
@@ -58,7 +64,7 @@ class PendingPage extends StatelessWidget {
                             child: Text(
                               'Não',
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 12,
                                 fontFamily: TextStyles.instance.secondary,
                                 color: AppColors.primaryColor,
                               ),
@@ -84,7 +90,7 @@ class PendingPage extends StatelessWidget {
                             child: Text(
                               'Sim',
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 12,
                                 fontFamily: TextStyles.instance.secondary,
                                 color: AppColors.textColor,
                               ),
@@ -97,8 +103,8 @@ class PendingPage extends StatelessWidget {
                 },
                 borderRadius: BorderRadius.circular(12),
                 child: Container(
-                  height: 80,
-                  width: 362,
+                  height: 72,
+                  width: 350,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
@@ -137,7 +143,7 @@ class PendingPage extends StatelessWidget {
                             Text(
                               'Carro 1',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 12,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: TextStyles.instance.primary,
                                 color: AppColors.primaryColor,
@@ -146,7 +152,7 @@ class PendingPage extends StatelessWidget {
                             Text(
                               'Dados do carro',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 12,
                                 fontFamily: TextStyles.instance.secondary,
                                 color: AppColors.primaryColor,
                               ),

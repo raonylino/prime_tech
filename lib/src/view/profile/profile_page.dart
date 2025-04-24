@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prime_pronta_resposta/src/constants/app_colors.dart';
+import 'package:prime_pronta_resposta/src/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/constants/app_text_styles.dart';
 import 'package:prime_pronta_resposta/src/view/profile/cubit/profile_cubit.dart';
 import 'package:prime_pronta_resposta/src/view/profile/geolocator.dart';
@@ -14,10 +15,18 @@ class ProfilePage extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
     return BlocProvider(
       create: (context) => ProfileCubit()..loadUserProfile(),
-      child: BlocBuilder<ProfileCubit, ProfileState>(
+      child: BlocConsumer<ProfileCubit, ProfileState>(
+        listener: (context, state) {
+          if (state is ProfileError) {
+            Navigator.of(
+              context,
+            ).pushNamed(AppRouters.errorPage, arguments: state.message);
+          }
+        },
         builder: (context, state) {
           String name = '';
           String email = '';
+          String? image = '';
 
           if (state is ProfileLoading) {
             return const Scaffold(
@@ -29,16 +38,7 @@ class ProfilePage extends StatelessWidget {
           } else if (state is ProfileLoaded) {
             name = state.name;
             email = state.email;
-          } else if (state is ProfileError) {
-            return Scaffold(
-              backgroundColor: AppColors.primaryColor,
-              body: Center(
-                child: Text(
-                  state.message,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
-            );
+            image = state.imageUrl;
           }
 
           return Scaffold(
@@ -63,16 +63,19 @@ class ProfilePage extends StatelessWidget {
               children: [
                 Center(
                   child: Column(
-                    spacing: 5,
                     children: [
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 75,
                         backgroundColor: Colors.white,
                         child: CircleAvatar(
                           radius: 70,
-                          backgroundImage: AssetImage(
-                            'assets/images/foto_perfil.jpg',
-                          ),
+                          backgroundImage:
+                              image != null
+                                  ? NetworkImage(image)
+                                  : const AssetImage(
+                                        'assets/images/foto_perfil.png',
+                                      )
+                                      as ImageProvider,
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -111,40 +114,59 @@ class ProfilePage extends StatelessWidget {
                         CustomProfileMenu(
                           label: 'Editar Perfil',
                           icon: Icons.edit,
-                          size: 20,
+                          size: 14,
                           backgroundColor: AppColors.primaryColor,
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(
+                              context,
+                            ).pushNamed(AppRouters.profilePageEdit);
+                          },
+                        ),
+                        CustomProfileMenu(
+                          label: 'Aleterar Senha',
+                          icon: Icons.lock,
+                          size: 14,
+                          backgroundColor: AppColors.primaryColor,
+                          onTap: () {
+                            Navigator.of(
+                              context,
+                            ).pushNamed(AppRouters.passwordPage);
+                          },
                         ),
                         CustomProfileMenu(
                           label: 'Configurações',
                           icon: Icons.settings,
-                          size: 20,
+                          size: 14,
                           backgroundColor: AppColors.primaryColor,
                           onTap: () {},
                         ),
                         CustomProfileMenu(
                           label: 'Ajuda',
                           icon: Icons.help,
-                          size: 20,
+                          size: 14,
                           backgroundColor: AppColors.primaryColor,
                           onTap: () {},
                         ),
                         CustomProfileMenu(
                           label: 'Localização',
                           icon: Icons.location_on,
-                          size: 20,
+                          size: 14,
                           backgroundColor: AppColors.primaryColor,
                           onTap: () {
-                            getCurrentLocation(context);
+                            ScaffoldMessengerState scaffoldMessenger =
+                                ScaffoldMessenger.of(context);
+                            getCurrentLocation(scaffoldMessenger);
                           },
                         ),
                         const Spacer(),
                         CustomProfileMenu(
                           label: 'Sair',
                           icon: Icons.logout,
-                          size: 20,
+                          size: 14,
                           backgroundColor: AppColors.errorColor,
-                          onTap: () {},
+                          onTap: () {
+                            context.read<ProfileCubit>().logout(context);
+                          },
                         ),
                       ],
                     ),

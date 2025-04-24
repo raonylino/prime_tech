@@ -13,7 +13,7 @@ class OperationPage extends StatelessWidget {
         title: Text(
           'Operações',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: FontWeight.normal,
             color: Colors.white,
             fontFamily: TextStyles.instance.primary,
@@ -64,7 +64,7 @@ class OperationPage extends StatelessWidget {
                 title: Text(
                   'Detalhes do atendimento',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
                     fontFamily: TextStyles.instance.primary,
                     color: Colors.black45,
@@ -79,14 +79,13 @@ class OperationPage extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: Column(
-                        crossAxisAlignment:
-                            CrossAxisAlignment.start, // <-- aqui
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'Tipo de atendimento:',
                             style: TextStyle(
                               fontFamily: TextStyles.instance.secondary,
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.normal,
                               color: AppColors.secondaryColor,
                             ),
@@ -95,7 +94,7 @@ class OperationPage extends StatelessWidget {
                             'Local de ocorrência:',
                             style: TextStyle(
                               fontFamily: TextStyles.instance.secondary,
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.normal,
                               color: AppColors.secondaryColor,
                             ),
@@ -104,7 +103,7 @@ class OperationPage extends StatelessWidget {
                             'Mercadoria:',
                             style: TextStyle(
                               fontFamily: TextStyles.instance.secondary,
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.normal,
                               color: AppColors.secondaryColor,
                             ),
@@ -113,7 +112,7 @@ class OperationPage extends StatelessWidget {
                             'Transportadora:',
                             style: TextStyle(
                               fontFamily: TextStyles.instance.secondary,
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.normal,
                               color: AppColors.secondaryColor,
                             ),
@@ -122,7 +121,7 @@ class OperationPage extends StatelessWidget {
                             'Placa cavalo:',
                             style: TextStyle(
                               fontFamily: TextStyles.instance.secondary,
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.normal,
                               color: AppColors.secondaryColor,
                             ),
@@ -131,7 +130,7 @@ class OperationPage extends StatelessWidget {
                             'Placa carreta:',
                             style: TextStyle(
                               fontFamily: TextStyles.instance.secondary,
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.normal,
                               color: AppColors.secondaryColor,
                             ),
@@ -140,7 +139,7 @@ class OperationPage extends StatelessWidget {
                             'Cidade ocorrência:',
                             style: TextStyle(
                               fontFamily: TextStyles.instance.secondary,
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.normal,
                               color: AppColors.secondaryColor,
                             ),
@@ -149,7 +148,7 @@ class OperationPage extends StatelessWidget {
                             'UF ocorrência:',
                             style: TextStyle(
                               fontFamily: TextStyles.instance.secondary,
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.normal,
                               color: AppColors.secondaryColor,
                             ),
@@ -158,7 +157,7 @@ class OperationPage extends StatelessWidget {
                             'Endereço ocorrência:',
                             style: TextStyle(
                               fontFamily: TextStyles.instance.secondary,
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.normal,
                               color: AppColors.secondaryColor,
                             ),
@@ -167,7 +166,7 @@ class OperationPage extends StatelessWidget {
                             'Latitude/Longitude:',
                             style: TextStyle(
                               fontFamily: TextStyles.instance.secondary,
-                              fontSize: 14,
+                              fontSize: 12,
                               fontWeight: FontWeight.normal,
                               color: AppColors.secondaryColor,
                             ),
@@ -198,7 +197,7 @@ class OperationPage extends StatelessWidget {
                 title: Text(
                   'Lista de atendimento',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
                     fontFamily: TextStyles.instance.primary,
                     color: Colors.black45,
@@ -214,7 +213,7 @@ class OperationPage extends StatelessWidget {
                       'Nenhuma Lista de atendimento ainda!',
                       style: TextStyle(
                         fontFamily: TextStyles.instance.secondary,
-                        fontSize: 14,
+                        fontSize: 12,
                         fontWeight: FontWeight.normal,
                         color: Colors.black,
                       ),
@@ -242,8 +241,14 @@ class OperationPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     title: const Text('Confirmação'),
-                    content: const Text(
+                    content: Text(
                       'Você realmente deseja iniciar a ocorrência?',
+                      style: TextStyle(
+                        fontFamily: TextStyles.instance.secondary,
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal,
+                        color: AppColors.secondaryColor,
+                      ),
                     ),
                     actions: [
                       ElevatedButton(
@@ -290,7 +295,7 @@ class OperationPage extends StatelessWidget {
               'iniciar ocorrência',
               style: TextStyle(
                 fontFamily: TextStyles.instance.secondary,
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.normal,
                 color: Colors.white,
               ),

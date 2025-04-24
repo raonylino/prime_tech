@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
@@ -10,14 +11,14 @@ class AuthLoginCubit extends Cubit<AuthLoginState> {
   AuthLoginCubit() : super(AuthLoginInitial());
 
   final _storage = FlutterSecureStorage();
-  final _baseUrl = 'https://primetst.techmize.com.br/api/v1';
+ final String baseUrl = dotenv.env['BASE_URL']!;
 
   void login({required String email, required String password}) async {
     emit(AuthLoginLoading());
 
     try {
       final response = await http.post(
-        Uri.parse('$_baseUrl/login'),
+        Uri.parse('$baseUrl/login'),
         body: {'email': email, 'password': password},
       );
 
