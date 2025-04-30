@@ -8,10 +8,18 @@ import 'package:prime_pronta_resposta/src/constants/app_text_styles.dart';
 import 'package:prime_pronta_resposta/src/view/profile/cubit/profile_cubit.dart';
 import 'package:prime_pronta_resposta/src/view/shared/custom_dual_buttom.dart';
 import 'package:prime_pronta_resposta/src/view/shared/custom_texfield.dart';
-import 'package:prime_pronta_resposta/src/view/shared/custom_texfield_pwd.dart';
 
-class ProfileEditPage extends StatelessWidget {
+class ProfileEditPage extends StatefulWidget {
   const ProfileEditPage({super.key});
+
+  @override
+  State<ProfileEditPage> createState() => _ProfileEditPageState();
+}
+
+class _ProfileEditPageState extends State<ProfileEditPage> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +33,20 @@ class ProfileEditPage extends StatelessWidget {
               context,
             ).pushNamed(AppRouters.errorPage, arguments: state.message);
           }
+
+          if (state is ProfileLoaded) {
+            nameController.text = state.name;
+            emailController.text = state.email;
+            phoneController.text = state.phone ?? '';
+          }
+
+          if (state is ProfileUpdateSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Perfil atualizado com sucesso!')),
+            );
+          }
         },
         builder: (context, state) {
-          String name = '';
-          String email = '';
-          String? phone = '';
-
           if (state is ProfileLoading) {
             return const Scaffold(
               backgroundColor: AppColors.primaryColor,
@@ -39,9 +55,9 @@ class ProfileEditPage extends StatelessWidget {
               ),
             );
           } else if (state is ProfileLoaded) {
-            name = state.name;
-            email = state.email;
-            phone = state.phone;
+            nameController.text = state.name;
+            emailController.text = state.email;
+            phoneController.text = state.phone ?? '';
           }
 
           return SafeArea(
@@ -97,25 +113,19 @@ class ProfileEditPage extends StatelessWidget {
                             CustomTexfield(
                               labelText: 'Nome',
                               backgroundColor: AppColors.fourthColor,
-                              controller: TextEditingController(
-                                text: name == '' ? null : name,
-                              ),
+                              controller: nameController,
                               obscureText: false,
                             ),
                             CustomTexfield(
                               labelText: 'Email',
                               backgroundColor: AppColors.fourthColor,
-                              controller: TextEditingController(
-                                text: email == '' ? null : email,
-                              ),
+                              controller: emailController,
                               obscureText: false,
                             ),
                             CustomTexfield(
                               labelText: 'Telefone',
                               backgroundColor: AppColors.fourthColor,
-                              controller: TextEditingController(
-                                text: phone == '' ? null : phone,
-                              ),
+                              controller: phoneController,
                               obscureText: false,
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly,
@@ -127,9 +137,18 @@ class ProfileEditPage extends StatelessWidget {
                         CustomDualButtom(
                           labelText1: 'Voltar',
                           labelText2: 'Salvar',
-                          onTap1: () => Navigator.pop(context),
+                          onTap1:
+                              () =>
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                    AppRouters.profilePage,
+                                    (route) => false,
+                                  ),
                           onTap2: () {
-                            Navigator.pop(context);
+                            context.read<ProfileCubit>().updateUserProfile(
+                              name: nameController.text,
+                              email: emailController.text,
+                              phone: phoneController.text,
+                            );
                           },
                           backgroundColor: AppColors.primaryColor,
                           icon1: Icons.arrow_back,

@@ -13,10 +13,27 @@ class ProfileLoaded extends ProfileState {
   final String? imageUrl;
   final String? phone;
 
-  ProfileLoaded({required this.name, required this.email, this.imageUrl, this.phone});
+  ProfileLoaded({
+    required this.name,
+    required this.email,
+    this.imageUrl,
+    this.phone,
+  });
 }
 
 class ProfileError extends ProfileState {
   final String message;
   ProfileError(this.message);
+}
+
+class ProfileImagePicked extends ProfileState {
+  final String imagePath;
+  ProfileImagePicked(this.imagePath);
+}
+
+class ProfileImageUploadSuccess extends ProfileState {}
+
+class ProfileUpdateSuccess extends ProfileState {
+  final String message;
+  ProfileUpdateSuccess(this.message);
 }

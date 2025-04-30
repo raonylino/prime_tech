@@ -14,59 +14,62 @@ class ErrorPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.red,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 40,
-          children: [
-            Lottie.asset(
-              'assets/animations/error.json',
-              width: 200,
-              height: 200,
-            ),
-            Text(
-              'Ocorreu um erro inesperado',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                fontFamily: TextStyles.instance.primary,
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 40,
+            children: [
+              Lottie.asset(
+                'assets/animations/error.json',
+                width: 200,
+                height: 200,
               ),
-            ),
-            Text(
-              errorMessage,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontFamily: TextStyles.instance.secondary,
-              ),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(200, 50),
-                backgroundColor: AppColors.primaryColor,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 10,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+              Text(
+                'Ocorreu um erro inesperado',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: TextStyles.instance.primary,
                 ),
               ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text(
-                'Voltar',
+              Text(
+                errorMessage,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontFamily: TextStyles.instance.secondary,
                 ),
               ),
-            ),
-          ],
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(200, 50),
+                  backgroundColor: AppColors.primaryColor,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  'Voltar',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontFamily: TextStyles.instance.secondary,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

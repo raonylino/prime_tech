@@ -1,23 +1,44 @@
+import 'package:prime_pronta_resposta/src/modal/image_profile_model.dart';
+
 class UserModel {
-  String? id;
+  int? id;
   String? name;
   String? email;
   String? token;
+  String? imageProfilePath;
+  ImageProfileModel? imageProfile;
 
-  UserModel({this.id, this.name, this.email, this.token});
+  UserModel({
+    this.id,
+    this.name,
+    this.email,
+    this.token,
+    this.imageProfilePath,
+    this.imageProfile,
+  });
 
-  UserModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    email = json['email'];
-    token = json['token'];
-  }
-  factory UserModel.fromMap(Map<String, dynamic> map) {
+  factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      id: map['id'],
-      name: map['name'],
-      email: map['email'],
-      token: map['token'],
+      id: json['id'],
+      name: json['name'],
+      email: json['email'],
+      token: json['token'],
+      imageProfilePath: json['image_profile_path'],
+      imageProfile:
+          json['image_profile'] != null
+              ? ImageProfileModel.fromJson(json['image_profile'])
+              : null,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'email': email,
+      'token': token,
+      'image_profile_path': imageProfilePath,
+      'image_profile': imageProfile?.toJson(),
+    };
   }
 }

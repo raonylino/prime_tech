@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prime_pronta_resposta/src/constants/app_colors.dart';
@@ -64,20 +66,31 @@ class ProfilePage extends StatelessWidget {
                 Center(
                   child: Column(
                     children: [
-                      CircleAvatar(
-                        radius: 75,
-                        backgroundColor: Colors.white,
+                      GestureDetector(
+                        onTap: () {
+                          context.read<ProfileCubit>().pickImage();
+                        },
                         child: CircleAvatar(
-                          radius: 70,
-                          backgroundImage:
-                              image != null
-                                  ? NetworkImage(image)
-                                  : const AssetImage(
-                                        'assets/images/foto_perfil.png',
-                                      )
-                                      as ImageProvider,
+                          radius: 75,
+                          backgroundColor: Colors.white,
+                          child: CircleAvatar(
+                            radius: 70,
+                            backgroundImage: () {
+                              if (state is ProfileImagePicked) {
+                                return FileImage(File(image!)) as ImageProvider;
+                              } else if (state is ProfileLoaded &&
+                                  image != null) {
+                                return NetworkImage(image) as ImageProvider;
+                              } else {
+                                return const AssetImage(
+                                  'assets/images/foto_perfil.png',
+                                );
+                              }
+                            }(),
+                          ),
                         ),
                       ),
+
                       const SizedBox(height: 10),
                       Text(
                         name,
@@ -123,7 +136,7 @@ class ProfilePage extends StatelessWidget {
                           },
                         ),
                         CustomProfileMenu(
-                          label: 'Aleterar Senha',
+                          label: 'Alterar Senha',
                           icon: Icons.lock,
                           size: 14,
                           backgroundColor: AppColors.primaryColor,
