@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prime_pronta_resposta/src/view/shared/custom_texfield.dart';
+import 'package:validatorless/validatorless.dart';
 
 class CustomTexfieldPwd extends StatefulWidget {
   final String label;
@@ -30,6 +31,10 @@ class _CustomTexfieldPwdState extends State<CustomTexfieldPwd> {
       backgroundColor: widget.backgroundColor,
       controller: widget.controller,
       obscureText: obscureText,
+      validator: Validatorless.multiple([
+        Validatorless.required('Campo obrigatório'),
+        Validatorless.min(8, 'Senha deve ter no mínimo 8 caracteres'),
+      ]),
       suffixIcon: IconButton(
         onPressed: () {
           setState(() {

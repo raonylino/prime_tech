@@ -24,32 +24,48 @@ class CustomProfileMenu extends StatefulWidget {
 class _CustomProfileMenuState extends State<CustomProfileMenu> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        TextButton.icon(
-          style: TextButton.styleFrom(
-            fixedSize: const Size(200, 50),
-            alignment: Alignment.centerLeft,
-          ),
-          onPressed: widget.onTap,
-          label: Text(
-            widget.label,
-            style: TextStyle(
-              fontSize: widget.size,
-              fontWeight: FontWeight.w500,
-              color: widget.backgroundColor,
-              fontFamily: TextStyles.instance.secondary,
-            ),
-          ),
-          icon: Icon(
-            widget.icon,
-            color: widget.backgroundColor,
-            size: widget.size,
-          ),
+    return InkWell(
+      onTap: widget.onTap,
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 8,
         ),
-        Icon(Icons.arrow_forward_ios, color: widget.backgroundColor, size: 15),
-      ],
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: Colors.transparent, 
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  widget.icon,
+                  color: widget.backgroundColor,
+                  size: widget.size,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  widget.label,
+                  style: TextStyle(
+                    fontSize: widget.size,
+                    fontWeight: FontWeight.w500,
+                    color: widget.backgroundColor,
+                    fontFamily: TextStyles.instance.secondary,
+                  ),
+                ),
+              ],
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: widget.backgroundColor,
+              size: 15,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -8,6 +8,8 @@ import 'package:prime_pronta_resposta/src/constants/app_text_styles.dart';
 import 'package:prime_pronta_resposta/src/view/profile/cubit/profile_cubit.dart';
 import 'package:prime_pronta_resposta/src/view/shared/custom_dual_buttom.dart';
 import 'package:prime_pronta_resposta/src/view/shared/custom_texfield.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class ProfileEditPage extends StatefulWidget {
   const ProfileEditPage({super.key});
@@ -41,8 +43,16 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
           }
 
           if (state is ProfileUpdateSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Perfil atualizado com sucesso!')),
+            showTopSnackBar(
+              Overlay.of(context),
+              CustomSnackBar.success(message: "Perfil atualizado com sucesso!"),
+            );
+          } else if (state is ProfileError) {
+            showTopSnackBar(
+              Overlay.of(context),
+              const CustomSnackBar.success(
+                message: "Erro ao atualizar perfil!",
+              ),
             );
           }
         },
@@ -84,9 +94,10 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       spacing: 40,
                       children: [
+                        Column(children: [const SizedBox(height: 100)]),
                         Column(
+                          spacing: 20,
                           children: [
-                            const SizedBox(height: 100),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 40,
@@ -105,11 +116,6 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                                 fontFamily: TextStyles.instance.secondary,
                               ),
                             ),
-                          ],
-                        ),
-                        Column(
-                          spacing: 20,
-                          children: [
                             CustomTexfield(
                               labelText: 'Nome',
                               backgroundColor: AppColors.fourthColor,

@@ -159,6 +159,46 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
+  Future<void> changePassword(
+    String newPassword,
+    String confirmPassword,
+  ) async {
+    emit(ProfileLoading());
+
+    if (newPassword != confirmPassword) {
+      emit(ProfileError("As senhas não coincidem."));
+      return;
+    }
+    try {
+      final token = await _storage.read(key: 'auth_token');
+
+      if (token == null) {
+        emit(ProfileError('Token não encontrado'));
+        return;
+      }
+
+      final response = await http.post(
+        Uri.parse('$baseUrl/user'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Accept': 'application/json',
+        }
+      );
+
+      if (response.statusCode == 200) {
+        emit(ProfileUpdateSuccess("Senha alterada com sucesso!"));
+      } else {
+        emit(
+          ProfileError(
+            "Erro ao alterar a senha. Código ${response.statusCode}",
+          ),
+        );
+      }
+    } catch (e) {
+      emit(ProfileError("Erro: ${e.toString()}"));
+    }
+  }
+
   void logout(BuildContext context) async {
     final navigator = Navigator.of(context, rootNavigator: true);
     final prefs = await SharedPreferences.getInstance();

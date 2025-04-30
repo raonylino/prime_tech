@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prime_pronta_resposta/src/constants/app_routers.dart';
+import 'package:prime_pronta_resposta/src/modal/pending_model.dart';
 import 'package:prime_pronta_resposta/src/view/accepted/accepted_page.dart';
 import 'package:prime_pronta_resposta/src/view/auth/cubit/auth_login_cubit.dart';
 import 'package:prime_pronta_resposta/src/view/auth/login_page.dart';
@@ -35,7 +36,11 @@ class PrimeApp extends StatelessWidget {
           AppRouters.splashPage: (context) => const SplashPage(),
           AppRouters.loginPage: (context) => const LoginPage(),
           AppRouters.acceptedPage: (context) => const AcceptedPage(),
-          AppRouters.operationPage: (context) => const OperationPage(),
+          AppRouters.operationPage: (context) {
+            final pending =
+                ModalRoute.of(context)!.settings.arguments as PendingModel;
+            return OperationPage(pending: pending);
+          },
           AppRouters.dateOperationPage: (context) => const DateOperationPage(),
           AppRouters.galleryPhotoPage: (context) => const PhotoGalleryPage(),
           AppRouters.recoverPage: (context) => const RecoverPasswordPage(),
