@@ -1,4 +1,4 @@
-import 'package:prime_pronta_resposta/src/modal/contact_model.dart';
+import 'package:prime_pronta_resposta/src/models/contact_model.dart';
 
 class PendingModel {
   final int id;

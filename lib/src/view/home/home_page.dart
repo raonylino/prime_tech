@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:prime_pronta_resposta/src/constants/app_colors.dart';
-import 'package:prime_pronta_resposta/src/constants/app_routers.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/view/accepted/accepted_page.dart';
 import 'package:prime_pronta_resposta/src/view/completed/completed_page.dart';
 import 'package:prime_pronta_resposta/src/view/pending/pending_page.dart';

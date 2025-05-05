@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prime_pronta_resposta/src/view/shared/custom_texfield.dart';
+import 'package:prime_pronta_resposta/src/shared/custom_texfield.dart';
 import 'package:validatorless/validatorless.dart';
 
 class CustomTexfieldPwd extends StatefulWidget {

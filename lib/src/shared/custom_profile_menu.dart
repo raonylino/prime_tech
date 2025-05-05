@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prime_pronta_resposta/src/constants/app_text_styles.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
 
 class CustomProfileMenu extends StatefulWidget {
   final String label;
@@ -28,13 +28,10 @@ class _CustomProfileMenuState extends State<CustomProfileMenu> {
       onTap: widget.onTap,
       borderRadius: BorderRadius.circular(8),
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 8,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: Colors.transparent, 
+          color: Colors.transparent,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

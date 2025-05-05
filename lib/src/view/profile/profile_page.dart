@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prime_pronta_resposta/src/constants/app_colors.dart';
-import 'package:prime_pronta_resposta/src/constants/app_routers.dart';
-import 'package:prime_pronta_resposta/src/constants/app_text_styles.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
 import 'package:prime_pronta_resposta/src/view/profile/cubit/profile_cubit.dart';
 import 'package:prime_pronta_resposta/src/view/profile/geolocator.dart';
-import 'package:prime_pronta_resposta/src/view/shared/custom_profile_menu.dart';
+import 'package:prime_pronta_resposta/src/shared/custom_profile_menu.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});

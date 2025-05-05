@@ -1,13 +1,13 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prime_pronta_resposta/src/constants/app_routers.dart';
-import 'package:prime_pronta_resposta/src/modal/pending_model.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
+import 'package:prime_pronta_resposta/src/core/dio/injection.dart';
+import 'package:prime_pronta_resposta/src/models/pending_model.dart';
 import 'package:prime_pronta_resposta/src/view/accepted/accepted_page.dart';
-import 'package:prime_pronta_resposta/src/view/auth/cubit/auth_login_cubit.dart';
-import 'package:prime_pronta_resposta/src/view/auth/login_page.dart';
-import 'package:prime_pronta_resposta/src/view/auth/recover_password_page.dart';
+import 'package:prime_pronta_resposta/src/view/auth/presenter/cubit/auth_login_cubit.dart';
+import 'package:prime_pronta_resposta/src/view/auth/presenter/pages/login_page.dart';
+import 'package:prime_pronta_resposta/src/view/auth/presenter/pages/recover_password_page.dart';
 import 'package:prime_pronta_resposta/src/view/dateOperation/date_operation_page.dart';
 import 'package:prime_pronta_resposta/src/view/error/error_page.dart';
 import 'package:prime_pronta_resposta/src/view/home/home_page.dart';
@@ -24,8 +24,10 @@ class PrimeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => AuthLoginCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthLoginCubit>(create: (_) => getIt<AuthLoginCubit>()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Prime App',

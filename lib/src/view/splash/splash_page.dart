@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:prime_pronta_resposta/src/constants/app_routers.dart';
-import 'package:prime_pronta_resposta/src/view/auth/login_page.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
+import 'package:prime_pronta_resposta/src/view/auth/presenter/pages/login_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

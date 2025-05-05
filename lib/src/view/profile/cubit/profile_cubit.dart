@@ -6,7 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:prime_pronta_resposta/src/constants/app_routers.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'profile_state.dart';
@@ -182,7 +182,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         headers: {
           'Authorization': 'Bearer $token',
           'Accept': 'application/json',
-        }
+        },
       );
 
       if (response.statusCode == 200) {

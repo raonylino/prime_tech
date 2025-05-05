@@ -1,71 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:prime_pronta_resposta/src/constants/app_colors.dart';
-import 'package:prime_pronta_resposta/src/constants/app_routers.dart';
-import 'package:prime_pronta_resposta/src/constants/app_text_styles.dart';
-import 'package:prime_pronta_resposta/src/view/shared/custom_texfield.dart';
-import 'package:prime_pronta_resposta/src/view/shared/custom_texfield_pwd.dart';
-import 'package:prime_pronta_resposta/src/view/auth/cubit/auth_login_cubit.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
+import 'package:prime_pronta_resposta/src/shared/custom_texfield.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        return BlocListener<AuthLoginCubit, AuthLoginState>(
-          listener: (context, state) {
-            if (state is AuthLoginLoading) {
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder:
-                    (_) => Center(
-                      child: LoadingAnimationWidget.halfTriangleDot(
-                        color: Colors.white,
-                        size: 60,
-                      ),
-                    ),
-              );
-            } else if (state is AuthLoginSuccess) {
-              Navigator.of(context).pop();
-              Navigator.pushReplacementNamed(context, AppRouters.homePage);
-            } else if (state is AuthLoginFailure) {
-              Navigator.of(context).pop();
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text(state.message)));
-            }
-          },
-          child: const _LoginView(),
-        );
-      },
-    );
-  }
-}
-
-class _LoginView extends StatefulWidget {
-  const _LoginView();
-
-  @override
-  State<_LoginView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<_LoginView> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-  void _onLoginPressed() {
-    final cubit = context.read<AuthLoginCubit>();
-    cubit.login(email: emailController.text, password: passwordController.text);
-  }
+class RecoverPasswordPage extends StatelessWidget {
+  const RecoverPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
-
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       body: SingleChildScrollView(
@@ -107,10 +50,10 @@ class _LoginViewState extends State<_LoginView> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        'Login',
+                        'Recuperar Senha',
                         style: TextStyle(
                           color: AppColors.primaryColor,
-                          fontSize: 40,
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
                           fontFamily: TextStyles.instance.primary,
                         ),
@@ -122,19 +65,13 @@ class _LoginViewState extends State<_LoginView> {
                             CustomTexfield(
                               labelText: 'Email',
                               hintText: 'Digite seu email',
-                              controller: emailController,
+                              controller: TextEditingController(),
                               obscureText: false,
                             ),
-                            const SizedBox(height: 20),
-                            CustomTexfieldPwd(
-                              label: 'Senha',
-                              hintText: 'Digite sua senha',
-                              backgroundColor: Colors.white,
-                              controller: passwordController,
-                            ),
+
                             const SizedBox(height: 30),
                             ElevatedButton(
-                              onPressed: _onLoginPressed,
+                              onPressed: () {},
                               style: ElevatedButton.styleFrom(
                                 minimumSize: const Size(300, 50),
                                 backgroundColor: AppColors.primaryColor,
@@ -143,7 +80,7 @@ class _LoginViewState extends State<_LoginView> {
                                 ),
                               ),
                               child: Text(
-                                'Entrar',
+                                'Enviar',
                                 style: TextStyle(
                                   fontFamily: TextStyles.instance.secondary,
                                   color: Colors.white,
@@ -156,15 +93,13 @@ class _LoginViewState extends State<_LoginView> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.only(top: 40),
                         child: TextButton(
                           onPressed: () {
-                            Navigator.of(
-                              context,
-                            ).pushNamed(AppRouters.recoverPage);
+                            Navigator.of(context).pop();
                           },
                           child: Text(
-                            'Esqueceu sua senha?',
+                            'Lembrou a senha?',
                             style: TextStyle(
                               color: AppColors.secondaryColor,
                               fontSize: 12,

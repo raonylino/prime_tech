@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:prime_pronta_resposta/src/constants/app_colors.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
 
 class CustomTexfield extends StatefulWidget {
   final String labelText;

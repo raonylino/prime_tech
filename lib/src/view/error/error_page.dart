@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:prime_pronta_resposta/src/constants/app_colors.dart';
-import 'package:prime_pronta_resposta/src/constants/app_text_styles.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
 
 class ErrorPage extends StatelessWidget {
   const ErrorPage({super.key});

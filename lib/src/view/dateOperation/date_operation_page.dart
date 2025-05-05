@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:prime_pronta_resposta/src/constants/app_colors.dart';
-import 'package:prime_pronta_resposta/src/constants/app_routers.dart';
-import 'package:prime_pronta_resposta/src/constants/app_text_styles.dart';
-import 'package:prime_pronta_resposta/src/view/shared/custom_dual_buttom.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
+import 'package:prime_pronta_resposta/src/shared/custom_dual_buttom.dart';
 
 class DateOperationPage extends StatefulWidget {
   const DateOperationPage({super.key});

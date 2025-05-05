@@ -1,14 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:prime_pronta_resposta/src/constants/app_colors.dart';
-import 'package:prime_pronta_resposta/src/constants/app_text_styles.dart';
-import 'package:prime_pronta_resposta/src/view/shared/custom_texfield.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
+import 'package:prime_pronta_resposta/src/shared/custom_texfield.dart';
+import 'package:prime_pronta_resposta/src/shared/custom_texfield_pwd.dart';
+import 'package:prime_pronta_resposta/src/view/auth/presenter/cubit/auth_login_cubit.dart';
 
-class RecoverPasswordPage extends StatelessWidget {
-  const RecoverPasswordPage({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BlocListener<AuthLoginCubit, AuthLoginState>(
+        listener: (context, state) {
+          if (state is AuthLoginLoading) {
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder:
+                  (_) => Center(
+                    child: LoadingAnimationWidget.halfTriangleDot(
+                      color: Colors.white,
+                      size: 60,
+                    ),
+                  ),
+            );
+          } else if (state is AuthLoginSuccess) {
+            Navigator.of(context).pop();
+            Navigator.pushReplacementNamed(context, AppRouters.homePage);
+          } else if (state is AuthLoginFailure) {
+            Navigator.of(context).pop();
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
+          }
+        },
+        child: const _LoginView(),
+      ),
+    );
+  }
+}
+
+class _LoginView extends StatefulWidget {
+  const _LoginView();
+
+  @override
+  State<_LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<_LoginView> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  void _onLoginPressed() {
+    final cubit = context.read<AuthLoginCubit>();
+    cubit.login(emailController.text, passwordController.text);
+  }
 
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       body: SingleChildScrollView(
@@ -50,10 +105,10 @@ class RecoverPasswordPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        'Recuperar Senha',
+                        'Login',
                         style: TextStyle(
                           color: AppColors.primaryColor,
-                          fontSize: 30,
+                          fontSize: 40,
                           fontWeight: FontWeight.bold,
                           fontFamily: TextStyles.instance.primary,
                         ),
@@ -65,13 +120,19 @@ class RecoverPasswordPage extends StatelessWidget {
                             CustomTexfield(
                               labelText: 'Email',
                               hintText: 'Digite seu email',
-                              controller: TextEditingController(),
+                              controller: emailController,
                               obscureText: false,
                             ),
-
+                            const SizedBox(height: 20),
+                            CustomTexfieldPwd(
+                              label: 'Senha',
+                              hintText: 'Digite sua senha',
+                              backgroundColor: Colors.white,
+                              controller: passwordController,
+                            ),
                             const SizedBox(height: 30),
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: _onLoginPressed,
                               style: ElevatedButton.styleFrom(
                                 minimumSize: const Size(300, 50),
                                 backgroundColor: AppColors.primaryColor,
@@ -80,7 +141,7 @@ class RecoverPasswordPage extends StatelessWidget {
                                 ),
                               ),
                               child: Text(
-                                'Enviar',
+                                'Entrar',
                                 style: TextStyle(
                                   fontFamily: TextStyles.instance.secondary,
                                   color: Colors.white,
@@ -93,13 +154,15 @@ class RecoverPasswordPage extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 40),
+                        padding: const EdgeInsets.only(top: 20),
                         child: TextButton(
                           onPressed: () {
-                            Navigator.of(context).pop();
+                            Navigator.of(
+                              context,
+                            ).pushNamed(AppRouters.recoverPage);
                           },
                           child: Text(
-                            'Lembrou a senha?',
+                            'Esqueceu sua senha?',
                             style: TextStyle(
                               color: AppColors.secondaryColor,
                               fontSize: 12,

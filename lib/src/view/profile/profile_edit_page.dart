@@ -2,12 +2,12 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prime_pronta_resposta/src/constants/app_colors.dart';
-import 'package:prime_pronta_resposta/src/constants/app_routers.dart';
-import 'package:prime_pronta_resposta/src/constants/app_text_styles.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
 import 'package:prime_pronta_resposta/src/view/profile/cubit/profile_cubit.dart';
-import 'package:prime_pronta_resposta/src/view/shared/custom_dual_buttom.dart';
-import 'package:prime_pronta_resposta/src/view/shared/custom_texfield.dart';
+import 'package:prime_pronta_resposta/src/shared/custom_dual_buttom.dart';
+import 'package:prime_pronta_resposta/src/shared/custom_texfield.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
