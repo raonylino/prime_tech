@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
-import 'package:prime_pronta_resposta/src/models/pending_model.dart';
+import 'package:prime_pronta_resposta/src/model/pending_model.dart';
 import 'package:prime_pronta_resposta/src/view/operation/cubit/operation_cubit.dart';
 import 'package:prime_pronta_resposta/src/shared/custom_text_operation.dart';
 

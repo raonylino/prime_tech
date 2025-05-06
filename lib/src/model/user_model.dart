@@ -1,4 +1,4 @@
-import 'package:prime_pronta_resposta/src/models/image_profile_model.dart';
+import 'package:prime_pronta_resposta/src/model/image_profile_model.dart';
 
 class UserModel {
   int? id;

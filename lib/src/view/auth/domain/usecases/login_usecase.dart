@@ -1,15 +1,15 @@
-
-import 'package:injectable/injectable.dart';
-
+import 'package:prime_pronta_resposta/src/view/auth/domain/entities/login_entities.dart';
 import '../repositories/auth_repository.dart';
-
-@injectable
 
 class LoginUseCase {
   final AuthRepository repository;
   LoginUseCase(this.repository);
 
-  Future<void> call(String email, String password) async {
-    await repository.login(email, password);
+  Future<LoginEntity> call(String email, String password) async {
+    final result = await repository.login(email, password);
+    return result.fold(
+      (failure) => throw failure,
+      (loginEntity) => loginEntity,
+    );
   }
 }
