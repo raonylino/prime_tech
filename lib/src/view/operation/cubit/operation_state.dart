@@ -8,7 +8,7 @@ final class OperationInitial extends OperationState {}
 final class OperationLoading extends OperationState {}
 
 final class OperationLoaded extends OperationState {
-  final PendingModel operation;
+  final PendingModel2 operation;
 
   OperationLoaded(this.operation);
 }

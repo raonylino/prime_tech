@@ -1,9 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
-import 'package:prime_pronta_resposta/src/view/pending/cubit/pending_cubit.dart';
+import 'package:prime_pronta_resposta/src/view/pending/data/datasources/pending_datasource.dart';
+import 'package:prime_pronta_resposta/src/view/pending/domain/repositories/pending_repository.dart';
+import 'package:prime_pronta_resposta/src/view/pending/domain/usecases/pending_usecase.dart';
+import 'package:prime_pronta_resposta/src/view/pending/presenter/cubit/pending_cubit.dart';
 
 class PendingPage extends StatelessWidget {
   const PendingPage({super.key});
@@ -11,7 +16,14 @@ class PendingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => PendingCubit()..fetchPendings(),
+      create:
+          (_) => PendingCubit(
+            PendingRepositoryImpl(
+                  PendingRemoteDataSourceImpl(Dio()),
+                  FlutterSecureStorage(),
+                )
+                as PendingUsecase,
+          )..fetchPendings(),
       child: Scaffold(
         body: BlocBuilder<PendingCubit, PendingState>(
           builder: (context, state) {
@@ -136,7 +148,7 @@ class PendingPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  pending.identification,
+                                  pending.title,
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
@@ -145,7 +157,7 @@ class PendingPage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  pending.shippingCompanyName,
+                                  pending.companyName,
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontFamily: TextStyles.instance.secondary,

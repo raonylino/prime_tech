@@ -8,6 +8,10 @@ import 'package:prime_pronta_resposta/src/view/auth/domain/usecases/check_login_
 import 'package:prime_pronta_resposta/src/view/auth/domain/usecases/login_usecase.dart';
 import 'package:prime_pronta_resposta/src/view/auth/domain/usecases/logout_usecase.dart';
 import 'package:prime_pronta_resposta/src/view/auth/presenter/cubit/auth_login_cubit.dart';
+import 'package:prime_pronta_resposta/src/view/pending/data/datasources/pending_datasource.dart';
+import 'package:prime_pronta_resposta/src/view/pending/domain/repositories/pending_repository.dart';
+import 'package:prime_pronta_resposta/src/view/pending/domain/usecases/pending_usecase.dart';
+import 'package:prime_pronta_resposta/src/view/pending/presenter/cubit/pending_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -50,5 +54,23 @@ Future<void> configureDependencies() async {
       checkLoginStatusUseCase: getIt<CheckLoginStatusUseCase>(),
       logoutUseCase: getIt<LogoutUseCase>(),
     ),
+  );
+  getIt.registerLazySingleton<PendingRemoteDataSource>(
+    () => PendingRemoteDataSourceImpl(getIt<Dio>()),
+  );
+
+  getIt.registerLazySingleton<PendingRepository>(
+    () => PendingRepositoryImpl(
+      getIt<PendingRemoteDataSource>(),
+      getIt<FlutterSecureStorage>(),
+    ),
+  );
+
+  getIt.registerFactory<PendingUsecase>(
+    () => PendingUsecase(getIt<PendingRepository>()),
+  );
+
+  getIt.registerFactory<PendingCubit>(
+    () => PendingCubit(getIt<PendingUsecase>()),
   );
 }

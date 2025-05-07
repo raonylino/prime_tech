@@ -23,7 +23,7 @@ class AuthLoginCubit extends Cubit<AuthLoginState> {
       await loginUseCase(email, password);
       emit(AuthLoginSuccess());
     } catch (e) {
-      emit(AuthLoginFailure(e.toString()));
+      emit(AuthLoginFailure(e.toString().split(': ')[1]));
     }
   }
 

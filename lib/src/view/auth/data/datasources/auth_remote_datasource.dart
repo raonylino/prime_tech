@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:prime_pronta_resposta/src/core/endpoints/app_endpoints.dart';
 import 'package:prime_pronta_resposta/src/view/auth/domain/entities/login_entities.dart';
-import 'package:prime_pronta_resposta/src/view/auth/model/login_model.dart';
+import 'package:prime_pronta_resposta/src/view/auth/data/model/login_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<LoginEntity> login(String email, String password);

@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
-import 'package:prime_pronta_resposta/src/core/errors/exceptions/rest_client_exception.dart';
 import 'package:prime_pronta_resposta/src/view/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:prime_pronta_resposta/src/view/auth/domain/entities/login_entities.dart';
 
@@ -31,7 +30,7 @@ class AuthRepositoryImpl implements AuthRepository {
       if (result.code == 1) {
         return Right(result);
       } else {
-        return Left(Exception(result.message));
+        return Left(Exception(result.message.toString()));
       }
     } catch (e) {
       return Left(Exception('Erro ao fazer login: $e'));

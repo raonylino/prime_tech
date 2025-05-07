@@ -7,6 +7,8 @@ import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
 import 'package:prime_pronta_resposta/src/shared/custom_texfield.dart';
 import 'package:prime_pronta_resposta/src/shared/custom_texfield_pwd.dart';
 import 'package:prime_pronta_resposta/src/view/auth/presenter/cubit/auth_login_cubit.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -33,9 +35,10 @@ class LoginPage extends StatelessWidget {
             Navigator.pushReplacementNamed(context, AppRouters.homePage);
           } else if (state is AuthLoginFailure) {
             Navigator.of(context).pop();
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.message)));
+            showTopSnackBar(
+              Overlay.of(context),
+              CustomSnackBar.error(message: state.message),
+            );
           }
         },
         child: const _LoginView(),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/core/dio/injection.dart';
-import 'package:prime_pronta_resposta/src/model/pending_model.dart';
+import 'package:prime_pronta_resposta/src/model/pending_model2.dart';
 import 'package:prime_pronta_resposta/src/view/accepted/accepted_page.dart';
 import 'package:prime_pronta_resposta/src/view/auth/presenter/cubit/auth_login_cubit.dart';
 import 'package:prime_pronta_resposta/src/view/auth/presenter/pages/login_page.dart';
@@ -40,7 +40,7 @@ class PrimeApp extends StatelessWidget {
           AppRouters.acceptedPage: (context) => const AcceptedPage(),
           AppRouters.operationPage: (context) {
             final pending =
-                ModalRoute.of(context)!.settings.arguments as PendingModel;
+                ModalRoute.of(context)!.settings.arguments as PendingModel2;
             return OperationPage(pending: pending);
           },
           AppRouters.dateOperationPage: (context) => const DateOperationPage(),

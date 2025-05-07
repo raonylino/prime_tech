@@ -3,7 +3,7 @@ import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/view/accepted/accepted_page.dart';
 import 'package:prime_pronta_resposta/src/view/completed/completed_page.dart';
-import 'package:prime_pronta_resposta/src/view/pending/pending_page.dart';
+import 'package:prime_pronta_resposta/src/view/pending/presenter/pending_page.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 
 class HomePage extends StatefulWidget {

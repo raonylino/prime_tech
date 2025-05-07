@@ -1,6 +1,6 @@
 import 'package:prime_pronta_resposta/src/model/contact_model.dart';
 
-class PendingModel {
+class PendingModel2 {
   final int id;
   final int idCompany;
   final int? idClient;
@@ -28,7 +28,7 @@ class PendingModel {
   final String createdAt;
   final String updatedAt;
 
-  PendingModel({
+  PendingModel2({
     required this.id,
     required this.idCompany,
     this.idClient,
@@ -57,8 +57,8 @@ class PendingModel {
     required this.updatedAt,
   });
 
-  factory PendingModel.fromJson(Map<String, dynamic> json) {
-    return PendingModel(
+  factory PendingModel2.fromJson(Map<String, dynamic> json) {
+    return PendingModel2(
       id: json['id'],
       idCompany: json['id_company'],
       idClient: json['id_client'],
