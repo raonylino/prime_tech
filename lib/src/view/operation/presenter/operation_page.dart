@@ -3,18 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
-import 'package:prime_pronta_resposta/src/model/pending_model2.dart';
-import 'package:prime_pronta_resposta/src/view/operation/cubit/operation_cubit.dart';
+import 'package:prime_pronta_resposta/src/core/dio/injection.dart';
 import 'package:prime_pronta_resposta/src/shared/custom_text_operation.dart';
+import 'package:prime_pronta_resposta/src/view/operation/presenter/cubit/operation_cubit.dart';
+import 'package:prime_pronta_resposta/src/view/pending/data/model/pending_model.dart';
 
 class OperationPage extends StatelessWidget {
-  final PendingModel2 pending;
+  final PendingModel pending;
   const OperationPage({super.key, required this.pending});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => OperationCubit()..fetchOperationById(pending.id),
+      create:
+          (context) => getIt<OperationCubit>()..fetchOperationById(pending.id),
       child: BlocBuilder<OperationCubit, OperationState>(
         builder: (context, state) {
           if (state is OperationLoading) {

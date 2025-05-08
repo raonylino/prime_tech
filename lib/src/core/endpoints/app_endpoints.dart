@@ -8,4 +8,5 @@ class AppEndpoints {
   /* ---------------------------------- Login ---------------------------------- */
   static String apiBase = 'https://$_apiUrl/api/v1';
   static String login = '/login';
+  static String dataOperation = '$apiBase/service/evidence';
 }

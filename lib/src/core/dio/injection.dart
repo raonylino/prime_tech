@@ -8,6 +8,14 @@ import 'package:prime_pronta_resposta/src/view/auth/domain/usecases/check_login_
 import 'package:prime_pronta_resposta/src/view/auth/domain/usecases/login_usecase.dart';
 import 'package:prime_pronta_resposta/src/view/auth/domain/usecases/logout_usecase.dart';
 import 'package:prime_pronta_resposta/src/view/auth/presenter/cubit/auth_login_cubit.dart';
+import 'package:prime_pronta_resposta/src/view/dateOperation/data/datasources/data_operation_remoto_datasource.dart';
+import 'package:prime_pronta_resposta/src/view/dateOperation/domain/repositories/data_operation_repository.dart';
+import 'package:prime_pronta_resposta/src/view/dateOperation/domain/usecases/data_opereation_usecase.dart';
+import 'package:prime_pronta_resposta/src/view/dateOperation/presenter/cubit/data_operation_cubit.dart';
+import 'package:prime_pronta_resposta/src/view/operation/data/datasources/operation_remote_datasouces.dart';
+import 'package:prime_pronta_resposta/src/view/operation/domain/repositories/operation_repository.dart';
+import 'package:prime_pronta_resposta/src/view/operation/domain/usecases/fetch_operation_by_id_usecase.dart';
+import 'package:prime_pronta_resposta/src/view/operation/presenter/cubit/operation_cubit.dart';
 import 'package:prime_pronta_resposta/src/view/pending/data/datasources/pending_datasource.dart';
 import 'package:prime_pronta_resposta/src/view/pending/domain/repositories/pending_repository.dart';
 import 'package:prime_pronta_resposta/src/view/pending/domain/usecases/pending_usecase.dart';
@@ -72,5 +80,40 @@ Future<void> configureDependencies() async {
 
   getIt.registerFactory<PendingCubit>(
     () => PendingCubit(getIt<PendingUsecase>()),
+  );
+
+  getIt.registerLazySingleton<OperationRemoteDataSource>(
+    () => OperationRemoteDataSourceImpl(
+      getIt<Dio>(),
+      getIt<FlutterSecureStorage>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<OperationRepository>(
+    () => OperationRepositoryImpl(getIt<OperationRemoteDataSource>()),
+  );
+
+  getIt.registerFactory<FetchOperationByIdUseCase>(
+    () => FetchOperationByIdUseCase(getIt<OperationRepository>()),
+  );
+
+  getIt.registerFactory<OperationCubit>(
+    () => OperationCubit(getIt<FetchOperationByIdUseCase>()),
+  );
+
+  getIt.registerLazySingleton<DataOperationRemoteDataSource>(
+    () => DataOperationRemoteDataSourceImpl(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<DataOperationRepository>(
+    () => DataOperationRepositoryImpl(
+      getIt<DataOperationRemoteDataSource>(),
+      getIt<FlutterSecureStorage>(),
+    ),
+  );
+  getIt.registerFactory<DataOpereationUsecase>(
+    () => DataOpereationUsecase(getIt<DataOperationRepository>()),
+  );
+  getIt.registerFactory<DataOperationCubit>(
+    () => DataOperationCubit(getIt<DataOpereationUsecase>()),
   );
 }

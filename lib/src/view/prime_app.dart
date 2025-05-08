@@ -3,16 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/core/dio/injection.dart';
-import 'package:prime_pronta_resposta/src/model/pending_model2.dart';
 import 'package:prime_pronta_resposta/src/view/accepted/accepted_page.dart';
 import 'package:prime_pronta_resposta/src/view/auth/presenter/cubit/auth_login_cubit.dart';
 import 'package:prime_pronta_resposta/src/view/auth/presenter/pages/login_page.dart';
 import 'package:prime_pronta_resposta/src/view/auth/presenter/pages/recover_password_page.dart';
-import 'package:prime_pronta_resposta/src/view/dateOperation/date_operation_page.dart';
+import 'package:prime_pronta_resposta/src/view/dateOperation/domain/usecases/data_opereation_usecase.dart';
+import 'package:prime_pronta_resposta/src/view/dateOperation/presenter/cubit/data_operation_cubit.dart';
+import 'package:prime_pronta_resposta/src/view/dateOperation/presenter/date_operation_page.dart';
 import 'package:prime_pronta_resposta/src/view/error/error_page.dart';
 import 'package:prime_pronta_resposta/src/view/home/home_page.dart';
 import 'package:prime_pronta_resposta/src/view/imagePreview/image_preview_page.dart';
-import 'package:prime_pronta_resposta/src/view/operation/operation_page.dart';
+import 'package:prime_pronta_resposta/src/view/operation/domain/usecases/fetch_operation_by_id_usecase.dart';
+import 'package:prime_pronta_resposta/src/view/operation/presenter/cubit/operation_cubit.dart';
+import 'package:prime_pronta_resposta/src/view/operation/presenter/operation_page.dart';
+import 'package:prime_pronta_resposta/src/view/pending/data/model/pending_model.dart';
+import 'package:prime_pronta_resposta/src/view/pending/domain/usecases/pending_usecase.dart';
+import 'package:prime_pronta_resposta/src/view/pending/presenter/cubit/pending_cubit.dart';
 import 'package:prime_pronta_resposta/src/view/photoGallery/photo_gallery_page.dart';
 import 'package:prime_pronta_resposta/src/view/profile/profile_edit_page.dart';
 import 'package:prime_pronta_resposta/src/view/profile/profile_page.dart';
@@ -27,6 +33,15 @@ class PrimeApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthLoginCubit>(create: (_) => getIt<AuthLoginCubit>()),
+        BlocProvider<PendingCubit>(
+          create: (_) => PendingCubit(getIt<PendingUsecase>()),
+        ),
+        BlocProvider<OperationCubit>(
+          create: (_) => OperationCubit(getIt<FetchOperationByIdUseCase>()),
+        ),
+        BlocProvider<DataOperationCubit>(
+          create: (_) => DataOperationCubit(getIt<DataOpereationUsecase>()),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -40,7 +55,7 @@ class PrimeApp extends StatelessWidget {
           AppRouters.acceptedPage: (context) => const AcceptedPage(),
           AppRouters.operationPage: (context) {
             final pending =
-                ModalRoute.of(context)!.settings.arguments as PendingModel2;
+                ModalRoute.of(context)!.settings.arguments as PendingModel;
             return OperationPage(pending: pending);
           },
           AppRouters.dateOperationPage: (context) => const DateOperationPage(),

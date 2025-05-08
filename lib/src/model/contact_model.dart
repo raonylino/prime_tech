@@ -14,4 +14,13 @@ class Contact {
       isMain: json['is_main'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'phone': phone,
+      'email': email,
+      'is_main': isMain,
+    };
+  }
 }
