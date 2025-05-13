@@ -1,0 +1,10 @@
+import 'package:prime_pronta_resposta/src/view/profile/domain/repositories/profile_repository.dart';
+
+class UploadProfileImage {
+  final ProfileRepository repository;
+
+  UploadProfileImage(this.repository);
+
+  Future<void> call(String imagePath, String token) =>
+      repository.uploadProfileImage(imagePath, token);
+}

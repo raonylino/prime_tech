@@ -32,11 +32,13 @@ class DataOperationRemoteDataSourceImpl
         ),
       );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final List data = response.data['data'];
-        return DataOperationModel.fromJson(data.first);
+      if (response.data['code'] == 1) {
+        final Map<String, dynamic> data = response.data['data'];
+        return DataOperationModel.fromJson(data);
       } else {
-        throw Exception('Erro ao enviar operações: ${response.statusCode}');
+        throw Exception(
+          'Erro ao enviar operações: ${response.data['message']}',
+        );
       }
     } catch (e) {
       throw Exception('Erro ao enviar operações: $e');

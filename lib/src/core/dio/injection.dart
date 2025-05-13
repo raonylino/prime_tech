@@ -20,6 +20,13 @@ import 'package:prime_pronta_resposta/src/view/pending/data/datasources/pending_
 import 'package:prime_pronta_resposta/src/view/pending/domain/repositories/pending_repository.dart';
 import 'package:prime_pronta_resposta/src/view/pending/domain/usecases/pending_usecase.dart';
 import 'package:prime_pronta_resposta/src/view/pending/presenter/cubit/pending_cubit.dart';
+import 'package:prime_pronta_resposta/src/view/profile/data/datasource/profile_datasource.dart';
+import 'package:prime_pronta_resposta/src/view/profile/domain/repositories/profile_repository.dart';
+import 'package:prime_pronta_resposta/src/view/profile/domain/usecases/change_password.dart';
+import 'package:prime_pronta_resposta/src/view/profile/domain/usecases/get_user_profile.dart';
+import 'package:prime_pronta_resposta/src/view/profile/domain/usecases/update_user_profile.dart';
+import 'package:prime_pronta_resposta/src/view/profile/domain/usecases/upload_profile_image.dart';
+import 'package:prime_pronta_resposta/src/view/profile/presenter/cubit/profile_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -115,5 +122,35 @@ Future<void> configureDependencies() async {
   );
   getIt.registerFactory<DataOperationCubit>(
     () => DataOperationCubit(getIt<DataOpereationUsecase>()),
+  );
+
+  // DataSource
+  getIt.registerLazySingleton<ProfileDataSource>(
+    () => ProfileDataSourceImpl(getIt<Dio>()),
+  );
+
+  // Repository
+  getIt.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(getIt<ProfileDataSource>()),
+  );
+
+  // UseCases
+  getIt.registerLazySingleton(() => GetUserProfile(getIt<ProfileRepository>()));
+  getIt.registerLazySingleton(
+    () => UpdateUserProfile(getIt<ProfileRepository>()),
+  );
+  getIt.registerLazySingleton(
+    () => UploadProfileImage(getIt<ProfileRepository>()),
+  );
+  getIt.registerLazySingleton(() => ChangePassword(getIt<ProfileRepository>()));
+
+  // Cubit
+  getIt.registerFactory(
+    () => ProfileCubit(
+      getUserProfileUseCase: getIt(),
+      updateUserProfileUseCase: getIt(),
+      uploadProfileImageUseCase: getIt(),
+      changePasswordUseCase: getIt(),
+    ),
   );
 }

@@ -5,9 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
-import 'package:prime_pronta_resposta/src/view/profile/cubit/profile_cubit.dart';
-import 'package:prime_pronta_resposta/src/shared/custom_dual_buttom.dart';
-import 'package:prime_pronta_resposta/src/shared/custom_texfield.dart';
+import 'package:prime_pronta_resposta/src/core/dio/injection.dart';
+import 'package:prime_pronta_resposta/src/view/profile/presenter/cubit/profile_cubit.dart';
+import 'package:prime_pronta_resposta/src/widget/custom_dual_buttom.dart';
+import 'package:prime_pronta_resposta/src/widget/custom_texfield.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
@@ -27,7 +28,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (context) => ProfileCubit()..loadUserProfile(),
+      create: (context) => getIt<ProfileCubit>()..loadUserProfile(),
       child: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
           if (state is ProfileError) {
@@ -39,7 +40,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
           if (state is ProfileLoaded) {
             nameController.text = state.name;
             emailController.text = state.email;
-            phoneController.text = state.phone ?? '';
+            phoneController.text = state.phone;
           }
 
           if (state is ProfileUpdateSuccess) {
@@ -67,7 +68,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
           } else if (state is ProfileLoaded) {
             nameController.text = state.name;
             emailController.text = state.email;
-            phoneController.text = state.phone ?? '';
+            phoneController.text = state.phone;
           }
 
           return SafeArea(

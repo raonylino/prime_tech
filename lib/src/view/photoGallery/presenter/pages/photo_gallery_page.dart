@@ -31,8 +31,6 @@ class _PhotoGalleryPageState extends State<PhotoGalleryPage> {
       setState(() {
         _imageFiles.add(newImage);
       });
-
-      print('Imagem salva em: $newPath');
     }
   }
 

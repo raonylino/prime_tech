@@ -12,17 +12,18 @@ import 'package:prime_pronta_resposta/src/view/dateOperation/presenter/cubit/dat
 import 'package:prime_pronta_resposta/src/view/dateOperation/presenter/date_operation_page.dart';
 import 'package:prime_pronta_resposta/src/view/error/error_page.dart';
 import 'package:prime_pronta_resposta/src/view/home/home_page.dart';
-import 'package:prime_pronta_resposta/src/view/imagePreview/image_preview_page.dart';
+import 'package:prime_pronta_resposta/src/view/photoGallery/presenter/pages/image_preview_page.dart';
 import 'package:prime_pronta_resposta/src/view/operation/domain/usecases/fetch_operation_by_id_usecase.dart';
 import 'package:prime_pronta_resposta/src/view/operation/presenter/cubit/operation_cubit.dart';
 import 'package:prime_pronta_resposta/src/view/operation/presenter/operation_page.dart';
 import 'package:prime_pronta_resposta/src/view/pending/data/model/pending_model.dart';
 import 'package:prime_pronta_resposta/src/view/pending/domain/usecases/pending_usecase.dart';
 import 'package:prime_pronta_resposta/src/view/pending/presenter/cubit/pending_cubit.dart';
-import 'package:prime_pronta_resposta/src/view/photoGallery/photo_gallery_page.dart';
-import 'package:prime_pronta_resposta/src/view/profile/profile_edit_page.dart';
-import 'package:prime_pronta_resposta/src/view/profile/profile_page.dart';
-import 'package:prime_pronta_resposta/src/view/profile/profile_password_page.dart';
+import 'package:prime_pronta_resposta/src/view/photoGallery/presenter/pages/photo_gallery_page.dart';
+import 'package:prime_pronta_resposta/src/view/profile/presenter/cubit/profile_cubit.dart';
+import 'package:prime_pronta_resposta/src/view/profile/presenter/pages/profile_edit_page.dart';
+import 'package:prime_pronta_resposta/src/view/profile/presenter/pages/profile_page.dart';
+import 'package:prime_pronta_resposta/src/view/profile/presenter/pages/profile_password_page.dart';
 import 'package:prime_pronta_resposta/src/view/splash/splash_page.dart';
 
 class PrimeApp extends StatelessWidget {
@@ -42,6 +43,7 @@ class PrimeApp extends StatelessWidget {
         BlocProvider<DataOperationCubit>(
           create: (_) => DataOperationCubit(getIt<DataOpereationUsecase>()),
         ),
+        BlocProvider<ProfileCubit>(create: (_) => getIt<ProfileCubit>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

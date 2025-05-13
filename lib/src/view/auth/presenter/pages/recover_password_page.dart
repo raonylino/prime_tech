@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
-import 'package:prime_pronta_resposta/src/shared/custom_texfield.dart';
+import 'package:prime_pronta_resposta/src/widget/custom_texfield.dart';
 
 class RecoverPasswordPage extends StatelessWidget {
   const RecoverPasswordPage({super.key});

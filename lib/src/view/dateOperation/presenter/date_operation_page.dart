@@ -4,7 +4,7 @@ import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
 import 'package:prime_pronta_resposta/src/core/dio/injection.dart';
-import 'package:prime_pronta_resposta/src/shared/custom_dual_buttom.dart';
+import 'package:prime_pronta_resposta/src/widget/custom_dual_buttom.dart';
 import 'package:prime_pronta_resposta/src/view/dateOperation/data/model/data_operation_model.dart';
 import 'package:prime_pronta_resposta/src/view/dateOperation/presenter/cubit/data_operation_cubit.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -18,14 +18,15 @@ class DateOperationPage extends StatefulWidget {
 }
 
 class _DateOperationPageState extends State<DateOperationPage> {
+  final titleOcorrenceController = TextEditingController();
   final occorrenceDescriptionController = TextEditingController();
   final actionDescriptionController = TextEditingController();
   final latitudeController = TextEditingController();
   final longitudeController = TextEditingController();
   final dataevidenceController = TextEditingController();
   final imagesController = TextEditingController();
-  final idServiceController = 6;
-  final idActionTypeController = 1;
+  final idServiceController = '6';
+  final idActionTypeController = '1';
 
   @override
   void dispose() {
@@ -53,14 +54,14 @@ class _DateOperationPageState extends State<DateOperationPage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (context) => getIt<DataOperationCubit>()
-        ..getToken(),
+      create: (context) => getIt<DataOperationCubit>()..getToken(),
       child: BlocConsumer<DataOperationCubit, DataOperationState>(
         listener: (context, state) {
           if (state is DataOperationError) {
-            Navigator.of(
-              context,
-            ).pushNamed(AppRouters.errorPage, arguments: state.message);
+            showTopSnackBar(
+              Overlay.of(context),
+              CustomSnackBar.error(message: state.message),
+            );
           }
           if (state is DataOperationSuccess) {
             showTopSnackBar(
@@ -121,7 +122,7 @@ class _DateOperationPageState extends State<DateOperationPage> {
                             ),
 
                             TextFormField(
-                              controller: occorrenceDescriptionController,
+                              controller: titleOcorrenceController,
                               decoration: InputDecoration(
                                 hintText: 'Digite o título da ocorrência',
                                 hintStyle: const TextStyle(
@@ -156,7 +157,7 @@ class _DateOperationPageState extends State<DateOperationPage> {
                             ),
 
                             TextFormField(
-                              controller: actionDescriptionController,
+                              controller: occorrenceDescriptionController,
                               maxLines: 5,
                               minLines: 3,
                               keyboardType: TextInputType.multiline,
@@ -347,10 +348,11 @@ class _DateOperationPageState extends State<DateOperationPage> {
                             final model = DataOperationModel(
                               idService: '1',
                               idActionType: '1',
+                              titleOcorrence: titleOcorrenceController.text,
                               occourrenceDescription:
-                                  'occorrenceDescriptionController.text',
+                                  occorrenceDescriptionController.text,
                               actionDescription:
-                                  'actionDescriptionController.text',
+                                  actionDescriptionController.text,
                               latitude: '-23.5505',
                               longitude: '-46.6333',
                               dataevidence: DateTime.now().toIso8601String(),

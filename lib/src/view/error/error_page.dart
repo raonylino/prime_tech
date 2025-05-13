@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
+import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
 
 class ErrorPage extends StatelessWidget {
@@ -57,7 +58,7 @@ class ErrorPage extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed(AppRouters.homePage);
                 },
                 child: Text(
                   'Voltar',

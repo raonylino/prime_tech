@@ -4,7 +4,7 @@ import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
 import 'package:prime_pronta_resposta/src/core/dio/injection.dart';
-import 'package:prime_pronta_resposta/src/shared/custom_text_operation.dart';
+import 'package:prime_pronta_resposta/src/widget/custom_text_operation.dart';
 import 'package:prime_pronta_resposta/src/view/operation/presenter/cubit/operation_cubit.dart';
 import 'package:prime_pronta_resposta/src/view/pending/data/model/pending_model.dart';
 
