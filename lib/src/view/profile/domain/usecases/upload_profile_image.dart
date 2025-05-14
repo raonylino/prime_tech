@@ -5,6 +5,6 @@ class UploadProfileImage {
 
   UploadProfileImage(this.repository);
 
-  Future<void> call(String imagePath, String token) =>
-      repository.uploadProfileImage(imagePath, token);
+  Future<void> call(String imagePath) =>
+      repository.uploadProfileImage(imagePath);
 }

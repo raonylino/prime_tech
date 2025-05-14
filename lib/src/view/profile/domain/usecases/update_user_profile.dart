@@ -5,6 +5,6 @@ class UpdateUserProfile {
 
   UpdateUserProfile(this.repository);
 
-  Future<void> call(String name, String email, String phone, String token) =>
-      repository.updateUserProfile(name, email, phone, token);
+  Future<void> call(String name, String email, String phone) =>
+      repository.updateUserProfile(name, email, phone);
 }

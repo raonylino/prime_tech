@@ -7,7 +7,7 @@ import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
 import 'package:prime_pronta_resposta/src/core/dio/injection.dart';
 import 'package:prime_pronta_resposta/src/view/profile/presenter/cubit/profile_cubit.dart';
-import 'package:prime_pronta_resposta/src/view/profile/geolocator.dart';
+import 'package:prime_pronta_resposta/src/core/services/geolocator.dart';
 import 'package:prime_pronta_resposta/src/widget/custom_profile_menu.dart';
 
 class ProfilePage extends StatelessWidget {

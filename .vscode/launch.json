@@ -4,23 +4,31 @@
     // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
         {
             "name": "prime_pronta_resposta",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "toolArgs": [
+                "--no-enable-impeller"
+            ],
         },
         {
             "name": "prime_pronta_resposta (profile mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+            "toolArgs": [
+                "--no-enable-impeller"
+            ],
         },
         {
             "name": "prime_pronta_resposta (release mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "release",
+            "toolArgs": [
+                "--no-enable-impeller"
+            ],
         }
     ]
 }

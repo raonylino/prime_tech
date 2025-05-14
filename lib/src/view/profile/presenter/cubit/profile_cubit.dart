@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/view/profile/domain/usecases/change_password.dart';
@@ -24,20 +24,13 @@ class ProfileCubit extends Cubit<ProfileState> {
     required this.changePasswordUseCase,
   }) : super(ProfileInitial());
 
-  final FlutterSecureStorage _storage = const FlutterSecureStorage();
   final ImagePicker _picker = ImagePicker();
 
   Future<void> loadUserProfile() async {
     emit(ProfileLoading());
 
     try {
-      final token = await _storage.read(key: 'auth_token');
-      if (token == null) {
-        emit(ProfileError('Token não encontrado'));
-        return;
-      }
-
-      final user = await getUserProfileUseCase(token);
+      final user = await getUserProfileUseCase();
       emit(
         ProfileLoaded(
           name: '${user.name}',
@@ -68,13 +61,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(ProfileLoading());
 
     try {
-      final token = await _storage.read(key: 'auth_token');
-      if (token == null) {
-        emit(ProfileError('Token não encontrado'));
-        return;
-      }
-
-      await uploadProfileImageUseCase(token, imagePath);
+      await uploadProfileImageUseCase(imagePath);
       emit(ProfileImageUploadSuccess());
     } catch (e) {
       emit(ProfileError('Erro no upload de imagem: ${e.toString()}'));
@@ -89,13 +76,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(ProfileLoading());
 
     try {
-      final token = await _storage.read(key: 'auth_token');
-      if (token == null) {
-        emit(ProfileError('Token não encontrado'));
-        return;
-      }
-
-      await updateUserProfileUseCase(token, name, email, phone);
+      await updateUserProfileUseCase(name, email, phone);
       emit(ProfileUpdateSuccess("Perfil atualizado com sucesso"));
       await loadUserProfile();
     } catch (e) {
@@ -103,10 +84,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  Future<void> changePassword(
-    String newPassword,
-    String confirmPassword,
-  ) async {
+  Future<void> changePassword({
+    required String newPassword,
+    required String confirmPassword,
+  }) async {
     emit(ProfileLoading());
 
     if (newPassword != confirmPassword) {
@@ -115,13 +96,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
 
     try {
-      final token = await _storage.read(key: 'auth_token');
-      if (token == null) {
-        emit(ProfileError('Token não encontrado'));
-        return;
-      }
-
-      await changePasswordUseCase(token, newPassword, confirmPassword);
+      await changePasswordUseCase(newPassword, confirmPassword);
       emit(ProfileUpdateSuccess("Senha alterada com sucesso!"));
     } catch (e) {
       emit(ProfileError("Erro ao alterar senha: ${e.toString()}"));

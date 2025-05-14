@@ -2,19 +2,10 @@ import 'package:prime_pronta_resposta/src/view/profile/data/datasource/profile_d
 import 'package:prime_pronta_resposta/src/view/profile/domain/entities/profile_entity.dart';
 
 abstract class ProfileRepository {
-  Future<ProfileEntity> getUserProfile(String token);
-  Future<void> updateUserProfile(
-    String name,
-    String email,
-    String phone,
-    String token,
-  );
-  Future<void> uploadProfileImage(String imagePath, String token);
-  Future<void> changePassword(
-    String newPassword,
-    String confirmPassword,
-    String token,
-  );
+  Future<ProfileEntity> getUserProfile();
+  Future<void> updateUserProfile(String name, String email, String phone);
+  Future<void> uploadProfileImage(String imagePath);
+  Future<void> changePassword(String newPassword, String confirmPassword);
 }
 
 class ProfileRepositoryImpl implements ProfileRepository {
@@ -22,8 +13,8 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
   ProfileRepositoryImpl(this.remoteDataSource);
   @override
-  Future<ProfileEntity> getUserProfile(String token) async {
-    return await remoteDataSource.getUserProfile(token);
+  Future<ProfileEntity> getUserProfile() async {
+    return await remoteDataSource.getUserProfile();
   }
 
   @override
@@ -31,22 +22,20 @@ class ProfileRepositoryImpl implements ProfileRepository {
     String name,
     String email,
     String phone,
-    String token,
   ) async {
-    return await remoteDataSource.updateUserProfile(name, email, phone, token);
+    return await remoteDataSource.updateUserProfile(name, email, phone);
   }
 
   @override
-  Future<void> uploadProfileImage(String imagePath, String token) async {
-    return await remoteDataSource.uploadProfileImage(imagePath, token);
+  Future<void> uploadProfileImage(String imagePath) async {
+    return await remoteDataSource.uploadProfileImage(imagePath);
   }
 
   @override
   Future<void> changePassword(
     String newPassword,
     String confirmPassword,
-    String token,
   ) async {
-    return await remoteDataSource.changePassword(token, newPassword);
+    return await remoteDataSource.changePassword(newPassword);
   }
 }

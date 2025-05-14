@@ -118,8 +118,8 @@ class _ProfilePasswordPageState extends State<ProfilePasswordPage> {
                             onTap1: () => Navigator.pop(context),
                             onTap2: () {
                               context.read<ProfileCubit>().changePassword(
-                                newPwdController.text,
-                                confirmPwdController.text,
+                                confirmPassword: confirmPwdController.text,
+                                newPassword: newPwdController.text,
                               );
                             },
                             backgroundColor: AppColors.primaryColor,

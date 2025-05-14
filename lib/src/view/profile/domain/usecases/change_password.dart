@@ -5,6 +5,6 @@ class ChangePassword {
 
   ChangePassword(this.repository);
 
-  Future<void> call(String newPassword, String confirmPassword, String token) =>
-      repository.changePassword(newPassword, confirmPassword, token);
+  Future<void> call(String newPassword, String confirmPassword) =>
+      repository.changePassword(newPassword, confirmPassword);
 }
