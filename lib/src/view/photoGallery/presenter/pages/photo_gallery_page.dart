@@ -1,38 +1,14 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as path;
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
+import 'package:prime_pronta_resposta/src/view/photoGallery/presenter/cubit/photo_gallery_cubit.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-class PhotoGalleryPage extends StatefulWidget {
+class PhotoGalleryPage extends StatelessWidget {
   const PhotoGalleryPage({super.key});
-
-  @override
-  State<PhotoGalleryPage> createState() => _PhotoGalleryPageState();
-}
-
-class _PhotoGalleryPageState extends State<PhotoGalleryPage> {
-  final List<File> _imageFiles = [];
-
-  Future<void> _pickAndSaveImage() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.camera);
-
-    if (image != null) {
-      final Directory? appDir = await getExternalStorageDirectory();
-      final String fileName = path.basename(image.path);
-      final String newPath = path.join(appDir!.path, fileName);
-      final File newImage = await File(image.path).copy(newPath);
-
-      setState(() {
-        _imageFiles.add(newImage);
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,49 +39,88 @@ class _PhotoGalleryPageState extends State<PhotoGalleryPage> {
         child: Column(
           children: [
             Expanded(
-              child: GridView.builder(
-                itemCount: _imageFiles.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 1,
-                ),
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        AppRouters.imagePreviewPage,
-                        arguments: _imageFiles[index],
-                      );
-                    },
-
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey.shade400,
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
+              child: BlocListener<PhotoGalleryCubit, PhotoGalleryState>(
+                listener: (context, state) {
+                  if (state is PhotoGallerySuccess) {
+                    showTopSnackBar(
+                      Overlay.of(context),
+                      const CustomSnackBar.success(
+                        message: 'Foto enviada com sucesso!',
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.file(
-                          _imageFiles[index],
-                          width: 200,
-                          height: 200,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  );
+                    );
+                  }
+                  if (state is PhotoGalleryError) {
+                    showTopSnackBar(
+                      Overlay.of(context),
+                      CustomSnackBar.error(message: state.message),
+                    );
+                  }
                 },
+                child: BlocBuilder<PhotoGalleryCubit, PhotoGalleryState>(
+                  builder: (context, state) {
+                    if (state is PhotoGalleryUploading) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (state is PhotoGallerySuccess) {
+                      final imageFiles = state.imageFiles;
+                      if (imageFiles.isEmpty) {
+                        return const Center(
+                          child: Text('Nenhuma foto enviada.'),
+                        );
+                      }
+                      return GridView.builder(
+                        itemCount: imageFiles.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10,
+                              childAspectRatio: 1,
+                            ),
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                AppRouters.imagePreviewPage,
+                                arguments: imageFiles[index],
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.grey.shade400,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.file(
+                                  imageFiles[index],
+                                  width: 200,
+                                  height: 200,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    } else if (state is PhotoGalleryInitial) {
+                      return const Center(child: Text('Nenhuma foto enviada.'));
+                    } else {
+                      return const Center(
+                        child: Text('Erro ao carregar galeria.'),
+                      );
+                    }
+                  },
+                ),
               ),
             ),
-
             ElevatedButton.icon(
-              onPressed: _pickAndSaveImage,
+              onPressed: () {
+                context.read<PhotoGalleryCubit>().pickAndUploadImage();
+              },
               icon: const Icon(Icons.camera_alt_outlined),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primaryColor,

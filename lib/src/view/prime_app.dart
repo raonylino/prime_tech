@@ -12,6 +12,7 @@ import 'package:prime_pronta_resposta/src/view/dateOperation/presenter/cubit/dat
 import 'package:prime_pronta_resposta/src/view/dateOperation/presenter/date_operation_page.dart';
 import 'package:prime_pronta_resposta/src/view/error/error_page.dart';
 import 'package:prime_pronta_resposta/src/view/home/home_page.dart';
+import 'package:prime_pronta_resposta/src/view/photoGallery/presenter/cubit/photo_gallery_cubit.dart';
 import 'package:prime_pronta_resposta/src/view/photoGallery/presenter/pages/image_preview_page.dart';
 import 'package:prime_pronta_resposta/src/view/operation/domain/usecases/fetch_operation_by_id_usecase.dart';
 import 'package:prime_pronta_resposta/src/view/operation/presenter/cubit/operation_cubit.dart';
@@ -44,6 +45,10 @@ class PrimeApp extends StatelessWidget {
           create: (_) => DataOperationCubit(getIt<DataOpereationUsecase>()),
         ),
         BlocProvider<ProfileCubit>(create: (_) => getIt<ProfileCubit>()),
+
+        BlocProvider<PhotoGalleryCubit>(
+          create: (_) => getIt<PhotoGalleryCubit>(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

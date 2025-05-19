@@ -20,6 +20,10 @@ import 'package:prime_pronta_resposta/src/view/pending/data/datasources/pending_
 import 'package:prime_pronta_resposta/src/view/pending/domain/repositories/pending_repository.dart';
 import 'package:prime_pronta_resposta/src/view/pending/domain/usecases/pending_usecase.dart';
 import 'package:prime_pronta_resposta/src/view/pending/presenter/cubit/pending_cubit.dart';
+import 'package:prime_pronta_resposta/src/view/photoGallery/data/datasource/photo_remote_datasource.dart';
+import 'package:prime_pronta_resposta/src/view/photoGallery/domain/repositories/photo_repository.dart';
+import 'package:prime_pronta_resposta/src/view/photoGallery/domain/usecases/upload_photo_usecase.dart';
+import 'package:prime_pronta_resposta/src/view/photoGallery/presenter/cubit/photo_gallery_cubit.dart';
 import 'package:prime_pronta_resposta/src/view/profile/data/datasource/profile_datasource.dart';
 import 'package:prime_pronta_resposta/src/view/profile/domain/repositories/profile_repository.dart';
 import 'package:prime_pronta_resposta/src/view/profile/domain/usecases/change_password.dart';
@@ -151,6 +155,25 @@ Future<void> configureDependencies() async {
       updateUserProfileUseCase: getIt(),
       uploadProfileImageUseCase: getIt(),
       changePasswordUseCase: getIt(),
+    ),
+  );
+
+  // Photo Gallery Dependencies
+  getIt.registerLazySingleton<PhotoRemoteDatasource>(
+    () => PhotoRemoteDatasourceImpl(
+      getIt<Dio>()
+      ),
+  );
+  getIt.registerLazySingleton<PhotoRepository>(
+    () => PhotoRepositoryImpl(getIt<PhotoRemoteDatasource>()),
+  );
+  getIt.registerLazySingleton<UploadPhotoUseCase>(
+    () => UploadPhotoUseCase(getIt<PhotoRepository>()),
+  );
+  getIt.registerFactory<PhotoGalleryCubit>(
+    () => PhotoGalleryCubit(
+      uploadPhotoUseCase: getIt<UploadPhotoUseCase>(),
+      storage: getIt<FlutterSecureStorage>(),
     ),
   );
 }

@@ -27,10 +27,10 @@ class AuthRepositoryImpl implements AuthRepository {
   ) async {
     try {
       final result = await authRemoteDataSource.login(email, password);
-      if (result.code == 1) {
-        return Right(result);
+      if (result.login.code == 1) {
+        return Right(result.login);
       } else {
-        return Left(Exception(result.message.toString()));
+        return Left(Exception(result.login.message.toString()));
       }
     } catch (e) {
       return Left(Exception('Erro ao fazer login: $e'));
