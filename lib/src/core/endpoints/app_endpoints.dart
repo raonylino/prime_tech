@@ -1,5 +1,5 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:prime_pronta_resposta/src/view/auth/domain/entities/s3_entity.dart';
+import 'package:prime_pronta_resposta/src/feature/auth/domain/entities/s3_entity.dart';
 
 class AppEndpoints {
   /* ---------------------------------- BASE ---------------------------------- */
