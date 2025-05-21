@@ -57,7 +57,7 @@ dependencies:
   injectable_generator: ^2.7.0
   dartz: ^0.10.1
   crypto: ^3.0.6
-  simple_s3: ^0.3.2
+  aws_s3_upload_lite: ^0.1.6
 
 dev_dependencies:
   flutter_test:
