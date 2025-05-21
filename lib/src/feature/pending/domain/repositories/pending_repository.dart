@@ -1,21 +1,25 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:prime_pronta_resposta/src/feature/pending/data/datasources/pending_datasource.dart';
 import 'package:prime_pronta_resposta/src/feature/pending/domain/entities/pending_entity.dart';
 
 abstract class PendingRepository {
   Future<List<PendingEntity>> fetchPendings();
+  Future<void> acceptPending(int id, BuildContext context);
 }
 
 class PendingRepositoryImpl implements PendingRepository {
   final PendingRemoteDataSource remoteDataSource;
-  final FlutterSecureStorage storage;
 
-  PendingRepositoryImpl(this.remoteDataSource, this.storage);
+
+  PendingRepositoryImpl(this.remoteDataSource);
 
   @override
   Future<List<PendingEntity>> fetchPendings() async {
-    final token = await storage.read(key: 'auth_token');
-    if (token == null) throw Exception('Token não encontrado');
-    return await remoteDataSource.fetchPendings(token);
+    return await remoteDataSource.fetchPendings();
+  }
+
+  @override
+  Future<void> acceptPending(int id, BuildContext context) async {
+     await remoteDataSource.acceptPending(id, context);
   }
 }

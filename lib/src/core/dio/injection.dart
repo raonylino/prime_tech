@@ -2,6 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:prime_pronta_resposta/src/core/endpoints/app_endpoints.dart';
+import 'package:prime_pronta_resposta/src/core/interceptors/auth_interceptor.dart';
+import 'package:prime_pronta_resposta/src/feature/accepted/data/datasource/accepted_remote_datasource.dart';
+import 'package:prime_pronta_resposta/src/feature/accepted/domain/repositories/accepted_repository.dart';
+import 'package:prime_pronta_resposta/src/feature/accepted/domain/usecases/accepted_usecase.dart';
+import 'package:prime_pronta_resposta/src/feature/accepted/presenter/cubit/accepted_cubit.dart';
 import 'package:prime_pronta_resposta/src/feature/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:prime_pronta_resposta/src/feature/auth/domain/repositories/auth_repository.dart';
 import 'package:prime_pronta_resposta/src/feature/auth/domain/usecases/check_login_status_usecase.dart';
@@ -39,10 +44,15 @@ Future<void> configureDependencies() async {
   getIt.registerLazySingleton<FlutterSecureStorage>(
     () => const FlutterSecureStorage(),
   );
+  getIt.registerLazySingleton<AuthInterceptor>(() => AuthInterceptor());
 
-  getIt.registerLazySingleton<Dio>(
-    () => Dio(BaseOptions(baseUrl: AppEndpoints.apiBase)),
-  );
+  getIt.registerLazySingleton<Dio>(() {
+    final dio = Dio(BaseOptions(baseUrl: AppEndpoints.apiBase));
+
+    dio.interceptors.add(getIt<AuthInterceptor>());
+
+    return dio;
+  });
 
   getIt.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(getIt<Dio>(), getIt<FlutterSecureStorage>()),
@@ -80,10 +90,7 @@ Future<void> configureDependencies() async {
   );
 
   getIt.registerLazySingleton<PendingRepository>(
-    () => PendingRepositoryImpl(
-      getIt<PendingRemoteDataSource>(),
-      getIt<FlutterSecureStorage>(),
-    ),
+    () => PendingRepositoryImpl(getIt<PendingRemoteDataSource>()),
   );
 
   getIt.registerFactory<PendingUsecase>(
@@ -92,6 +99,21 @@ Future<void> configureDependencies() async {
 
   getIt.registerFactory<PendingCubit>(
     () => PendingCubit(getIt<PendingUsecase>()),
+  );
+
+  getIt.registerFactory<AcceptedCubit>(
+    () => AcceptedCubit(getIt<AcceptedUsecase>()),
+  );
+  getIt.registerLazySingleton<AcceptedRemoteDatasource>(
+    () => AcceptedRemoteDatasourceImpl(getIt<Dio>()),
+  );
+
+  getIt.registerLazySingleton<AcceptedRepository>(
+    () => AcceptedRepositoryImpl(getIt<AcceptedRemoteDatasource>()),
+  );
+
+  getIt.registerFactory<AcceptedUsecase>(
+    () => AcceptedUsecase(getIt<AcceptedRepository>()),
   );
 
   getIt.registerLazySingleton<OperationRemoteDataSource>(
@@ -129,17 +151,14 @@ Future<void> configureDependencies() async {
     () => DataOperationCubit(getIt<DataOpereationUsecase>()),
   );
 
-  // DataSource
   getIt.registerLazySingleton<ProfileDataSource>(
     () => ProfileDataSourceImpl(getIt<Dio>()),
   );
 
-  // Repository
   getIt.registerLazySingleton<ProfileRepository>(
     () => ProfileRepositoryImpl(getIt<ProfileDataSource>()),
   );
 
-  // UseCases
   getIt.registerLazySingleton(() => GetUserProfile(getIt<ProfileRepository>()));
   getIt.registerLazySingleton(
     () => UpdateUserProfile(getIt<ProfileRepository>()),
@@ -149,7 +168,6 @@ Future<void> configureDependencies() async {
   );
   getIt.registerLazySingleton(() => ChangePassword(getIt<ProfileRepository>()));
 
-  // Cubit
   getIt.registerFactory(
     () => ProfileCubit(
       getUserProfileUseCase: getIt(),

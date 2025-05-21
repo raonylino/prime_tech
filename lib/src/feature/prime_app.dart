@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/core/dio/injection.dart';
-import 'package:prime_pronta_resposta/src/feature/accepted/accepted_page.dart';
+import 'package:prime_pronta_resposta/src/feature/accepted/data/model/accepted_model.dart';
+import 'package:prime_pronta_resposta/src/feature/accepted/presenter/accepted_page.dart';
+import 'package:prime_pronta_resposta/src/feature/accepted/presenter/cubit/accepted_cubit.dart';
 import 'package:prime_pronta_resposta/src/feature/auth/presenter/cubit/auth_login_cubit.dart';
 import 'package:prime_pronta_resposta/src/feature/auth/presenter/pages/login_page.dart';
 import 'package:prime_pronta_resposta/src/feature/auth/presenter/pages/recover_password_page.dart';
@@ -49,6 +51,8 @@ class PrimeApp extends StatelessWidget {
         BlocProvider<PhotoGalleryCubit>(
           create: (_) => getIt<PhotoGalleryCubit>(),
         ),
+
+        BlocProvider<AcceptedCubit>(create: (_) => getIt<AcceptedCubit>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -60,11 +64,6 @@ class PrimeApp extends StatelessWidget {
           AppRouters.splashPage: (context) => const SplashPage(),
           AppRouters.loginPage: (context) => const LoginPage(),
           AppRouters.acceptedPage: (context) => const AcceptedPage(),
-          AppRouters.operationPage: (context) {
-            final pending =
-                ModalRoute.of(context)!.settings.arguments as PendingModel;
-            return OperationPage(pending: pending);
-          },
           AppRouters.dateOperationPage: (context) => const DateOperationPage(),
           AppRouters.galleryPhotoPage: (context) => const PhotoGalleryPage(),
           AppRouters.recoverPage: (context) => const RecoverPasswordPage(),
@@ -72,6 +71,19 @@ class PrimeApp extends StatelessWidget {
           AppRouters.errorPage: (context) => const ErrorPage(),
           AppRouters.profilePageEdit: (context) => const ProfileEditPage(),
           AppRouters.passwordPage: (context) => const ProfilePasswordPage(),
+          AppRouters.operationPage: (context) {
+            final args = ModalRoute.of(context)!.settings.arguments as Object;
+
+            if (args is PendingModel) {
+              return OperationPage(pending: args);
+            } else if (args is AcceptedModel) {
+              return OperationPage(accepted: args);
+            } else {
+              return const Scaffold(
+                body: Center(child: Text('Erro: tipo inválido')),
+              );
+            }
+          },
         },
         onGenerateRoute: (settings) {
           if (settings.name == AppRouters.imagePreviewPage) {

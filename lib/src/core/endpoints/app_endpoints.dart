@@ -13,6 +13,6 @@ class AppEndpoints {
 
   /* ---------------------------------- Photo S3 ---------------------------------- */
   static String photoUrl({required S3Entity s3}) {
-    return 'https://${s3.bucket}.s3.${s3.region}.amazonaws.com/${s3.directory}';
+    return s3.directory;
   }
 }

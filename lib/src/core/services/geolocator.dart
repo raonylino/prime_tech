@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
-Future<void> getCurrentLocation(ScaffoldMessengerState scaffoldMessenger) async {
+Future<Position?> getCurrentLocation(ScaffoldMessengerState scaffoldMessenger) async {
   bool serviceEnabled;
   LocationPermission permission;
-
 
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
     scaffoldMessenger.showSnackBar(
       SnackBar(content: Text('Serviço de localização está desativado.')),
     );
-    return;
+    return null;
   }
-
 
   permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.denied) {
@@ -22,7 +20,7 @@ Future<void> getCurrentLocation(ScaffoldMessengerState scaffoldMessenger) async 
       scaffoldMessenger.showSnackBar(
         SnackBar(content: Text('Permissão de localização negada.')),
       );
-      return;
+      return null;
     }
   }
 
@@ -30,15 +28,14 @@ Future<void> getCurrentLocation(ScaffoldMessengerState scaffoldMessenger) async 
     scaffoldMessenger.showSnackBar(
       SnackBar(content: Text('Permissão permanentemente negada.')),
     );
-    return;
+    return null;
   }
 
-
-Position position = await Geolocator.getCurrentPosition(
-  locationSettings: LocationSettings(
-    accuracy: LocationAccuracy.high,
-  ),
-);
+  Position position = await Geolocator.getCurrentPosition(
+    locationSettings: const LocationSettings(
+      accuracy: LocationAccuracy.high,
+    ),
+  );
 
   scaffoldMessenger.showSnackBar(
     SnackBar(
@@ -47,4 +44,6 @@ Position position = await Geolocator.getCurrentPosition(
       ),
     ),
   );
+
+  return position;
 }

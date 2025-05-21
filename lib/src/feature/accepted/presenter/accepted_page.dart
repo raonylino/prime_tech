@@ -4,30 +4,25 @@ import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
 import 'package:prime_pronta_resposta/src/core/dio/injection.dart';
-import 'package:prime_pronta_resposta/src/feature/pending/presenter/cubit/pending_cubit.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:prime_pronta_resposta/src/feature/accepted/presenter/cubit/accepted_cubit.dart';
 
-class PendingPage extends StatelessWidget {
-  const PendingPage({super.key});
+class AcceptedPage extends StatelessWidget {
+  const AcceptedPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    PendingCubit pendingCubit = context.read<PendingCubit>();
-    final navigator = Navigator.of(context);
-
-    return BlocProvider<PendingCubit>(
-      create: (_) => getIt<PendingCubit>()..fetchPendings(),
+    return BlocProvider<AcceptedCubit>(
+      create: (_) => getIt<AcceptedCubit>()..fetchAccepted(),
       child: Scaffold(
-        body: BlocBuilder<PendingCubit, PendingState>(
+        body: BlocBuilder<AcceptedCubit, AcceptedState>(
           builder: (context, state) {
-            if (state is PendingLoading) {
+            if (state is AcceptedLoading) {
               return const Center(child: CircularProgressIndicator());
-            } else if (state is PendingLoaded) {
+            } else if (state is AcceptedLoaded) {
               return ListView.builder(
-                itemCount: state.pendings.length,
+                itemCount: state.accepted.length,
                 itemBuilder: (context, index) {
-                  final pending = state.pendings[index];
+                  final accepted = state.accepted[index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(
                       vertical: 15,
@@ -45,7 +40,7 @@ class PendingPage extends StatelessWidget {
                               ),
                               title: const Text('Confirmação'),
                               content: Text(
-                                'Você deseja aceitar este chamado?',
+                                'Você deseja abrir este chamado?',
                                 style: TextStyle(
                                   fontFamily: TextStyles.instance.secondary,
                                   fontSize: 12,
@@ -88,30 +83,11 @@ class PendingPage extends StatelessWidget {
                                       color: AppColors.primaryColor,
                                     ),
                                   ),
-                                  onPressed: () async {
-                                    await pendingCubit.acceptPending(
-                                      pending.id,
-                                      context,
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed(
+                                      AppRouters.operationPage,
+                                      arguments: accepted,
                                     );
-                                    if (pendingCubit.state is PendingLoaded) {
-                                      navigator.pop();
-                                      navigator.pushNamed(
-                                        AppRouters.operationPage,
-                                        arguments: pending,
-                                      );
-                                    } else if (pendingCubit.state
-                                        is PendingError) {
-                                      navigator.pop();
-                                      showTopSnackBar(
-                                        context as OverlayState,
-                                        CustomSnackBar.error(
-                                          message:
-                                              (pendingCubit.state
-                                                      as PendingError)
-                                                  .message,
-                                        ),
-                                      );
-                                    }
                                   },
                                   child: Text(
                                     'Sim',
@@ -161,7 +137,7 @@ class PendingPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  pending.title,
+                                  accepted.title,
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
@@ -170,7 +146,7 @@ class PendingPage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  pending.companyName,
+                                  accepted.companyName,
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontFamily: TextStyles.instance.secondary,
@@ -193,13 +169,13 @@ class PendingPage extends StatelessWidget {
                   );
                 },
               );
-            } else if (state is PendingError) {
+            } else if (state is AcceptedError) {
               return Center(child: Text(state.message));
             }
 
             return Center(
               child: Text(
-                'Nenhum chamado pendente!',
+                'Nenhum chamado aceito!',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
-import 'package:prime_pronta_resposta/src/feature/accepted/accepted_page.dart';
+import 'package:prime_pronta_resposta/src/feature/accepted/presenter/accepted_page.dart';
 import 'package:prime_pronta_resposta/src/feature/completed/completed_page.dart';
 import 'package:prime_pronta_resposta/src/feature/pending/presenter/pending_page.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';

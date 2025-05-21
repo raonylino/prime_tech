@@ -4,19 +4,23 @@ import 'package:prime_pronta_resposta/src/core/constants/app_colors.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_routers.dart';
 import 'package:prime_pronta_resposta/src/core/constants/app_text_styles.dart';
 import 'package:prime_pronta_resposta/src/core/dio/injection.dart';
+import 'package:prime_pronta_resposta/src/feature/accepted/data/model/accepted_model.dart';
 import 'package:prime_pronta_resposta/src/widget/custom_text_operation.dart';
 import 'package:prime_pronta_resposta/src/feature/operation/presenter/cubit/operation_cubit.dart';
 import 'package:prime_pronta_resposta/src/feature/pending/data/model/pending_model.dart';
 
 class OperationPage extends StatelessWidget {
-  final PendingModel pending;
-  const OperationPage({super.key, required this.pending});
+  final PendingModel? pending;
+  final AcceptedModel? accepted;
+  const OperationPage({super.key, this.pending, this.accepted});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:
-          (context) => getIt<OperationCubit>()..fetchOperationById(pending.id),
+      create: (context) {
+        final id = pending?.id ?? accepted?.id;
+        return getIt<OperationCubit>()..fetchOperationById(id!);
+      },
       child: BlocBuilder<OperationCubit, OperationState>(
         builder: (context, state) {
           if (state is OperationLoading) {
@@ -30,7 +34,7 @@ class OperationPage extends StatelessWidget {
               ),
             );
           } else if (state is OperationLoaded) {
-            final pending = state.operation;
+            final data = state.operation;
             return Scaffold(
               appBar: AppBar(
                 title: Text(
@@ -96,15 +100,15 @@ class OperationPage extends StatelessWidget {
                                   CustomTextOperation(
                                     title: 'Local da ocorrência:',
                                     description:
-                                        '${pending.address}, ${pending.number} - ${pending.uf}',
+                                        '${data.address}, ${data.number} - ${data.uf}',
                                   ),
                                   CustomTextOperation(
                                     title: 'Mercadoria:',
-                                    description: pending.goods.first,
+                                    description: data.goods.first,
                                   ),
                                   CustomTextOperation(
                                     title: 'Transporte:',
-                                    description: pending.shippingCompanyName,
+                                    description: data.shippingCompanyName,
                                   ),
                                   CustomTextOperation(
                                     title: 'Placa carreta:',
@@ -116,17 +120,17 @@ class OperationPage extends StatelessWidget {
                                   ),
                                   CustomTextOperation(
                                     title: 'Cidade da ocorrência:',
-                                    description: pending.city,
+                                    description: data.city,
                                   ),
                                   CustomTextOperation(
                                     title: 'UF da ocorrência:',
-                                    description: pending.uf,
+                                    description: data.uf,
                                   ),
 
                                   CustomTextOperation(
                                     title: 'Latitude / Longitude:',
                                     description:
-                                        '${pending.latitude} / ${pending.longitude}',
+                                        '${data.latitude} / ${data.longitude}',
                                   ),
                                 ],
                               ),

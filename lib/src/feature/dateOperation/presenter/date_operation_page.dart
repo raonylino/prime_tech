@@ -295,7 +295,7 @@ class _DateOperationPageState extends State<DateOperationPage> {
                               onTap: () {
                                 Navigator.of(
                                   context,
-                                ).pushNamed(AppRouters.galleryPhotoPage);
+                                ).pushNamed(AppRouters.galleryPhotoPage,arguments: 3);
                               },
                               borderRadius: BorderRadius.circular(12),
                               child: Container(
